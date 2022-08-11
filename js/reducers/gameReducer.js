@@ -314,10 +314,8 @@ const gameReducer = (game: Game, action: Action): Game => {
       return game;
     }
     case 'SUBTRACT_BASE_RESOURCES': {
-      const {subtractResources} = action;
-      for (const resource in subtractResources) {
-        game.bases[game.playerID].resources[resource] -= subtractResources[resource];
-      }
+      const {cost} = action;
+      game.money -= cost;
       return game;
     }
     case 'SET_MOUSE_MODE': {

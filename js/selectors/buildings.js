@@ -16,14 +16,8 @@ const getModifiedCost = (game: Game, entityType: EntityType): Object => {
   return cost;
 }
 
-const canAffordBuilding = (base: Base, cost: Cost): Boolean => {
-  const resources = base.resources;
-  for (const resource in cost) {
-    if (resources[resource] == null || resources[resource] < cost[resource]) {
-      return false;
-    }
-  }
-  return true;
+const canAffordBuilding = (game, cost: Cost): Boolean => {
+  return game.money >= cost;
 };
 
 module.exports = {

@@ -52,6 +52,9 @@ const initBaseState = (
     gaiaID: 0,
     numPlayers,
 
+    // tower-defense-specific
+    money: 50,
+
     // for tracking difficulty and missiles
     difficulty: 'NORMAL',
     lastMissileLaunchTime: 0,

@@ -85,7 +85,8 @@ const config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: 10,
+    COLONY: 5,
+    PASS_THROUGH_COLONY: 5,
   },
   RETRIEVE: {
     base: 1,

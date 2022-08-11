@@ -9,7 +9,8 @@ const config = {
   TILED: true,
   NOT_ANIMATED: true,
   COLLECTABLE: true,
-  hp: 20,
+  hp: 50,
+  cost: 10,
 };
 
 const make = (

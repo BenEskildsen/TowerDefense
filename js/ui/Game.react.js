@@ -6,6 +6,7 @@ const Canvas = require('./Canvas.react');
 const Checkbox = require('./Components/Checkbox.react');
 const RadioPicker = require('./Components/RadioPicker.react');
 const BottomBar = require('./BottomBar.react');
+const TopBar = require('./TopBar.react');
 const {config} = require('../config');
 const {initMouseControlsSystem} = require('../systems/mouseControlsSystem');
 const {initGameOverSystem} = require('../systems/gameOverSystem');
@@ -103,6 +104,14 @@ function Game(props: Props): React.Node {
           ? <ExperimentalSidebar state={state} dispatch={dispatch} />
           : null
       }
+      <TopBar
+        dispatch={dispatch}
+        isExperimental={state.screen == 'EDITOR'}
+        tickInterval={tickInterval}
+        game={game}
+        placeType={game.placeType}
+        base={game.entities[game.BASE[0]]}
+      />
       <Canvas
         dispatch={dispatch}
         tickInterval={tickInterval}
@@ -225,39 +234,22 @@ function configureMouseHandlers(game) {
     mouseMove: (state, dispatch, gridPos) => {
       const dim = inLine(gridPos, state.game.mouse.prevPos);
       if (dim) {
-        let firstCollectedSucceeded = false;
         for (let i = 1; i <= dim.dist; i++) {
           const pos = {...state.game.mouse.prevPos};
           pos[dim.dim] += (i * dim.mult)
           if (state.game.mouse.isLeftDown) {
-            const success = handleCollect(
-              state, dispatch,
-              pos, false,
-              i > 1 && firstCollectedSucceeded, /* ignore colony */
-            );
-            if (success && i == 1) {
-              firstCollectedSucceeded = true;
-            }
-          } else if (state.game.mouse.isRightDown) {
             handlePlace(state, dispatch, pos);
           }
         }
-      } else {
-        if (state.game.mouse.isLeftDown) {
-          handleCollect(state, dispatch, gridPos);
-        } else if (state.game.mouse.isRightDown) {
-          handlePlace(state, dispatch, gridPos);
-        }
+      } else if (state.game.mouse.isLeftDown) {
+        handlePlace(state, dispatch, gridPos);
       }
     },
     leftDown: (state, dispatch, gridPos) => {
-      handleCollect(state, dispatch, gridPos, true /* ignore prevPos */);
-    },
-    rightDown: (state, dispatch, gridPos) => {
       handlePlace(state, dispatch, gridPos, true /* ignore prevPos */);
     },
     scroll: (state, dispatch, zoom) => {
-      dispatch({type: 'INCREMENT_ZOOM', zoom});
+      // dispatch({type: 'INCREMENT_ZOOM', zoom});
     },
   }
   return handlers;

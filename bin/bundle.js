@@ -63,6 +63,15 @@ var pheromones = {
     blockingTypes: [].concat(_toConsumableArray(pheromoneBlockingTypes), ['COAL']),
     blockingPheromones: []
   },
+  PASS_THROUGH_COLONY: {
+    quantity: 350,
+    decayAmount: 1,
+    color: 'rgb(155, 227, 90)',
+    tileIndex: 0,
+
+    blockingTypes: ['COAL'],
+    blockingPheromones: []
+  },
   LIGHT: {
     quantity: 350,
     decayAmount: 1,
@@ -437,7 +446,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":35,"../selectors/sprites":45,"../utils/vectors":93,"./makeEntity":10}],3:[function(require,module,exports){
+},{"../render/renderAgent":35,"../selectors/sprites":45,"../utils/vectors":98,"./makeEntity":10}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -550,9 +559,7 @@ var config = {
     spriteOrder: [0]
   },
 
-  cost: {
-    IRON: 1
-  }
+  cost: 50
 
 };
 
@@ -643,7 +650,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":35,"../utils/vectors":93,"./makeEntity.js":10}],6:[function(require,module,exports){
+},{"../render/renderAgent":35,"../utils/vectors":98,"./makeEntity.js":10}],6:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -719,7 +726,7 @@ var render = function render(ctx, game, bullet) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":45,"../simulation/actionQueue":47,"../utils/vectors":93,"./makeEntity":10}],7:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":45,"../simulation/actionQueue":47,"../utils/vectors":98,"./makeEntity":10}],7:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -734,6 +741,7 @@ var config = {
   NOT_ANIMATED: true,
   TILED: true,
   COLLECTABLE: true,
+  cost: 1,
   hp: 10
 };
 
@@ -979,7 +987,7 @@ var render = function render(ctx, game, missile) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":45,"../simulation/actionQueue":47,"../utils/vectors":93,"./makeEntity":10}],12:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":45,"../simulation/actionQueue":47,"../utils/vectors":98,"./makeEntity":10}],12:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1065,7 +1073,8 @@ var config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: 10
+    COLONY: 5,
+    PASS_THROUGH_COLONY: 5
   },
   RETRIEVE: {
     base: 1,
@@ -1310,7 +1319,8 @@ var config = {
   TILED: true,
   NOT_ANIMATED: true,
   COLLECTABLE: true,
-  hp: 20
+  hp: 50,
+  cost: 10
 };
 
 var make = function make(game, position, subType, width, height) {
@@ -1371,11 +1381,8 @@ var config = {
   SHOOT: {
     duration: 150,
     spriteOrder: [1, 2]
-  },
-
-  cost: {
-    STEEL: 8
   }
+
 };
 
 var make = function make(game, position, playerID, projectileType, fireRate, name, theta) {
@@ -1471,7 +1478,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":35,"../selectors/sprites":45,"../utils/vectors":93,"./makeEntity.js":10}],18:[function(require,module,exports){
+},{"../render/renderAgent":35,"../selectors/sprites":45,"../utils/vectors":98,"./makeEntity.js":10}],18:[function(require,module,exports){
 'use strict';
 
 var _require = require('redux'),
@@ -1500,7 +1507,7 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":32,"./ui/Main.react":78,"react":131,"react-dom":128,"redux":132}],19:[function(require,module,exports){
+},{"./reducers/rootReducer":32,"./ui/Main.react":81,"react":136,"react-dom":133,"redux":137}],19:[function(require,module,exports){
 // @flow
 
 module.exports = {
@@ -2129,11 +2136,9 @@ var gameReducer = function gameReducer(game, action) {
       }
     case 'SUBTRACT_BASE_RESOURCES':
       {
-        var subtractResources = action.subtractResources;
+        var cost = action.cost;
 
-        for (var resource in subtractResources) {
-          game.bases[game.playerID].resources[resource] -= subtractResources[resource];
-        }
+        game.money -= cost;
         return game;
       }
     case 'SET_MOUSE_MODE':
@@ -2226,7 +2231,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":14,"../render/render":34,"../selectors/pheromones":44,"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/pheromones":52,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],29:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":34,"../selectors/pheromones":44,"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/pheromones":52,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],29:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -2782,7 +2787,7 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":19,"../simulation/entityOperations":49,"../state/gameState":53,"../state/state":54,"../utils/helpers":90,"./gameReducer":28,"./hotKeysReducer":29,"./modalReducer":30,"./mouseReducer":31,"./tickReducer":33}],33:[function(require,module,exports){
+},{"../levels/levels":19,"../simulation/entityOperations":49,"../state/gameState":53,"../state/state":54,"../utils/helpers":95,"./gameReducer":28,"./hotKeysReducer":29,"./modalReducer":30,"./mouseReducer":31,"./tickReducer":33}],33:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3495,7 +3500,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":14,"../render/render":34,"../selectors/buildings":39,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/pheromones":44,"../selectors/sprites":45,"../simulation/actionOperations":46,"../simulation/actionQueue.js":47,"../simulation/agentOperations":48,"../simulation/entityOperations":49,"../simulation/miscOperations":51,"../simulation/pheromones":52,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/stochastic":92,"../utils/vectors":93}],34:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":34,"../selectors/buildings":39,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/pheromones":44,"../selectors/sprites":45,"../simulation/actionOperations":46,"../simulation/actionQueue.js":47,"../simulation/agentOperations":48,"../simulation/entityOperations":49,"../simulation/miscOperations":51,"../simulation/pheromones":52,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/stochastic":97,"../utils/vectors":98}],34:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4129,7 +4134,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":14,"../selectors/misc":41,"../selectors/mouseInteractionSelectors":42,"../selectors/sprites":45,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93,"./renderMinimap":37}],35:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/misc":41,"../selectors/mouseInteractionSelectors":42,"../selectors/sprites":45,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98,"./renderMinimap":37}],35:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4221,7 +4226,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93,"./renderHealthBar":36}],36:[function(require,module,exports){
+},{"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98,"./renderHealthBar":36}],36:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4263,7 +4268,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":89,"../utils/vectors":93}],37:[function(require,module,exports){
+},{"../utils/gridHelpers":94,"../utils/vectors":98}],37:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4706,7 +4711,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":14,"../selectors/misc":41,"../selectors/sprites":45,"../utils/gridHelpers":89,"../utils/vectors":93,"./renderSegmented":38}],38:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/misc":41,"../selectors/sprites":45,"../utils/gridHelpers":94,"../utils/vectors":98,"./renderSegmented":38}],38:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -4854,7 +4859,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":41,"../selectors/sprites":45,"../utils/vectors":93,"./renderHealthBar":36}],39:[function(require,module,exports){
+},{"../selectors/misc":41,"../selectors/sprites":45,"../utils/vectors":98,"./renderHealthBar":36}],39:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4877,14 +4882,8 @@ var getModifiedCost = function getModifiedCost(game, entityType) {
   return cost;
 };
 
-var canAffordBuilding = function canAffordBuilding(base, cost) {
-  var resources = base.resources;
-  for (var resource in cost) {
-    if (resources[resource] == null || resources[resource] < cost[resource]) {
-      return false;
-    }
-  }
-  return true;
+var canAffordBuilding = function canAffordBuilding(game, cost) {
+  return game.money >= cost;
 };
 
 module.exports = {
@@ -4955,7 +4954,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":89}],41:[function(require,module,exports){
+},{"../utils/gridHelpers":94}],41:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5204,7 +5203,7 @@ module.exports = {
   getControlledEntityInteraction: getControlledEntityInteraction,
   getManningAction: getManningAction
 };
-},{"../selectors/collisions":40,"../selectors/neighbors":43,"../simulation/actionQueue":47,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],42:[function(require,module,exports){
+},{"../selectors/collisions":40,"../selectors/neighbors":43,"../simulation/actionQueue":47,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],42:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5299,7 +5298,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":14,"../selectors/buildings":39,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],43:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/buildings":39,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],43:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -5566,7 +5565,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":40,"../utils/gridHelpers":89,"../utils/vectors":93}],44:[function(require,module,exports){
+},{"../selectors/collisions":40,"../utils/gridHelpers":94,"../utils/vectors":98}],44:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5672,13 +5671,22 @@ var getEntityPheromoneSources = function getEntityPheromoneSources(game, entity)
   var quantity = 0;
 
   if (entity.PHEROMONE_EMITTER) {
-    return [{
+    var sources = [{
       id: entity.id,
       playerID: entity.playerID || 0,
       pheromoneType: entity.pheromoneType,
       position: entity.position,
       quantity: entity.quantity
     }];
+    if (entity.type == 'BASE') {
+      sources.push({
+        id: entity.id,
+        playerID: entity.playerID || 0,
+        pheromoneType: 'PASS_THROUGH_COLONY',
+        position: entity.position,
+        quantity: entity.quantity
+      });
+    }
   }
   return [];
 };
@@ -5691,6 +5699,10 @@ var getSourcesOfPheromoneType = function getSourcesOfPheromoneType(game, pheromo
   var sources = [];
   for (var entityID in game.PHEROMONE_EMITTER) {
     var entity = game.entities[entityID];
+    if (pheromoneType == 'PASS_THROUGH_COLONY' && entity.type == 'BASE') {
+      sources.push(entity);
+      continue;
+    }
     if (entity.pheromoneType != pheromoneType) continue;
     if (entity.playerID != playerID) continue;
     if (entity.quantity <= 0) continue;
@@ -5748,7 +5760,7 @@ module.exports = {
   getQuantityForStalePos: getQuantityForStalePos,
   isPositionBlockingPheromone: isPositionBlockingPheromone
 };
-},{"../config":1,"../selectors/neighbors":43,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],45:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":43,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],45:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6263,7 +6275,7 @@ module.exports = {
   getSegmentTail: getSegmentTail,
   getBeetleSprite: getBeetleSprite
 };
-},{"../config":1,"../selectors/misc":41,"../selectors/neighbors":43,"../simulation/actionQueue":47,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],46:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":41,"../selectors/neighbors":43,"../simulation/actionQueue":47,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],46:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6598,7 +6610,7 @@ var entityUnMan = function entityUnMan(game, entity, mannedEntity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":14,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/sprites":45,"../simulation/actionQueue":47,"../simulation/agentOperations":48,"../simulation/entityOperations":49,"../simulation/explosiveOperations":50,"../simulation/miscOperations":51,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],47:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/sprites":45,"../simulation/actionQueue":47,"../simulation/agentOperations":48,"../simulation/entityOperations":49,"../simulation/explosiveOperations":50,"../simulation/miscOperations":51,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],47:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6830,7 +6842,7 @@ module.exports = {
   makeAction: makeAction,
   getFrame: getFrame
 };
-},{"../selectors/pheromones":44,"../utils/helpers":90,"../utils/vectors":93}],48:[function(require,module,exports){
+},{"../selectors/pheromones":44,"../utils/helpers":95,"../utils/vectors":98}],48:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7177,7 +7189,7 @@ module.exports = {
   agentDecideMove: agentDecideMove,
   agentSwitchTask: agentSwitchTask
 };
-},{"../config":1,"../entities/registry":14,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/pheromones":44,"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/pheromones":52,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/stochastic":92,"../utils/vectors":93}],49:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/collisions":40,"../selectors/misc":41,"../selectors/neighbors":43,"../selectors/pheromones":44,"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/pheromones":52,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/stochastic":97,"../utils/vectors":98}],49:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7892,7 +7904,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":27,"../selectors/neighbors":43,"../selectors/pheromones":44,"../simulation/pheromones":52,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],50:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":27,"../selectors/neighbors":43,"../selectors/pheromones":44,"../simulation/pheromones":52,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],50:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8023,7 +8035,7 @@ var triggerExplosion = function triggerExplosion(game, explosive, precompute) {
 module.exports = {
   triggerExplosion: triggerExplosion
 };
-},{"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/miscOperations":51,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],51:[function(require,module,exports){
+},{"../simulation/actionQueue":47,"../simulation/entityOperations":49,"../simulation/miscOperations":51,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],51:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8410,7 +8422,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],53:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],53:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -8476,6 +8488,9 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
     playerID: 1,
     gaiaID: 0,
     numPlayers: numPlayers,
+
+    // tower-defense-specific
+    money: 50,
 
     // for tracking difficulty and missiles
     difficulty: 'NORMAL',
@@ -8611,7 +8626,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":27,"../simulation/entityOperations":49,"../utils/gridHelpers":89,"../utils/stochastic":92,"../utils/vectors":93}],54:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":27,"../simulation/entityOperations":49,"../utils/gridHelpers":94,"../utils/stochastic":97,"../utils/vectors":98}],54:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -8776,7 +8791,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../render/render":34,"../ui/components/Button.react":80,"../ui/components/Divider.react":82,"../ui/components/Modal.react":85,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93,"axios":96,"react":131}],56:[function(require,module,exports){
+},{"../render/render":34,"../ui/components/Button.react":85,"../ui/components/Divider.react":87,"../ui/components/Modal.react":90,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98,"axios":101,"react":136}],56:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -9053,7 +9068,7 @@ function doStartWave(dispatch, game, missileFrequency) {
 }
 
 module.exports = { initMonsterAttackSystem: initMonsterAttackSystem };
-},{"../config":1,"../entities/registry":14,"../utils/stochastic":92}],58:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../utils/stochastic":97}],58:[function(require,module,exports){
 'use strict';
 
 var _require = require('../config'),
@@ -9286,7 +9301,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],59:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],59:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -9379,7 +9394,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":14,"../utils/helpers":90,"../utils/vectors":93}],60:[function(require,module,exports){
+},{"../entities/registry":14,"../utils/helpers":95,"../utils/vectors":98}],60:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -9429,7 +9444,7 @@ var initRainSystem = function initRainSystem(store) {
 };
 
 module.exports = { initRainSystem: initRainSystem };
-},{"../config":1,"../simulation/pheromones":52,"../utils/stochastic":92}],61:[function(require,module,exports){
+},{"../config":1,"../simulation/pheromones":52,"../utils/stochastic":97}],61:[function(require,module,exports){
 'use strict';
 
 var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
@@ -9531,10 +9546,8 @@ function loadLevel(store, levelName, additionalUpgrades) {
 module.exports = {
   loadLevel: loadLevel
 };
-},{"../levels/levels":19,"../utils/proceduralLevel":91}],63:[function(require,module,exports){
+},{"../levels/levels":19,"../utils/proceduralLevel":96}],63:[function(require,module,exports){
 'use strict';
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var _require = require('../utils/vectors'),
     add = _require.add,
@@ -9594,20 +9607,20 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
   var game = state.game;
   // if (!state.game.mouse.isRightDown) return;
 
+
+  console.log("in handle place");
   // don't interact with the same position twice
   if (!ignorePrevPos && game.prevInteractPosition != null && equals(game.prevInteractPosition, gridPos)) {
     return;
   }
 
   // only can place entities that are connected to the colony
-  if (!isNeighboringColonyPher(game, gridPos)) {
-    return;
-  }
+  // if (!isNeighboringColonyPher(game, gridPos)) {
+  //   return;
+  // }
 
   var entityType = game.placeType;
-  if (game.placeType == 'HOT COAL') {
-    entityType = 'COAL';
-  }
+  console.log("placeType", entityType);
   // can't place if there's no entity type selected
   if (entityType == null) return;
 
@@ -9615,13 +9628,11 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 
   var base = game.bases[game.playerID];
 
-  // can't place a resource you don't have
-  if (config.COLLECTABLE && base.resources[entityType] <= 0) return;
-
   // can't place buildings you can't afford
-  if (config.cost && !canAffordBuilding(base, getModifiedCost(game, entityType))) {
+  if (config.cost && !canAffordBuilding(game, config.cost)) {
     return;
   }
+  console.log("can afford");
 
   // can't place on top of other resources
   var occupied = lookupInGrid(game.grid, gridPos).map(function (id) {
@@ -9633,24 +9644,14 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 
   // make the entity and update base resources for its cost
   var entity = null;
-  if (config.COLLECTABLE) {
-    entity = Entities[entityType].make(game, gridPos);
-    var quantity = 1;
-    if (base.resources[entityType] < 1) {
-      quantity = base.resources[entityType];
-      entity.hp *= quantity;
-    }
+  if (config.cost) {
     dispatch({
       type: 'SUBTRACT_BASE_RESOURCES',
-      subtractResources: _defineProperty({}, entityType, quantity)
-    });
-  } else if (config.cost) {
-    dispatch({
-      type: 'SUBTRACT_BASE_RESOURCES',
-      subtractResources: getModifiedCost(game, entityType)
+      cost: config.cost
     });
     entity = Entities[entityType].make(game, gridPos, game.playerID);
   }
+  console.log("want to place", entity);
 
   if (entity != null) {
     if (game.placeType == 'HOT COAL') {
@@ -9661,7 +9662,7 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":14,"../selectors/buildings":39,"../selectors/mouseInteractionSelectors":42,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93}],64:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/buildings":39,"../selectors/mouseInteractionSelectors":42,"../selectors/neighbors":43,"../selectors/pheromones":44,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98}],64:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -9694,7 +9695,7 @@ var BottomBar = function BottomBar(props) {
 };
 
 module.exports = BottomBar;
-},{"./InfoHUD.react":75,"react":131}],65:[function(require,module,exports){
+},{"./InfoHUD.react":78,"react":136}],65:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -9833,7 +9834,95 @@ function withPropsChecker(WrappedComponent) {
 }
 
 module.exports = React.memo(Canvas);
-},{"../config":1,"react":131}],66:[function(require,module,exports){
+},{"../config":1,"react":136}],66:[function(require,module,exports){
+'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var React = require('react');
+var Button = require('./Button.react');
+var useState = React.useState,
+    useEffect = React.useEffect,
+    useMemo = React.useMemo;
+
+/**
+ * Props:
+ *
+ * audioFiles, // array of {path, type} pairs
+ * isMuted, // optional boolean for outside control of this widget
+ * setIsMuted, // optional function called when this is toggled
+ * isShuffled, // optional boolean for whether audio should play in random order
+ * style, // optional object of css styles
+ *
+ */
+
+var AudioWidget = function AudioWidget(props) {
+  var _useState = useState(!!props.isMuted),
+      _useState2 = _slicedToArray(_useState, 2),
+      isMuted = _useState2[0],
+      setIsMuted = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      playIndex = _useState4[0],
+      setPlayIndex = _useState4[1];
+
+  var playOrder = useMemo(function () {
+    var initialOrder = props.audioFiles.map(function (a, i) {
+      return i;
+    });
+    if (props.isShuffled) {
+      // TODO: shuffle the playOrder array
+    }
+    return initialOrder;
+  }, [props.audioFiles]);
+
+  var widgetStyle = {
+    margin: 5,
+    borderRadius: 8,
+    left: 5
+  };
+
+  // player
+  var audioPlayer = useMemo(function () {
+    var a = new Audio(props.audioFiles[playIndex].path);
+    return a;
+  }, [playIndex, isMuted, props.audioFiles]);
+
+  useEffect(function () {
+    if (!isMuted) {
+      audioPlayer.addEventListener('loadeddata', function () {
+        audioPlayer.play();
+        setTimeout(function () {
+          return setPlayIndex((playIndex + 1) % props.audioFiles.length);
+        }, audioPlayer.duration * 1000);
+      });
+    }
+    return function () {
+      audioPlayer.pause();
+    };
+  }, [playIndex, isMuted, props.audioFiles, audioPlayer]);
+
+  return React.createElement(
+    'div',
+    {
+      style: props.style ? props.style : widgetStyle
+    },
+    React.createElement(Button, {
+      label: isMuted ? 'Turn Music ON' : 'Turn Music OFF',
+      onClick: function onClick() {
+        audioPlayer.pause();
+        setIsMuted(!isMuted);
+        if (props.setIsMuted) {
+          props.setIsMuted(!isMuted);
+        }
+      }
+    })
+  );
+};
+
+module.exports = AudioWidget;
+},{"./Button.react":67,"react":136}],67:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9917,7 +10006,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":131}],67:[function(require,module,exports){
+},{"react":136}],68:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -9957,7 +10046,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":131}],68:[function(require,module,exports){
+},{"react":136}],69:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -9977,7 +10066,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":131}],69:[function(require,module,exports){
+},{"react":136}],70:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10018,7 +10107,111 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":131}],70:[function(require,module,exports){
+},{"react":136}],71:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var React = require('react');
+
+var InfoCard = function InfoCard(props) {
+  var overrideStyle = props.overrideStyle || {};
+  var underrideStyle = props.underrideStyle || {};
+  return React.createElement(
+    'div',
+    {
+      style: _extends({}, underrideStyle, {
+        border: props.border != null ? props.border : '1px solid black',
+        backgroundColor: 'white',
+        opacity: props.opacity != null ? props.opacity : 1,
+        // width: 200,
+        // height: 148,
+        verticalAlign: 'top',
+        marginLeft: 4,
+        display: 'inline-block',
+        padding: 4
+      }, overrideStyle)
+    },
+    props.children
+  );
+};
+
+module.exports = InfoCard;
+},{"react":136}],72:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Button = require('./Button.react');
+
+var _require = require('../../utils/helpers'),
+    isMobile = _require.isMobile;
+
+function Modal(props) {
+  var content = props.content,
+      title = props.title,
+      body = props.body,
+      buttons = props.buttons;
+
+  var height = props.height ? props.height : 450;
+
+  // using 2 rects to properly position width and height
+  var rect = document.getElementById('container').getBoundingClientRect();
+  var canvasRect = null;
+  var canvas = document.getElementById('canvas');
+  if (canvas != null) {
+    canvasRect = canvas.getBoundingClientRect();
+  } else {
+    canvasRect = rect;
+  }
+
+  var buttonHTML = buttons.map(function (b) {
+    return React.createElement(Button, {
+      key: "b_" + b.label,
+      disabled: !!b.disabled,
+      label: b.label, onClick: b.onClick
+    });
+  });
+
+  var width = props.width ? props.width : Math.min(rect.width * 0.8, 350);
+  return React.createElement(
+    'div',
+    {
+      style: {
+        position: 'absolute',
+        backgroundColor: 'whitesmoke',
+        border: '1px solid black',
+        padding: 4,
+        boxShadow: '2px 2px #666666',
+        borderRadius: 3,
+        color: '#46403a',
+        textAlign: 'center',
+        width: width,
+        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
+        left: (rect.width - width) / 2
+      }
+    },
+    React.createElement(
+      'h3',
+      null,
+      React.createElement(
+        'b',
+        null,
+        title
+      )
+    ),
+    body,
+    React.createElement(
+      'div',
+      {
+        style: {}
+      },
+      buttonHTML
+    )
+  );
+}
+
+module.exports = Modal;
+},{"../../utils/helpers":95,"./Button.react":67,"react":136}],73:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10108,7 +10301,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":131}],71:[function(require,module,exports){
+},{"react":136}],74:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10197,7 +10390,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":131}],72:[function(require,module,exports){
+},{"react":136}],75:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10268,7 +10461,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":70,"react":131}],73:[function(require,module,exports){
+},{"./NumberField.react":73,"react":136}],76:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10447,7 +10640,7 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":66,"./Components/Checkbox.react":67,"./Components/Divider.react":68,"./Components/Dropdown.react":69,"./Components/Slider.react":72,"react":131}],74:[function(require,module,exports){
+},{"./Components/Button.react":67,"./Components/Checkbox.react":68,"./Components/Divider.react":69,"./Components/Dropdown.react":70,"./Components/Slider.react":75,"react":136}],77:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10458,6 +10651,7 @@ var Canvas = require('./Canvas.react');
 var Checkbox = require('./Components/Checkbox.react');
 var RadioPicker = require('./Components/RadioPicker.react');
 var BottomBar = require('./BottomBar.react');
+var TopBar = require('./TopBar.react');
 
 var _require = require('../config'),
     config = _require.config;
@@ -10582,6 +10776,14 @@ function Game(props) {
       }
     },
     state.screen == 'EDITOR' ? React.createElement(ExperimentalSidebar, { state: state, dispatch: dispatch }) : null,
+    React.createElement(TopBar, {
+      dispatch: dispatch,
+      isExperimental: state.screen == 'EDITOR',
+      tickInterval: tickInterval,
+      game: game,
+      placeType: game.placeType,
+      base: game.entities[game.BASE[0]]
+    }),
     React.createElement(Canvas, {
       dispatch: dispatch,
       tickInterval: tickInterval,
@@ -10702,36 +10904,22 @@ function configureMouseHandlers(game) {
     mouseMove: function mouseMove(state, dispatch, gridPos) {
       var dim = inLine(gridPos, state.game.mouse.prevPos);
       if (dim) {
-        var firstCollectedSucceeded = false;
         for (var i = 1; i <= dim.dist; i++) {
           var pos = _extends({}, state.game.mouse.prevPos);
           pos[dim.dim] += i * dim.mult;
           if (state.game.mouse.isLeftDown) {
-            var success = handleCollect(state, dispatch, pos, false, i > 1 && firstCollectedSucceeded /* ignore colony */
-            );
-            if (success && i == 1) {
-              firstCollectedSucceeded = true;
-            }
-          } else if (state.game.mouse.isRightDown) {
             handlePlace(state, dispatch, pos);
           }
         }
-      } else {
-        if (state.game.mouse.isLeftDown) {
-          handleCollect(state, dispatch, gridPos);
-        } else if (state.game.mouse.isRightDown) {
-          handlePlace(state, dispatch, gridPos);
-        }
+      } else if (state.game.mouse.isLeftDown) {
+        handlePlace(state, dispatch, gridPos);
       }
     },
     leftDown: function leftDown(state, dispatch, gridPos) {
-      handleCollect(state, dispatch, gridPos, true /* ignore prevPos */);
-    },
-    rightDown: function rightDown(state, dispatch, gridPos) {
       handlePlace(state, dispatch, gridPos, true /* ignore prevPos */);
     },
     scroll: function scroll(state, dispatch, zoom) {
-      dispatch({ type: 'INCREMENT_ZOOM', zoom: zoom });
+      // dispatch({type: 'INCREMENT_ZOOM', zoom});
     }
   };
   return handlers;
@@ -10804,7 +10992,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":34,"../selectors/misc":41,"../simulation/actionQueue":47,"../systems/gameOverSystem":55,"../systems/keyboardControlsSystem":56,"../systems/monsterAttackSystem":57,"../systems/mouseControlsSystem":58,"../systems/pheromoneWorkerSystem":59,"../systems/rainSystem":60,"../systems/spriteSheetSystem":61,"../thunks/mouseInteractions":63,"../utils/gridHelpers":89,"../utils/helpers":90,"../utils/vectors":93,"./BottomBar.react":64,"./Canvas.react":65,"./Components/Button.react":66,"./Components/Checkbox.react":67,"./Components/RadioPicker.react":71,"./ExperimentalSidebar.react":73,"react":131}],75:[function(require,module,exports){
+},{"../config":1,"../render/render":34,"../selectors/misc":41,"../simulation/actionQueue":47,"../systems/gameOverSystem":55,"../systems/keyboardControlsSystem":56,"../systems/monsterAttackSystem":57,"../systems/mouseControlsSystem":58,"../systems/pheromoneWorkerSystem":59,"../systems/rainSystem":60,"../systems/spriteSheetSystem":61,"../thunks/mouseInteractions":63,"../utils/gridHelpers":94,"../utils/helpers":95,"../utils/vectors":98,"./BottomBar.react":64,"./Canvas.react":65,"./Components/Button.react":67,"./Components/Checkbox.react":68,"./Components/RadioPicker.react":74,"./ExperimentalSidebar.react":76,"./TopBar.react":83,"react":136}],78:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11044,7 +11232,7 @@ var EntityInfoCard = function EntityInfoCard(props) {
 };
 
 module.exports = InfoHUD;
-},{"../config":1,"../entities/registry":14,"../selectors/pheromones":44,"../ui/components/InfoCard.react":84,"../utils/gridHelpers":89,"../utils/helpers":90,"react":131}],76:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/pheromones":44,"../ui/components/InfoCard.react":89,"../utils/gridHelpers":94,"../utils/helpers":95,"react":136}],79:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -12071,7 +12259,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":14,"../render/render":34,"../systems/mouseControlsSystem":58,"../utils/vectors":93,"./components/Button.react":80,"./components/Checkbox.react":81,"./components/Divider.react":82,"./components/Dropdown.react":83,"./components/NumberField.react":86,"./components/Slider.react":88,"react":131}],77:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":34,"../systems/mouseControlsSystem":58,"../utils/vectors":98,"./components/Button.react":85,"./components/Checkbox.react":86,"./components/Divider.react":87,"./components/Dropdown.react":88,"./components/NumberField.react":91,"./components/Slider.react":93,"react":136}],80:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -12501,7 +12689,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":19,"../systems/spriteSheetSystem":61,"../thunks/levelThunks":62,"../ui/components/Modal.react":85,"../ui/components/QuitButton.react":87,"../utils/helpers":90,"./components/AudioWidget.react":79,"./components/Button.react":80,"./components/Checkbox.react":81,"./components/Divider.react":82,"./components/Dropdown.react":83,"axios":96,"react":131}],78:[function(require,module,exports){
+},{"../config":1,"../levels/levels":19,"../systems/spriteSheetSystem":61,"../thunks/levelThunks":62,"../ui/components/Modal.react":90,"../ui/components/QuitButton.react":92,"../utils/helpers":95,"./components/AudioWidget.react":84,"./components/Button.react":85,"./components/Checkbox.react":86,"./components/Divider.react":87,"./components/Dropdown.react":88,"axios":101,"react":136}],81:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -12548,209 +12736,546 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":74,"./LevelEditor.react":76,"./Lobby.react":77,"react":131}],79:[function(require,module,exports){
-'use strict';
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var React = require('react');
-var Button = require('./Button.react');
-var useState = React.useState,
-    useEffect = React.useEffect,
-    useMemo = React.useMemo;
-
-/**
- * Props:
- *
- * audioFiles, // array of {path, type} pairs
- * isMuted, // optional boolean for outside control of this widget
- * setIsMuted, // optional function called when this is toggled
- * isShuffled, // optional boolean for whether audio should play in random order
- * style, // optional object of css styles
- *
- */
-
-var AudioWidget = function AudioWidget(props) {
-  var _useState = useState(!!props.isMuted),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMuted = _useState2[0],
-      setIsMuted = _useState2[1];
-
-  var _useState3 = useState(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      playIndex = _useState4[0],
-      setPlayIndex = _useState4[1];
-
-  var playOrder = useMemo(function () {
-    var initialOrder = props.audioFiles.map(function (a, i) {
-      return i;
-    });
-    if (props.isShuffled) {
-      // TODO: shuffle the playOrder array
-    }
-    return initialOrder;
-  }, [props.audioFiles]);
-
-  var widgetStyle = {
-    margin: 5,
-    borderRadius: 8,
-    left: 5
-  };
-
-  // player
-  var audioPlayer = useMemo(function () {
-    var a = new Audio(props.audioFiles[playIndex].path);
-    return a;
-  }, [playIndex, isMuted, props.audioFiles]);
-
-  useEffect(function () {
-    if (!isMuted) {
-      audioPlayer.addEventListener('loadeddata', function () {
-        audioPlayer.play();
-        setTimeout(function () {
-          return setPlayIndex((playIndex + 1) % props.audioFiles.length);
-        }, audioPlayer.duration * 1000);
-      });
-    }
-    return function () {
-      audioPlayer.pause();
-    };
-  }, [playIndex, isMuted, props.audioFiles, audioPlayer]);
-
-  return React.createElement(
-    'div',
-    {
-      style: props.style ? props.style : widgetStyle
-    },
-    React.createElement(Button, {
-      label: isMuted ? 'Turn Music ON' : 'Turn Music OFF',
-      onClick: function onClick() {
-        audioPlayer.pause();
-        setIsMuted(!isMuted);
-        if (props.setIsMuted) {
-          props.setIsMuted(!isMuted);
-        }
-      }
-    })
-  );
-};
-
-module.exports = AudioWidget;
-},{"./Button.react":80,"react":131}],80:[function(require,module,exports){
-arguments[4][66][0].apply(exports,arguments)
-},{"dup":66,"react":131}],81:[function(require,module,exports){
-arguments[4][67][0].apply(exports,arguments)
-},{"dup":67,"react":131}],82:[function(require,module,exports){
-arguments[4][68][0].apply(exports,arguments)
-},{"dup":68,"react":131}],83:[function(require,module,exports){
-arguments[4][69][0].apply(exports,arguments)
-},{"dup":69,"react":131}],84:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var React = require('react');
-
-var InfoCard = function InfoCard(props) {
-  var overrideStyle = props.overrideStyle || {};
-  var underrideStyle = props.underrideStyle || {};
-  return React.createElement(
-    'div',
-    {
-      style: _extends({}, underrideStyle, {
-        border: props.border != null ? props.border : '1px solid black',
-        backgroundColor: 'white',
-        opacity: props.opacity != null ? props.opacity : 1,
-        // width: 200,
-        // height: 148,
-        verticalAlign: 'top',
-        marginLeft: 4,
-        display: 'inline-block',
-        padding: 4
-      }, overrideStyle)
-    },
-    props.children
-  );
-};
-
-module.exports = InfoCard;
-},{"react":131}],85:[function(require,module,exports){
+},{"./Game.react":77,"./LevelEditor.react":79,"./Lobby.react":80,"react":136}],82:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
-var Button = require('./Button.react');
+var InfoCard = require('../ui/Components/InfoCard.react');
+var globalConfig = require('../config');
 
-var _require = require('../../utils/helpers'),
-    isMobile = _require.isMobile;
+var _require = require('../entities/registry'),
+    Entities = _require.Entities;
 
-function Modal(props) {
-  var content = props.content,
-      title = props.title,
-      body = props.body,
-      buttons = props.buttons;
+var _require2 = require('../selectors/buildings'),
+    canAffordBuilding = _require2.canAffordBuilding,
+    getModifiedCost = _require2.getModifiedCost;
 
-  var height = props.height ? props.height : 450;
+var useMemo = React.useMemo,
+    useEffect = React.useEffect;
 
-  // using 2 rects to properly position width and height
-  var rect = document.getElementById('container').getBoundingClientRect();
-  var canvasRect = null;
-  var canvas = document.getElementById('canvas');
-  if (canvas != null) {
-    canvasRect = canvas.getBoundingClientRect();
-  } else {
-    canvasRect = rect;
+
+function PlacementPalette(props) {
+  var dispatch = props.dispatch,
+      game = props.game,
+      placeType = props.placeType;
+
+
+  var placeBuildingCards = [];
+  for (var entityType in Entities) {
+    var config = Entities[entityType].config;
+    if (config.cost == null) continue;
+    placeBuildingCards.push(React.createElement(PlaceBuildingCard, { key: "placeEntityCard_" + entityType,
+      dispatch: dispatch,
+      game: game,
+      entityType: entityType,
+      cost: config.cost,
+      isSelected: entityType == placeType
+    }));
   }
 
-  var buttonHTML = buttons.map(function (b) {
-    return React.createElement(Button, {
-      key: "b_" + b.label,
-      disabled: !!b.disabled,
-      label: b.label, onClick: b.onClick
-    });
-  });
-
-  var width = props.width ? props.width : Math.min(rect.width * 0.8, 350);
   return React.createElement(
-    'div',
-    {
-      style: {
-        position: 'absolute',
-        backgroundColor: 'whitesmoke',
-        border: '1px solid black',
-        padding: 4,
-        boxShadow: '2px 2px #666666',
-        borderRadius: 3,
-        color: '#46403a',
-        textAlign: 'center',
-        width: width,
-        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
-        left: (rect.width - width) / 2
-      }
-    },
-    React.createElement(
-      'h3',
-      null,
-      React.createElement(
-        'b',
-        null,
-        title
-      )
-    ),
-    body,
+    'span',
+    null,
     React.createElement(
       'div',
-      {
-        style: {}
-      },
-      buttonHTML
+      null,
+      placeBuildingCards
     )
   );
 }
 
-module.exports = Modal;
-},{"../../utils/helpers":90,"./Button.react":80,"react":131}],86:[function(require,module,exports){
+function PlaceBuildingCard(props) {
+  var dispatch = props.dispatch,
+      entityType = props.entityType,
+      cost = props.cost,
+      isSelected = props.isSelected,
+      game = props.game;
+
+  // const hover = useMemo(() => {
+  //   return (
+  //     <HoverCard entityType={entityType} depth={0} />
+  //   );
+  // }, []);
+
+  return React.createElement(
+    'div',
+    {
+      style: {
+        display: 'inline-block',
+        position: 'relative'
+      },
+      onClick: function onClick() {
+        return dispatch({ type: 'SET_PLACE_TYPE', placeType: entityType });
+      }
+    },
+    React.createElement(
+      InfoCard,
+      {
+        border: isSelected ? '2px solid orange' : null,
+        opacity: canAffordBuilding(game, cost) ? null : 0.5
+      },
+      React.createElement(
+        'div',
+        null,
+        entityType
+      ),
+      React.createElement(
+        'div',
+        null,
+        'Cost: ',
+        cost
+      )
+    )
+  );
+}
+
+function HoverCard(props) {
+  var entityType = props.entityType,
+      depth = props.depth;
+
+  var allDescriptions = globalConfig.config.descriptions;
+  var _allDescriptions$enti = allDescriptions[entityType],
+      description = _allDescriptions$enti.description,
+      howToMake = _allDescriptions$enti.howToMake;
+
+
+  var hoverableDescription = [];
+  var hoverableHowToMake = [];
+  if (depth < 4) {
+    var splitDescription = description.split(' ');
+    var _iteratorNormalCompletion = true;
+    var _didIteratorError = false;
+    var _iteratorError = undefined;
+
+    try {
+      for (var _iterator = splitDescription[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+        var term = _step.value;
+
+        if (term == 'HOT_COAL') term = 'HOT COAL';
+        if (allDescriptions[term] != null) {
+          hoverableDescription.push(React.createElement(
+            'div',
+            {
+              style: {
+                display: 'inline'
+              },
+              key: "hoverDesc_" + entityType + "_" + term + depth,
+              className: 'displayChildOnHover'
+            },
+            React.createElement(Resource, { resource: term }),
+            React.createElement(HoverCard, { entityType: term, depth: depth + 1 })
+          ));
+          hoverableDescription.push(' ');
+        } else {
+          hoverableDescription.push(term + ' ');
+        }
+      }
+    } catch (err) {
+      _didIteratorError = true;
+      _iteratorError = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion && _iterator.return) {
+          _iterator.return();
+        }
+      } finally {
+        if (_didIteratorError) {
+          throw _iteratorError;
+        }
+      }
+    }
+
+    var splitHowToMake = [];
+    if (howToMake != null) {
+      splitHowToMake = howToMake.split(' ');
+    }
+    var _iteratorNormalCompletion2 = true;
+    var _didIteratorError2 = false;
+    var _iteratorError2 = undefined;
+
+    try {
+      for (var _iterator2 = splitHowToMake[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+        var _term = _step2.value;
+
+        if (_term == 'HOT_COAL') _term = 'HOT COAL';
+        if (allDescriptions[_term] != null) {
+          hoverableHowToMake.push(React.createElement(
+            'div',
+            {
+              style: {
+                display: 'inline'
+              },
+              key: "hoverHowTo_" + entityType + "_" + _term + depth,
+              className: 'displayChildOnHover'
+            },
+            React.createElement(Resource, { resource: _term }),
+            React.createElement(HoverCard, { entityType: _term, depth: depth + 1 })
+          ));
+          hoverableHowToMake.push(' ');
+        } else {
+          hoverableHowToMake.push(_term + ' ');
+        }
+      }
+    } catch (err) {
+      _didIteratorError2 = true;
+      _iteratorError2 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion2 && _iterator2.return) {
+          _iterator2.return();
+        }
+      } finally {
+        if (_didIteratorError2) {
+          throw _iteratorError2;
+        }
+      }
+    }
+  } else {
+    hoverableDescription = description;
+    hoverableHowToMake = howToMake;
+  }
+
+  return React.createElement(
+    'div',
+    {
+      className: 'hidden',
+      style: {
+        position: 'absolute',
+        top: 35,
+        left: 35,
+        width: 300,
+        zIndex: depth + 5
+      }
+    },
+    React.createElement(
+      InfoCard,
+      null,
+      React.createElement(
+        'div',
+        { style: { textAlign: 'center' } },
+        React.createElement(
+          'b',
+          null,
+          depth == 0 ? "Details" : entityType
+        )
+      ),
+      React.createElement(
+        'div',
+        null,
+        hoverableDescription
+      ),
+      howToMake != null ? React.createElement(
+        'div',
+        null,
+        React.createElement(
+          'b',
+          null,
+          'Made From: '
+        ),
+        hoverableHowToMake
+      ) : null
+    )
+  );
+}
+
+function Resource(props) {
+  var resource = props.resource;
+
+  if (resource == 'HOT COAL') {
+    resource = 'HOT_COAL';
+  }
+
+  var image = null;
+  switch (resource) {
+    case 'DIRT':
+    case 'STONE':
+    case 'COAL':
+    case 'HOT_COAL':
+    case 'IRON':
+    case 'STEEL':
+    case 'SULPHUR':
+    case 'ICE':
+    case 'URANIUM':
+      image = React.createElement(
+        'div',
+        {
+          style: {
+            display: 'inline-block',
+            position: 'relative',
+            overflow: 'hidden',
+            width: 16,
+            height: 16
+          }
+        },
+        React.createElement('img', {
+          style: {
+            position: 'absolute',
+            top: 0,
+            left: -64
+          },
+          src: "./img/" + resource + ".png"
+        })
+      );
+      break;
+    case 'TURBINE':
+    case 'SOLAR_PANEL':
+      image = React.createElement('img', {
+        width: 16,
+        height: 16,
+        src: "./img/" + resource + ".png"
+      });
+      break;
+    case 'BASIC_TURRET':
+    case 'FAST_TURRET':
+    case 'MISSILE_TURRET':
+    case 'LASER_TURRET':
+      image = React.createElement('img', {
+        width: 16,
+        height: 16,
+        src: "./img/TURRET.png"
+      });
+      break;
+    case 'SAND':
+    case 'MOLTEN_SAND':
+    case 'MOLTEN_IRON':
+    case 'MOLTEN_STEEL':
+    case 'WATER':
+    case 'STEAM':
+    case 'SULPHUR_DIOXIDE':
+    case 'OIL':
+    case 'HOT_OIL':
+    case 'HEAT':
+    case 'COLD':
+      image = React.createElement('div', {
+        style: {
+          display: 'inline-block',
+          width: 16,
+          height: 16,
+          border: '1px solid black',
+          backgroundColor: globalConfig.pheromones[resource].color
+        }
+      });
+      break;
+    case 'POWER':
+      image = React.createElement('div', {
+        style: {
+          display: 'inline-block',
+          width: 16,
+          height: 16,
+          border: '1px solid black',
+          backgroundColor: globalConfig.pheromones.SAND.color
+        }
+      });
+      break;
+    case 'FLUID':
+      image = React.createElement('div', {
+        style: {
+          display: 'inline-block',
+          width: 16,
+          height: 16,
+          border: '1px solid black',
+          backgroundColor: globalConfig.pheromones.WATER.color
+        }
+      });
+      break;
+    case 'GAS':
+      image = React.createElement('div', {
+        style: {
+          display: 'inline-block',
+          width: 16,
+          height: 16,
+          border: '1px solid black',
+          backgroundColor: globalConfig.pheromones.STEAM.color
+        }
+      });
+      break;
+    case 'SILICON':
+      image = React.createElement('div', {
+        style: {
+          display: 'inline-block',
+          width: 16,
+          height: 16,
+          backgroundColor: '#006400'
+        }
+      });
+      break;
+    case 'GLASS':
+      image = React.createElement(
+        'div',
+        {
+          style: {
+            display: 'inline-block',
+            position: 'relative',
+            overflow: 'hidden',
+            width: 16,
+            height: 16
+          }
+        },
+        React.createElement('img', {
+          style: {
+            position: 'absolute',
+            top: 0,
+            left: -64,
+            opacity: 0.7
+          },
+          src: "./img/STEEL.png"
+        })
+      );
+      break;
+  }
+
+  return React.createElement(
+    'div',
+    {
+      style: {
+        display: 'inline-block'
+      }
+    },
+    React.createElement(
+      'b',
+      null,
+      React.createElement(
+        'span',
+        { style: { color: 'steelblue' } },
+        resource
+      )
+    ),
+    React.createElement(
+      'div',
+      { style: {
+          display: 'inline-block',
+          marginLeft: 2,
+          verticalAlign: 'top'
+        }
+      },
+      image
+    )
+  );
+}
+
+module.exports = PlacementPalette;
+},{"../config":1,"../entities/registry":14,"../selectors/buildings":39,"../ui/Components/InfoCard.react":71,"react":136}],83:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var AudioWidget = require('./Components/AudioWidget.react');
+var Button = require('./Components/Button.react');
+var Divider = require('./Components/Divider.react');
+var Modal = require('./Components/Modal.react');
+var QuitButton = require('../ui/components/QuitButton.react');
+var globalConfig = require('../config');
+
+var _require = require('../utils/helpers'),
+    getDisplayTime = _require.getDisplayTime,
+    isElectron = _require.isElectron;
+
+var InfoCard = require('../ui/components/InfoCard.react');
+var PlacementPalette = require('../ui/PlacementPalette.react');
+var memo = React.memo;
+
+var _require2 = require('../entities/registry'),
+    Entities = _require2.Entities;
+
+function TopBar(props) {
+  var dispatch = props.dispatch,
+      placeType = props.placeType,
+      game = props.game,
+      base = props.base,
+      isExperimental = props.isExperimental,
+      tickInterval = props.tickInterval;
+
+
+  if (isExperimental && tickInterval == null) return null;
+
+  var height = 100;
+  var topPadding = 8;
+  var leftPadding = 4;
+  var powerStuff = React.createElement(
+    'div',
+    null,
+    'Money: ',
+    game.money
+  );
+
+  return React.createElement(
+    'div',
+    {
+      id: 'topBar',
+      style: {
+        position: 'absolute',
+        top: topPadding,
+        height: height,
+        width: '100%',
+        zIndex: 2,
+        textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
+      }
+    },
+    React.createElement(
+      'div',
+      {
+        style: {
+          display: 'inline-block',
+          verticalAlign: 'top'
+        }
+      },
+      React.createElement(PlacementPalette, {
+        game: game,
+        dispatch: dispatch,
+        placeType: placeType
+      })
+    ),
+    React.createElement(
+      'div',
+      {
+        style: {
+          // left: leftPadding,
+          width: 200,
+          marginLeft: 10,
+          display: 'inline-block'
+          // position: 'absolute',
+        }
+      },
+      powerStuff
+    ),
+    React.createElement(
+      'div',
+      {
+        style: {
+          width: 200,
+          marginLeft: 10,
+          fontSize: '1.5em',
+          display: 'inline-block'
+        }
+      },
+      React.createElement(
+        'b',
+        null,
+        'Missiles Survived'
+      ),
+      ': ',
+      0
+    )
+  );
+}
+
+module.exports = TopBar;
+},{"../config":1,"../entities/registry":14,"../ui/PlacementPalette.react":82,"../ui/components/InfoCard.react":89,"../ui/components/QuitButton.react":92,"../utils/helpers":95,"./Components/AudioWidget.react":66,"./Components/Button.react":67,"./Components/Divider.react":69,"./Components/Modal.react":72,"react":136}],84:[function(require,module,exports){
+arguments[4][66][0].apply(exports,arguments)
+},{"./Button.react":85,"dup":66,"react":136}],85:[function(require,module,exports){
+arguments[4][67][0].apply(exports,arguments)
+},{"dup":67,"react":136}],86:[function(require,module,exports){
+arguments[4][68][0].apply(exports,arguments)
+},{"dup":68,"react":136}],87:[function(require,module,exports){
+arguments[4][69][0].apply(exports,arguments)
+},{"dup":69,"react":136}],88:[function(require,module,exports){
 arguments[4][70][0].apply(exports,arguments)
-},{"dup":70,"react":131}],87:[function(require,module,exports){
+},{"dup":70,"react":136}],89:[function(require,module,exports){
+arguments[4][71][0].apply(exports,arguments)
+},{"dup":71,"react":136}],90:[function(require,module,exports){
+arguments[4][72][0].apply(exports,arguments)
+},{"../../utils/helpers":95,"./Button.react":85,"dup":72,"react":136}],91:[function(require,module,exports){
+arguments[4][73][0].apply(exports,arguments)
+},{"dup":73,"react":136}],92:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -12839,9 +13364,9 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":90,"./Button.react":80,"./Modal.react":85,"react":131}],88:[function(require,module,exports){
-arguments[4][72][0].apply(exports,arguments)
-},{"./NumberField.react":86,"dup":72,"react":131}],89:[function(require,module,exports){
+},{"../../utils/helpers":95,"./Button.react":85,"./Modal.react":90,"react":136}],93:[function(require,module,exports){
+arguments[4][75][0].apply(exports,arguments)
+},{"./NumberField.react":91,"dup":75,"react":136}],94:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -12977,7 +13502,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":90,"../utils/vectors":93}],90:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":95,"../utils/vectors":98}],95:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -13160,7 +13685,7 @@ module.exports = {
   forEachObj: forEachObj,
   filterObj: filterObj
 };
-},{"./vectors":93}],91:[function(require,module,exports){
+},{"./vectors":98}],96:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -13285,7 +13810,7 @@ var clearOutPocket = function clearOutPocket(level, rect) {
 };
 
 module.exports = { getProceduralLevel: getProceduralLevel };
-},{"../config":1,"../utils/stochastic":92}],92:[function(require,module,exports){
+},{"../config":1,"../utils/stochastic":97}],97:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -13340,7 +13865,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],93:[function(require,module,exports){
+},{}],98:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -13539,7 +14064,7 @@ module.exports = {
   rotate: rotate,
   abs: abs
 };
-},{}],94:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -13557,7 +14082,7 @@ function _defineProperty(obj, key, value) {
 
 module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],95:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 var defineProperty = require("./defineProperty.js");
 
 function ownKeys(object, enumerableOnly) {
@@ -13600,9 +14125,9 @@ function _objectSpread2(target) {
 
 module.exports = _objectSpread2;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"./defineProperty.js":94}],96:[function(require,module,exports){
+},{"./defineProperty.js":99}],101:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":98}],97:[function(require,module,exports){
+},{"./lib/axios":103}],102:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -13816,7 +14341,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../cancel/Cancel":99,"../core/buildFullPath":104,"../core/createError":105,"../defaults":111,"./../core/settle":109,"./../helpers/buildURL":114,"./../helpers/cookies":116,"./../helpers/isURLSameOrigin":119,"./../helpers/parseHeaders":121,"./../utils":124}],98:[function(require,module,exports){
+},{"../cancel/Cancel":104,"../core/buildFullPath":109,"../core/createError":110,"../defaults":116,"./../core/settle":114,"./../helpers/buildURL":119,"./../helpers/cookies":121,"./../helpers/isURLSameOrigin":124,"./../helpers/parseHeaders":126,"./../utils":129}],103:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -13875,7 +14400,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":99,"./cancel/CancelToken":100,"./cancel/isCancel":101,"./core/Axios":102,"./core/mergeConfig":108,"./defaults":111,"./env/data":112,"./helpers/bind":113,"./helpers/isAxiosError":118,"./helpers/spread":122,"./utils":124}],99:[function(require,module,exports){
+},{"./cancel/Cancel":104,"./cancel/CancelToken":105,"./cancel/isCancel":106,"./core/Axios":107,"./core/mergeConfig":113,"./defaults":116,"./env/data":117,"./helpers/bind":118,"./helpers/isAxiosError":123,"./helpers/spread":127,"./utils":129}],104:[function(require,module,exports){
 'use strict';
 
 /**
@@ -13896,7 +14421,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],100:[function(require,module,exports){
+},{}],105:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -14017,14 +14542,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":99}],101:[function(require,module,exports){
+},{"./Cancel":104}],106:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],102:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14174,7 +14699,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":114,"../helpers/validator":123,"./../utils":124,"./InterceptorManager":103,"./dispatchRequest":106,"./mergeConfig":108}],103:[function(require,module,exports){
+},{"../helpers/buildURL":119,"../helpers/validator":128,"./../utils":129,"./InterceptorManager":108,"./dispatchRequest":111,"./mergeConfig":113}],108:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14230,7 +14755,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":124}],104:[function(require,module,exports){
+},{"./../utils":129}],109:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -14252,7 +14777,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":115,"../helpers/isAbsoluteURL":117}],105:[function(require,module,exports){
+},{"../helpers/combineURLs":120,"../helpers/isAbsoluteURL":122}],110:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -14272,7 +14797,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":107}],106:[function(require,module,exports){
+},{"./enhanceError":112}],111:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14361,7 +14886,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/Cancel":99,"../cancel/isCancel":101,"../defaults":111,"./../utils":124,"./transformData":110}],107:[function(require,module,exports){
+},{"../cancel/Cancel":104,"../cancel/isCancel":106,"../defaults":116,"./../utils":129,"./transformData":115}],112:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14406,7 +14931,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],108:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -14507,7 +15032,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":124}],109:[function(require,module,exports){
+},{"../utils":129}],114:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -14534,7 +15059,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":105}],110:[function(require,module,exports){
+},{"./createError":110}],115:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14558,7 +15083,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../defaults":111,"./../utils":124}],111:[function(require,module,exports){
+},{"./../defaults":116,"./../utils":129}],116:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -14696,11 +15221,11 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":97,"./adapters/xhr":97,"./core/enhanceError":107,"./helpers/normalizeHeaderName":120,"./utils":124,"_process":139}],112:[function(require,module,exports){
+},{"./adapters/http":102,"./adapters/xhr":102,"./core/enhanceError":112,"./helpers/normalizeHeaderName":125,"./utils":129,"_process":144}],117:[function(require,module,exports){
 module.exports = {
   "version": "0.24.0"
 };
-},{}],113:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -14713,7 +15238,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],114:[function(require,module,exports){
+},{}],119:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14785,7 +15310,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":124}],115:[function(require,module,exports){
+},{"./../utils":129}],120:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14801,7 +15326,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],116:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14856,7 +15381,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":124}],117:[function(require,module,exports){
+},{"./../utils":129}],122:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14872,7 +15397,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],118:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14885,7 +15410,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],119:[function(require,module,exports){
+},{}],124:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14955,7 +15480,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":124}],120:[function(require,module,exports){
+},{"./../utils":129}],125:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -14969,7 +15494,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":124}],121:[function(require,module,exports){
+},{"../utils":129}],126:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15024,7 +15549,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":124}],122:[function(require,module,exports){
+},{"./../utils":129}],127:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15053,7 +15578,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],123:[function(require,module,exports){
+},{}],128:[function(require,module,exports){
 'use strict';
 
 var VERSION = require('../env/data').version;
@@ -15137,7 +15662,7 @@ module.exports = {
   validators: validators
 };
 
-},{"../env/data":112}],124:[function(require,module,exports){
+},{"../env/data":117}],129:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -15488,7 +16013,7 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":113}],125:[function(require,module,exports){
+},{"./helpers/bind":118}],130:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -15580,7 +16105,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],126:[function(require,module,exports){
+},{}],131:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react-dom.development.js
@@ -41846,7 +42371,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":139,"object-assign":125,"react":131,"scheduler":137,"scheduler/tracing":138}],127:[function(require,module,exports){
+},{"_process":144,"object-assign":130,"react":136,"scheduler":142,"scheduler/tracing":143}],132:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -42145,7 +42670,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":125,"react":131,"scheduler":137}],128:[function(require,module,exports){
+},{"object-assign":130,"react":136,"scheduler":142}],133:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -42187,7 +42712,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":126,"./cjs/react-dom.production.min.js":127,"_process":139}],129:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":131,"./cjs/react-dom.production.min.js":132,"_process":144}],134:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react.development.js
@@ -44524,7 +45049,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":139,"object-assign":125}],130:[function(require,module,exports){
+},{"_process":144,"object-assign":130}],135:[function(require,module,exports){
 /** @license React v17.0.2
  * react.production.min.js
  *
@@ -44549,7 +45074,7 @@ key:d,ref:k,props:e,_owner:h}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:v,_payload:{_status:-1,_result:a},_init:Q}};exports.memo=function(a,b){return{$$typeof:u,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return S().useCallback(a,b)};exports.useContext=function(a,b){return S().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return S().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return S().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.2";
 
-},{"object-assign":125}],131:[function(require,module,exports){
+},{"object-assign":130}],136:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -44560,7 +45085,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":129,"./cjs/react.production.min.js":130,"_process":139}],132:[function(require,module,exports){
+},{"./cjs/react.development.js":134,"./cjs/react.production.min.js":135,"_process":144}],137:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -45261,7 +45786,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"@babel/runtime/helpers/objectSpread2":95,"_process":139}],133:[function(require,module,exports){
+},{"@babel/runtime/helpers/objectSpread2":100,"_process":144}],138:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -45612,7 +46137,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":139}],134:[function(require,module,exports){
+},{"_process":144}],139:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -45623,7 +46148,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],135:[function(require,module,exports){
+},{}],140:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -46273,7 +46798,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":139}],136:[function(require,module,exports){
+},{"_process":144}],141:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -46295,7 +46820,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],137:[function(require,module,exports){
+},{}],142:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -46306,7 +46831,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":135,"./cjs/scheduler.production.min.js":136,"_process":139}],138:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":140,"./cjs/scheduler.production.min.js":141,"_process":144}],143:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -46317,7 +46842,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":133,"./cjs/scheduler-tracing.production.min.js":134,"_process":139}],139:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":138,"./cjs/scheduler-tracing.production.min.js":139,"_process":144}],144:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

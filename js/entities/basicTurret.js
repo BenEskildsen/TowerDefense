@@ -22,9 +22,7 @@ const config = {
     spriteOrder: [0],
   },
 
-  cost: {
-    IRON: 1,
-  },
+  cost: 50,
 
 };
 

@@ -85,6 +85,15 @@ const pheromones = {
     blockingTypes: [...pheromoneBlockingTypes, 'COAL'],
     blockingPheromones: [],
   },
+  PASS_THROUGH_COLONY: {
+    quantity: 350,
+    decayAmount: 1,
+    color: 'rgb(155, 227, 90)',
+    tileIndex: 0,
+
+    blockingTypes: ['COAL'],
+    blockingPheromones: [],
+  },
   LIGHT: {
     quantity: 350,
     decayAmount: 1,

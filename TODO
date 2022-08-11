@@ -4,15 +4,13 @@
 - - - - - - GAME MECHANICS - - - - - -
   - monster entity
     - monsterAttackSystem spawns waves of monsters
-    - pass-through pheromone to continue to attract monsters
   - UI
-    - place turrets, dirt, stone
     - get healthbar to render for turret and base and dirt and stone
       - maxHP
       - render healthbars for non-agents
       - render location
+    - display score/num enemies killed
   - game
-    - game over when base destroyed
     - get points for killing monsters
   - economy
     - money-making tower
@@ -26,6 +24,10 @@
 
 
 - - - - - - POLISH - - - - - -
+  - UI
+    - nicer cards for buildings
+    - allow clicking behind them
+  - make sure touch events work like in SidewalkEmpire
   - Remove WASD and scroll (add hotkeys for pause, etc)
   - use same sprite loading system as SidewalkEmpire
   - Remove main menu

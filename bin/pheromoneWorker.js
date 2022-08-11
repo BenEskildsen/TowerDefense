@@ -63,6 +63,15 @@ var pheromones = {
     blockingTypes: [].concat(_toConsumableArray(pheromoneBlockingTypes), ['COAL']),
     blockingPheromones: []
   },
+  PASS_THROUGH_COLONY: {
+    quantity: 350,
+    decayAmount: 1,
+    color: 'rgb(155, 227, 90)',
+    tileIndex: 0,
+
+    blockingTypes: ['COAL'],
+    blockingPheromones: []
+  },
   LIGHT: {
     quantity: 350,
     decayAmount: 1,
@@ -550,9 +559,7 @@ var config = {
     spriteOrder: [0]
   },
 
-  cost: {
-    IRON: 1
-  }
+  cost: 50
 
 };
 
@@ -734,6 +741,7 @@ var config = {
   NOT_ANIMATED: true,
   TILED: true,
   COLLECTABLE: true,
+  cost: 1,
   hp: 10
 };
 
@@ -1065,7 +1073,8 @@ var config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: 10
+    COLONY: 5,
+    PASS_THROUGH_COLONY: 5
   },
   RETRIEVE: {
     base: 1,
@@ -1310,7 +1319,8 @@ var config = {
   TILED: true,
   NOT_ANIMATED: true,
   COLLECTABLE: true,
-  hp: 20
+  hp: 50,
+  cost: 10
 };
 
 var make = function make(game, position, subType, width, height) {
@@ -1371,11 +1381,8 @@ var config = {
   SHOOT: {
     duration: 150,
     spriteOrder: [1, 2]
-  },
-
-  cost: {
-    STEEL: 8
   }
+
 };
 
 var make = function make(game, position, playerID, projectileType, fireRate, name, theta) {
@@ -3236,13 +3243,22 @@ var getEntityPheromoneSources = function getEntityPheromoneSources(game, entity)
   var quantity = 0;
 
   if (entity.PHEROMONE_EMITTER) {
-    return [{
+    var sources = [{
       id: entity.id,
       playerID: entity.playerID || 0,
       pheromoneType: entity.pheromoneType,
       position: entity.position,
       quantity: entity.quantity
     }];
+    if (entity.type == 'BASE') {
+      sources.push({
+        id: entity.id,
+        playerID: entity.playerID || 0,
+        pheromoneType: 'PASS_THROUGH_COLONY',
+        position: entity.position,
+        quantity: entity.quantity
+      });
+    }
   }
   return [];
 };
@@ -3255,6 +3271,10 @@ var getSourcesOfPheromoneType = function getSourcesOfPheromoneType(game, pheromo
   var sources = [];
   for (var entityID in game.PHEROMONE_EMITTER) {
     var entity = game.entities[entityID];
+    if (pheromoneType == 'PASS_THROUGH_COLONY' && entity.type == 'BASE') {
+      sources.push(entity);
+      continue;
+    }
     if (entity.pheromoneType != pheromoneType) continue;
     if (entity.playerID != playerID) continue;
     if (entity.quantity <= 0) continue;

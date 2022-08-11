@@ -82,13 +82,22 @@ const getEntityPheromoneSources = (
   let quantity = 0;
 
   if (entity.PHEROMONE_EMITTER) {
-    return [{
+    const sources = [{
       id: entity.id,
       playerID: entity.playerID || 0,
       pheromoneType: entity.pheromoneType,
       position: entity.position,
       quantity: entity.quantity,
     }];
+    if (entity.type == 'BASE') {
+      sources.push({
+        id: entity.id,
+        playerID: entity.playerID || 0,
+        pheromoneType: 'PASS_THROUGH_COLONY',
+        position: entity.position,
+        quantity: entity.quantity,
+      });
+    }
   }
   return [];
 }
@@ -103,6 +112,10 @@ const getSourcesOfPheromoneType = (
   let sources = [];
   for (const entityID in game.PHEROMONE_EMITTER) {
     const entity = game.entities[entityID];
+    if (pheromoneType == 'PASS_THROUGH_COLONY' && entity.type == 'BASE') {
+      sources.push(entity);
+      continue;
+    }
     if (entity.pheromoneType != pheromoneType) continue;
     if (entity.playerID != playerID) continue;
     if (entity.quantity <= 0) continue;
