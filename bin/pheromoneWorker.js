@@ -539,8 +539,8 @@ var config = {
   height: 1,
   damage: 10,
   thetaAccel: 0.00005,
-  minTheta: 0.2,
-  maxTheta: Math.PI - 0.2,
+  minTheta: 0,
+  maxTheta: 2 * Math.PI,
   maxThetaSpeed: 0.04,
 
   // action overrides
@@ -672,7 +672,7 @@ var config = {
   width: 2,
   height: 1,
   velocity: 500,
-  blockingTypes: ['DIRT', 'STONE', 'FOOD', 'AGENT', 'DOODAD', 'WORM', 'MISSILE', 'TURBINE', 'IRON', 'STEEL', 'COAL', 'ICE', 'URANIUM'],
+  blockingTypes: ['DOODAD', 'WORM', 'MONSTER', 'TURBINE', 'IRON', 'STEEL', 'COAL', 'ICE', 'URANIUM'],
 
   DIE: {
     duration: 1,

@@ -15,8 +15,7 @@ const config = {
   height: 1,
   velocity: 500,
   blockingTypes: [
-    'DIRT', 'STONE', 'FOOD', 'AGENT',
-    'DOODAD', 'WORM', 'MISSILE',
+    'DOODAD', 'WORM', 'MONSTER',
     'TURBINE', 'IRON', 'STEEL', 'COAL',
     'ICE', 'URANIUM',
   ],

@@ -9,6 +9,9 @@
   - UI
     - place turrets, dirt, stone
     - get healthbar to render for turret and base and dirt and stone
+      - maxHP
+      - render healthbars for non-agents
+      - render location
   - game
     - game over when base destroyed
     - get points for killing monsters
@@ -26,7 +29,9 @@
   - Remove main menu
   - Reset should pass through lobby again
   - switch to fullscreen canvas component
+  - favicon
   - heroku app
+  - rune integration
 
 
 - - - - - - STRETCH - - - - - -

@@ -11,8 +11,8 @@ const config = {
   height: 1,
   damage: 10,
   thetaAccel: 0.00005,
-  minTheta: 0.2,
-  maxTheta: Math.PI - 0.2,
+  minTheta: 0,
+  maxTheta: 2 * Math.PI,
   maxThetaSpeed: 0.04,
 
   // action overrides

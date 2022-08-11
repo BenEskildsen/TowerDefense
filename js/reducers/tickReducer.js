@@ -295,20 +295,14 @@ const updateTowers = (game): void => {
   for (const id in game.TOWER) {
     const tower = game.entities[id];
     const config = Entities[tower.type].config;
-    // don't do anything if unpowered
-    if (
-      tower.isPowerConsumer &&
-      !tower.isPowered &&
-      !game.pausePowerConsumption
-    ) continue;
 
     // choose target if possible
     if (tower.targetID == null) {
       const possibleTargets = [];
-      for (const missileID of game.MISSILE) {
-        const missile = game.entities[missileID];
-        if (missile.playerID != tower.playerID) {
-          possibleTargets.push(missileID);
+      for (const monsterID of game.MONSTER) {
+        const monster = game.entities[monsterID];
+        if (monster.playerID != tower.playerID) {
+          possibleTargets.push(monsterID);
         }
       }
       tower.targetID = oneOf(possibleTargets);
@@ -321,12 +315,10 @@ const updateTowers = (game): void => {
       // clear dead target
       if (target == null) {
         tower.targetID = null;
-
       // else aim at living target
       } else {
         const targetPos = game.entities[tower.targetID].position;
         targetTheta = vectorTheta(subtract(targetPos, tower.position)) % (Math.PI / 2);
-        targetTheta = clamp(targetTheta, config.minTheta, config.maxTheta);
         if (targetPos.y >= tower.position.y) {
           targetTheta = config.minTheta;
         }
