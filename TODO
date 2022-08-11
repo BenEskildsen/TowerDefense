@@ -1,0 +1,21 @@
+
+- - - - - - - FIX - - - - - - - -
+
+- - - - - - GAME MECHANICS - - - - - -
+  - level
+    - base in the center
+  - monster entity
+    - goes towards base
+    - attacks things when it can't reach the base
+    - monsterAttackSystem spawns waves of monsters
+  - turrets
+    - shoot at monsters
+  - UI
+    - place turrets, dirt, stone
+  - economy
+    - money-making tower
+    - costs money to place buildings
+
+
+- - - - - - STRETCH - - - - - -
+  - detect sideways screen and rotate grid rendering
