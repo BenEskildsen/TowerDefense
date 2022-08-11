@@ -1,11 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-var _descriptions;
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var config = {
   msPerTick: 16,
@@ -50,106 +46,8 @@ var config = {
       busterTime: 8 * 60 * 1000,
       nukeTime: 10 * 60 * 1000
     }
-  },
+  }
 
-  proceduralFrequencies: {
-    STONE: { numMin: 1, numMax: 2, sizeMin: 4, sizeMax: 12 },
-    IRON: { numMin: 7, numMax: 10, sizeMin: 5, sizeMax: 10 },
-    COAL: { numMin: 6, numMax: 10, sizeMin: 6, sizeMax: 10 },
-    WATER: { numMin: 2, numMax: 5, sizeMin: 7, sizeMax: 14 },
-    SAND: { numMin: 1, numMax: 3, sizeMin: 5, sizeMax: 8 },
-    OIL: { numMin: 2, numMax: 4, sizeMin: 6, sizeMax: 12 },
-    SULPHUR: { numMin: 0, numMax: 1, sizeMin: 3, sizeMax: 4 },
-    GLASS: { numMin: 0, numMax: 1, sizeMin: 3, sizeMax: 4 },
-    ICE: { numMin: 1, numMax: 2, sizeMin: 3, sizeMax: 5 },
-    URANIUM: { numMin: 1, numMax: 2, sizeMin: 3, sizeMax: 3 }
-  },
-
-  descriptions: (_descriptions = {
-    // resources:
-    DIRT: {
-      description: 'low-hp blocks for sculpting the landscape'
-    },
-    STONE: {
-      description: 'high-hp blocks'
-    },
-    COAL: {
-      description: 'carbon-based building block, combusts in HEAT'
-    }
-  }, _defineProperty(_descriptions, 'HOT COAL', {
-    description: 'flaming coal whose HEAT melts resources into their molten form'
-  }), _defineProperty(_descriptions, 'IRON', {
-    description: 'abundant resource that can be smelted into STEEL'
-  }), _defineProperty(_descriptions, 'STEEL', {
-    description: 'high-hp resource used for making buildings',
-    howToMake: 'COAL + MOLTEN_IRON (place coal directly on molten iron OR place HOT_COAL ' + 'directly underneath IRON )'
-  }), _defineProperty(_descriptions, 'GLASS', {
-    description: 'resource used in high-tech buildings',
-    howToMake: 'cooled MOLTEN_SAND'
-  }), _defineProperty(_descriptions, 'SILICON', {
-    description: 'resource used in high-tech buildings',
-    howToMake: 'COAL + MOLTEN_SAND (place coal directly on molten sand OR place HOT_COAL ' + 'directly underneath GLASS )'
-  }), _defineProperty(_descriptions, 'SULPHUR', {
-    description: 'resource used in missiles',
-    howToMake: 'frozen SULPHUR_DIOXIDE'
-  }), _defineProperty(_descriptions, 'ICE', {
-    description: 'frozen WATER that produces COLD in the area around it',
-    howToMake: 'WATER + ICE'
-  }), _defineProperty(_descriptions, 'URANIUM', {
-    description: 'very rare resource that produces indefinite low HEAT'
-  }), _defineProperty(_descriptions, 'SAND', {
-    description: 'naturally-occurring FLUID particulate that melts into MOLTEN_SAND'
-  }), _defineProperty(_descriptions, 'MOLTEN_SAND', {
-    description: 'super-hot FLUID sand that cools to GLASS or combines with COAL to make SILICON',
-    howToMake: 'HEAT + SAND'
-  }), _defineProperty(_descriptions, 'MOLTEN_IRON', {
-    description: 'super-hot FLUID IRON',
-    howToMake: 'HEAT + IRON'
-  }), _defineProperty(_descriptions, 'MOLTEN_STEEL', {
-    description: 'super-hot FLUID STEEL',
-    howToMake: 'HEAT + IRON + COAL'
-  }), _defineProperty(_descriptions, 'WATER', {
-    description: 'FLUID that heats to STEAM and freezes to ICE. Can pass through a TURBINE ' + 'to produce POWER'
-  }), _defineProperty(_descriptions, 'STEAM', {
-    description: 'rising GAS that can pass through a TURBINE to produce POWER'
-  }), _defineProperty(_descriptions, 'SULPHUR_DIOXIDE', {
-    description: 'rising GAS that freezes into SULPHUR',
-    howToMake: 'OIL + low HEAT'
-  }), _defineProperty(_descriptions, 'OIL', {
-    description: 'naturally-occurring FLUID that heats to SULPHUR_DIOXIDE and combusts to ' + 'HOT_OIL'
-  }), _defineProperty(_descriptions, 'HOT_OIL', {
-    description: 'short-lived FLUID that briefly produces HEAT before burning off'
-  }), _defineProperty(_descriptions, 'HEAT', {
-    description: 'primary cause of phase changes in resources',
-    howToMake: 'HOT_COAL or URANIUM or HOT_OIL'
-  }), _defineProperty(_descriptions, 'COLD', {
-    description: 'counteracts HEAT, needed to make ICE and SULPHUR',
-    howToMake: 'ICE'
-  }), _defineProperty(_descriptions, 'BASIC_TURRET', {
-    description: 'turret with poor aim and a low rate of fire that does not require POWER',
-    howToMake: 'IRON'
-  }), _defineProperty(_descriptions, 'FAST_TURRET', {
-    description: 'turret with high fire rate that requires POWER',
-    howToMake: 'STEEL'
-  }), _defineProperty(_descriptions, 'MISSILE_TURRET', {
-    description: 'turret that fires interceptor missiles which each cost some IRON COAL and ' + 'SULPHUR to produce but does not require POWER',
-    howToMake: 'IRON and STEEL'
-  }), _defineProperty(_descriptions, 'LASER_TURRET', {
-    description: 'turret with very high rate of fire with a high POWER requirement',
-    howToMake: 'STEEL and GLASS and SILICON'
-  }), _defineProperty(_descriptions, 'TURBINE', {
-    description: 'building that produces POWER when a FLUID or GAS passes through it',
-    howToMake: 'STEEL'
-  }), _defineProperty(_descriptions, 'SOLAR_PANEL', {
-    description: 'building that passively produces power based on how much sunlight it gets',
-    howToMake: 'STEEL and GLASS and SILICON'
-  }), _defineProperty(_descriptions, 'FLUID', {
-    description: 'uncollectable resource type (like WATER or OIL ) that can pass through a TURBINE' + ' to produce POWER'
-  }), _defineProperty(_descriptions, 'GAS', {
-    description: 'uncollectable, rising resource that can pass through a TURBINE to produce POWER'
-  }), _defineProperty(_descriptions, 'POWER', {
-    description: 'energy produced by passing a FLUID or a GAS through a TURBINE to operate' + ' buildings'
-  }), _descriptions)
 };
 
 var nonMoltenPheromoneBlockingTypes = ['DIRT', 'STONE', 'DOODAD', 'TURRET'];
@@ -539,7 +437,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":32,"../selectors/sprites":38,"../utils/vectors":45,"./makeEntity":18}],3:[function(require,module,exports){
+},{"../render/renderAgent":20,"../selectors/sprites":26,"../utils/vectors":33,"./makeEntity":10}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -576,7 +474,7 @@ var render = function render(ctx, game, bg) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":38,"./makeEntity":18}],4:[function(require,module,exports){
+},{"../selectors/sprites":26,"./makeEntity":10}],4:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -592,6 +490,7 @@ var config = {
   height: 3,
   PHEROMONE_EMITTER: true,
   pheromoneType: 'COLONY',
+  AGENT: true,
 
   blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
 
@@ -615,7 +514,7 @@ var render = function render(ctx, game, base) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"./makeEntity":18}],5:[function(require,module,exports){
+},{"../config":1,"./makeEntity":10}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -747,106 +646,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":32,"../utils/vectors":45,"./makeEntity.js":18}],6:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 2,
-  height: 2,
-  maxHold: 2,
-  age: 0,
-
-  AGENT: true,
-  MANNED: true, // property where you can have a player ride
-  LOADER: true, // property where you can drop things into entities that hold stuff
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('BULLDOZER', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "yellow";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":32,"../selectors/sprites":38,"./makeEntity":18}],7:[function(require,module,exports){
+},{"../render/renderAgent":20,"../utils/vectors":33,"./makeEntity.js":10}],6:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -922,49 +722,7 @@ var render = function render(ctx, game, bullet) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":38,"../simulation/actionQueue":39,"../utils/vectors":45,"./makeEntity":18}],8:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  FLAMMABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'HEAT',
-  hp: 10,
-  combustionTemp: 125, // temperature at which you catch on fire
-  fuel: 3 * 60 * 1000, // ms of burn time
-  heatQuantity: 150, // amount of heat produced when on fire
-  refreshRate: 60 // heat is updated this often
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('COAL', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    onFire: false,
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, coal) {
-  var obj = getTileSprite(game, coal);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, coal.position.x, coal.position.y, coal.width, coal.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],9:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":26,"../simulation/actionQueue":27,"../utils/vectors":33,"./makeEntity":10}],7:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1004,7 +762,7 @@ var render = function render(ctx, game, dirt) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":38,"./makeEntity":18}],10:[function(require,module,exports){
+},{"../selectors/sprites":26,"./makeEntity":10}],8:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1035,200 +793,7 @@ var render = function render(ctx, game, doodad) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"./makeEntity":18}],11:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 2,
-  height: 2,
-  age: 0,
-
-  AGENT: true,
-  RAM: true, // property where you deal damage to things you collide with
-  MANNED: true, // property where you can have a player ride
-
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 12,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('DRILL', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "steelblue";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":32,"../selectors/sprites":38,"./makeEntity":18}],12:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 3,
-  height: 3,
-  maxHold: 9,
-  age: 0,
-
-  AGENT: true,
-  MANNED: true, // property where you can have a player ride
-  LOADER: true, // can load held entities into other entities
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('DUMPTRUCK', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "gray";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":32,"../selectors/sprites":38,"./makeEntity":18}],13:[function(require,module,exports){
+},{"./makeEntity":10}],9:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1300,173 +865,7 @@ var render = function render(ctx, game, dynamite) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":38,"../simulation/actionQueue":39,"./makeEntity":18}],14:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  hp: 120
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('FOOD', position, width, height), config, {
-    dictIndexStr: ''
-  });
-};
-
-var render = function render(ctx, game, food) {
-  var obj = getTileSprite(game, food);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, food.position.x, food.position.y, food.width, food.height);
-
-  if (game.showMarkedFood) {
-    if (game.bases[game.playerID].foodMarkedForRetrieval[food.id]) {
-      ctx.fillStyle = 'rgba(0, 0, 250, 0.2)';
-      ctx.fillRect(food.position.x, food.position.y, food.width, food.height);
-      ctx.fillStyle = 'red';
-      ctx.font = '1px sans serif';
-      ctx.fillText(parseInt(food.id), food.position.x, food.position.y + 1, 1);
-    }
-  }
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],15:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'MOLTEN_SAND',
-  hp: 10,
-  meltTemp: 100, // temperature at which you catch on fire
-  heatQuantity: 120 // amount of glass produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('GLASS', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    hp: hp || config.hp,
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, glass) {
-  var obj = getTileSprite(game, glass);
-  if (obj == null || obj.img == null) return;
-  ctx.save();
-  ctx.globalAlpha = 0.5;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, glass.position.x, glass.position.y, glass.width, glass.height);
-  ctx.restore();
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],16:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'COLD',
-  meltType: 'WATER',
-  hp: 120,
-  meltTemp: 12, // temperature at which you melt
-  heatQuantity: 120, // amount of water produced when melted
-  refreshRate: 60
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('ICE', position, width || 1, height || 1), config, {
-    hp: hp || config.hp,
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: 120 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, ice) {
-  var obj = getTileSprite(game, ice);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, ice.position.x, ice.position.y, ice.width, ice.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],17:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'MOLTEN_IRON',
-  hp: 120,
-  meltTemp: 125, // temperature at which you melt
-  heatQuantity: 120 // amount of iron produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('IRON', position, width || 1, height || 1), config, {
-    hp: hp || config.hp,
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, iron) {
-  var obj = getTileSprite(game, iron);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, iron.position.x, iron.position.y, iron.width, iron.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],18:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":26,"../simulation/actionQueue":27,"./makeEntity":10}],10:[function(require,module,exports){
 'use strict';
 
 var makeEntity = function makeEntity(type, position, width, height) {
@@ -1485,7 +884,7 @@ var makeEntity = function makeEntity(type, position, width, height) {
 module.exports = {
 	makeEntity: makeEntity
 };
-},{}],19:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1583,7 +982,171 @@ var render = function render(ctx, game, missile) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":38,"../simulation/actionQueue":39,"../utils/vectors":45,"./makeEntity":18}],20:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":26,"../simulation/actionQueue":27,"../utils/vectors":33,"./makeEntity":10}],12:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _require = require('./makeEntity'),
+    makeEntity = _require.makeEntity;
+
+var _require2 = require('../selectors/sprites'),
+    getBeetleSprite = _require2.getBeetleSprite;
+
+var _require3 = require('../render/renderAgent'),
+    renderAgent = _require3.renderAgent;
+
+var config = {
+  maxHP: 10, // hack to prevent circular reference with render Agent
+  hp: 10,
+  damage: 1,
+  width: 1,
+  height: 1,
+  maxHold: 1,
+  age: 0,
+
+  AGENT: true,
+
+  pickupTypes: ['FOOD', 'TOKEN', 'DYNAMITE', 'STEEL'],
+  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'STEEL', 'BASE'],
+
+  // action params
+  MOVE: {
+    duration: 41 * 6,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  MAN: {
+    duration: 41 * 4,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  UN_MAN: {
+    duration: 41 * 4,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  MOVE_TURN: {
+    duration: 41 * 7,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  PICKUP: {
+    duration: 41 * 6,
+    spriteOrder: [5, 6, 7]
+  },
+  PUTDOWN: {
+    duration: 41 * 6,
+    spriteOrder: [7, 6, 5]
+  },
+  TURN: {
+    duration: 41 * 6,
+    spriteOrder: [1, 2, 3, 4]
+  },
+  DIE: {
+    duration: 41 * 2,
+    spriteOrder: [6]
+  },
+  GRAPPLE: {
+    duration: 41 * 6,
+    spriteOrder: [5, 6, 7]
+  },
+  BITE: {
+    duration: 41 * 6,
+    spriteOrder: [3, 4, 0, 5, 3]
+  },
+
+  // task-specific params
+  WANDER: {
+    base: 1,
+    forwardMovementBonus: 0,
+    prevPositionPenalty: -100,
+    ALERT: 500,
+    FOOD: 100,
+    FOLLOW: 2000,
+    COLONY: 10
+  },
+  RETRIEVE: {
+    base: 1,
+    forwardMovementBonus: 100,
+    prevPositionPenalty: -100,
+    ALERT: 300,
+    FOOD: 300,
+    COLONY: -100
+  },
+  RETURN: {
+    base: 3,
+    forwardMovementBonus: 500,
+    prevPositionPenalty: -1000,
+    ALERT: 0,
+    FOOD: 200,
+    COLONY: 1000
+  },
+  DEFEND: {
+    base: 3,
+    forwardMovementBonus: 500,
+    prevPositionPenalty: -1000,
+    ALERT: 50
+  },
+  MOVE_DIRT: {
+    base: 1,
+    forwardMovementBonus: 20,
+    prevPositionPenalty: -100,
+    ALERT: 100,
+    DIRT_DROP: 200
+  },
+  GO_TO_DIRT: {
+    base: 1,
+    forwardMovementBonus: 20,
+    prevPositionPenalty: -100,
+    ALERT: 100,
+    MARKED_DIRT_PHER: 300
+  }
+};
+
+var make = function make(game, position, playerID) {
+  var ant = _extends({}, makeEntity('MONSTER', position, config.width, config.height), config, {
+    playerID: playerID,
+    prevHP: config.hp,
+    prevHPAge: 0,
+    holding: null,
+    holdingIDs: [], // treat holding like a stack
+    actions: [],
+
+    task: 'WANDER',
+    timeOnTask: 0,
+
+    foodPherQuantity: 0, // tracks how much food pheromone to place
+
+    // this frame offset allows iterating through spritesheets across
+    // multiple actions (rn only used by queen ant doing one full walk
+    // cycle across two MOVE actions)
+    frameOffset: 0,
+    timeOnMove: 0 // for turning in place
+  });
+
+  return ant;
+};
+
+var render = function render(ctx, game, agent) {
+  renderAgent(ctx, game, agent, spriteRenderFn);
+};
+
+var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
+  var sprite = getBeetleSprite(game, ant);
+  if (sprite.img != null) {
+    ctx.drawImage(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, ant.width, ant.height);
+  }
+};
+
+module.exports = {
+  config: config, make: make, render: render
+};
+},{"../render/renderAgent":20,"../selectors/sprites":26,"./makeEntity":10}],13:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1655,111 +1218,7 @@ var render = function render(ctx, game, dynamite) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":38,"../simulation/actionQueue":39,"./makeEntity":18}],21:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 60,
-  damage: 1,
-  width: 1,
-  height: 1,
-  maxHold: 1,
-  age: 0,
-
-  AGENT: true,
-  LOADER: true,
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MAN: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  UN_MAN: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 5,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  PICKUP: {
-    duration: 41 * 6,
-    spriteOrder: [5, 6, 7]
-  },
-  PUTDOWN: {
-    duration: 41 * 6,
-    spriteOrder: [7, 6, 5]
-  },
-  TURN: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position, playerID) {
-  var player = _extends({}, makeEntity('PLAYER', position, config.width, config.height), config, {
-    playerID: playerID,
-    prevHP: config.hp,
-    prevHPAge: 0,
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-    actions: [],
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
-  var sprite = getAntSpriteAndOffset(game, ant);
-  if (sprite.img != null) {
-    ctx.drawImage(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, ant.width, ant.height);
-  }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":32,"../selectors/sprites":38,"./makeEntity":18}],22:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":26,"../simulation/actionQueue":27,"./makeEntity":10}],14:[function(require,module,exports){
 'use strict';
 
 var globalConfig = require('../config');
@@ -1779,23 +1238,9 @@ var Entities = {
 
   DIRT: require('./dirt.js'),
   STONE: require('./stone.js'),
-  COAL: require('./coal.js'),
-  IRON: require('./iron.js'),
   STEEL: require('./steel.js'),
-  GLASS: require('./glass.js'),
-  SILICON: require('./silicon.js'),
-  SULPHUR: require('./sulphur.js'),
-  ICE: require('./ice.js'),
-  URANIUM: require('./uranium.js'),
 
-  FOOD: require('./food.js'),
   AGENT: require('./agent.js'),
-  TOKEN: require('./token.js'),
-
-  PLAYER: require('./player.js'),
-  DRILL: require('./drill.js'),
-  BULLDOZER: require('./bulldozer.js'),
-  DUMPTRUCK: require('./dumptruck.js'),
 
   BASIC_TURRET: require('./basicTurret.js'),
   FAST_TURRET: require('./turret.js'),
@@ -1805,57 +1250,15 @@ var Entities = {
   MISSILE: require('./missile.js'),
   BULLET: require('./bullet.js'),
 
-  BASE: require('./base.js')
+  BASE: require('./base.js'),
+
+  MONSTER: require('./monster.js')
 };
 
 module.exports = {
   Entities: Entities
 };
-},{"../config":1,"./agent.js":2,"./background.js":3,"./base.js":4,"./basicTurret.js":5,"./bulldozer.js":6,"./bullet.js":7,"./coal.js":8,"./dirt.js":9,"./doodad.js":10,"./drill.js":11,"./dumptruck.js":12,"./dynamite.js":13,"./food.js":14,"./glass.js":15,"./ice.js":16,"./iron.js":17,"./missile.js":19,"./nuke.js":20,"./player.js":21,"./silicon.js":23,"./steel.js":24,"./stone.js":25,"./sulphur.js":26,"./token.js":27,"./turret.js":28,"./uranium.js":29}],23:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  hp: 10
-  // pheromoneType: 'MOLTEN_SAND',
-  // meltTemp: 100, // temperature at which you melt
-  // heatQuantity: 120, // amount of glass produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('SILICON', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    hp: hp || config.hp,
-    playerID: 0 // gaia
-  });
-};
-
-var render = function render(ctx, game, silicon) {
-  // const obj = getTileSprite(game, silicon);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   silicon.position.x, silicon.position.y, silicon.width, silicon.height,
-  // );
-
-  ctx.fillStyle = "#006400";
-  ctx.fillRect(silicon.position.x, silicon.position.y, silicon.width, silicon.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],24:[function(require,module,exports){
+},{"../config":1,"./agent.js":2,"./background.js":3,"./base.js":4,"./basicTurret.js":5,"./bullet.js":6,"./dirt.js":7,"./doodad.js":8,"./dynamite.js":9,"./missile.js":11,"./monster.js":12,"./nuke.js":13,"./steel.js":15,"./stone.js":16,"./turret.js":17}],15:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1895,7 +1298,7 @@ var render = function render(ctx, game, steel) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":38,"./makeEntity":18}],25:[function(require,module,exports){
+},{"../selectors/sprites":26,"./makeEntity":10}],16:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1929,78 +1332,7 @@ var render = function render(ctx, game, stone) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":38,"./makeEntity":18}],26:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  hp: 10
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('SULPHUR', position, width, height), config, {
-    marked: null,
-    dictIndexStr: ''
-  });
-};
-
-var render = function render(ctx, game, sulphur) {
-  var obj = getTileSprite(game, sulphur);
-
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, sulphur.position.x, sulphur.position.y, sulphur.width, sulphur.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],27:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var globalConfig = require('../config');
-
-var config = {
-  PHEROMONE_EMITTER: true
-};
-
-var make = function make(game, position, playerID, pheromoneType, quantity) {
-  return _extends({}, makeEntity('TOKEN', position, 1, 1), config, {
-    pheromoneType: pheromoneType,
-    playerID: playerID,
-    quantity: quantity || globalConfig.pheromones[pheromoneType].quantity
-  });
-};
-
-var render = function render(ctx, game, token) {
-  ctx.save();
-  ctx.translate(token.position.x, token.position.y);
-  ctx.strokeStyle = 'black';
-  ctx.fillStyle = 'steelblue';
-  ctx.beginPath();
-  var radius = token.width / 2;
-  ctx.arc(token.width / 2, token.height / 2, radius, 0, Math.PI * 2);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-  ctx.restore();
-};
-
-module.exports = { config: config, make: make, render: render };
-},{"../config":1,"./makeEntity":18}],28:[function(require,module,exports){
+},{"../selectors/sprites":26,"./makeEntity":10}],17:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2142,45 +1474,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":32,"../selectors/sprites":38,"../utils/vectors":45,"./makeEntity.js":18}],29:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'HEAT',
-  hp: 100,
-  heatQuantity: 125, // amount of heat produced when on fire
-  refreshRate: 60
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('URANIUM', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: config.heatQuantity // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, uranium) {
-  var obj = getTileSprite(game, uranium);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, uranium.position.x, uranium.position.y, uranium.width, uranium.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":38,"./makeEntity":18}],30:[function(require,module,exports){
+},{"../render/renderAgent":20,"../selectors/sprites":26,"../utils/vectors":33,"./makeEntity.js":10}],18:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3058,7 +2352,7 @@ var updateDispersingPheromones = function updateDispersingPheromones(game) {
   return nextDispersingPheromones;
 };
 
-},{"./config":1,"./selectors/neighbors":36,"./selectors/pheromones":37,"./simulation/entityOperations":40,"./simulation/pheromones":41,"./utils/gridHelpers":42,"./utils/helpers":43,"./utils/stochastic":44,"./utils/vectors":45}],31:[function(require,module,exports){
+},{"./config":1,"./selectors/neighbors":24,"./selectors/pheromones":25,"./simulation/entityOperations":28,"./simulation/pheromones":29,"./utils/gridHelpers":30,"./utils/helpers":31,"./utils/stochastic":32,"./utils/vectors":33}],19:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/registry'),
@@ -3125,7 +2419,7 @@ var Properties = {
 module.exports = {
   Properties: Properties
 };
-},{"../entities/registry":22}],32:[function(require,module,exports){
+},{"../entities/registry":14}],20:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3217,7 +2511,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45,"./renderHealthBar":33}],33:[function(require,module,exports){
+},{"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33,"./renderHealthBar":21}],21:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -3259,7 +2553,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":42,"../utils/vectors":45}],34:[function(require,module,exports){
+},{"../utils/gridHelpers":30,"../utils/vectors":33}],22:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/gridHelpers'),
@@ -3323,7 +2617,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":42}],35:[function(require,module,exports){
+},{"../utils/gridHelpers":30}],23:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3572,7 +2866,7 @@ module.exports = {
   getControlledEntityInteraction: getControlledEntityInteraction,
   getManningAction: getManningAction
 };
-},{"../selectors/collisions":34,"../selectors/neighbors":36,"../simulation/actionQueue":39,"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45}],36:[function(require,module,exports){
+},{"../selectors/collisions":22,"../selectors/neighbors":24,"../simulation/actionQueue":27,"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33}],24:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -3839,7 +3133,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":34,"../utils/gridHelpers":42,"../utils/vectors":45}],37:[function(require,module,exports){
+},{"../selectors/collisions":22,"../utils/gridHelpers":30,"../utils/vectors":33}],25:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4021,7 +3315,7 @@ module.exports = {
   getQuantityForStalePos: getQuantityForStalePos,
   isPositionBlockingPheromone: isPositionBlockingPheromone
 };
-},{"../config":1,"../selectors/neighbors":36,"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45}],38:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":24,"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33}],26:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4499,6 +3793,26 @@ var getSegmentTail = function getSegmentTail(game, entity, segment) {
   }
 };
 
+var getBeetleSprite = function getBeetleSprite(game, beetle) {
+  var width = 32;
+  var height = 32;
+  var obj = {
+    img: game.sprites.BEETLE,
+    x: 0, y: 0,
+    width: width, height: height
+  };
+  var index = getInterpolatedIndex(game, beetle);
+  if (beetle.type == 'DEAD_BEETLE') {
+    index = 6;
+    obj.x = index * width;
+  } else if (beetle.actions.length == 0) {
+    return obj;
+  } else {
+    obj.x = getFrame(game, beetle, index) * width;
+  }
+  return obj;
+};
+
 module.exports = {
   getInterpolatedPos: getInterpolatedPos,
   getInterpolatedTheta: getInterpolatedTheta,
@@ -4513,9 +3827,10 @@ module.exports = {
   getMaxFrameOffset: getMaxFrameOffset,
   getSegmentSprite: getSegmentSprite,
   getSegmentHead: getSegmentHead,
-  getSegmentTail: getSegmentTail
+  getSegmentTail: getSegmentTail,
+  getBeetleSprite: getBeetleSprite
 };
-},{"../config":1,"../selectors/misc":35,"../selectors/neighbors":36,"../simulation/actionQueue":39,"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45}],39:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":23,"../selectors/neighbors":24,"../simulation/actionQueue":27,"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33}],27:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4747,7 +4062,7 @@ module.exports = {
   makeAction: makeAction,
   getFrame: getFrame
 };
-},{"../selectors/pheromones":37,"../utils/helpers":43,"../utils/vectors":45}],40:[function(require,module,exports){
+},{"../selectors/pheromones":25,"../utils/helpers":31,"../utils/vectors":33}],28:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5462,7 +4777,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":18,"../entities/registry":22,"../properties/registry":31,"../selectors/neighbors":36,"../selectors/pheromones":37,"../simulation/pheromones":41,"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45}],41:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":19,"../selectors/neighbors":24,"../selectors/pheromones":25,"../simulation/pheromones":29,"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33}],29:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5822,7 +5137,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":36,"../selectors/pheromones":37,"../utils/gridHelpers":42,"../utils/helpers":43,"../utils/vectors":45}],42:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":24,"../selectors/pheromones":25,"../utils/gridHelpers":30,"../utils/helpers":31,"../utils/vectors":33}],30:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -5958,7 +5273,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":43,"../utils/vectors":45}],43:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":31,"../utils/vectors":33}],31:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -6141,7 +5456,7 @@ module.exports = {
   forEachObj: forEachObj,
   filterObj: filterObj
 };
-},{"./vectors":45}],44:[function(require,module,exports){
+},{"./vectors":33}],32:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -6196,7 +5511,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],45:[function(require,module,exports){
+},{}],33:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6395,4 +5710,4 @@ module.exports = {
   rotate: rotate,
   abs: abs
 };
-},{}]},{},[30]);
+},{}]},{},[18]);

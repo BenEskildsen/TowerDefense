@@ -86,7 +86,7 @@ const renderFrame = (game: Game): void => {
       globalConfig.config.canvasWidth - pxWidth - 8,
       globalConfig.config.canvasHeight - pxHeight - 8,
     );
-    renderMinimap(ctx, game, miniDims);
+    // renderMinimap(ctx, game, miniDims);
     ctx.restore();
   } else {
     const nextViewPos = {
@@ -110,7 +110,7 @@ const renderFrame = (game: Game): void => {
       viewHeight: game.viewHeight,
       viewPos: {...game.viewPos},
     };
-    renderMinimap(ctx, game, bigDims);
+    // renderMinimap(ctx, game, bigDims);
     ctx.save();
     ctx.translate(
       globalConfig.config.canvasWidth - pxWidth - 8,
@@ -201,27 +201,27 @@ const renderView = (canvas, ctx2d, game, dims, isMini): void => {
 
 
   // render cursor square
-  const cursorPos = game.mouse.curPos;
-  ctx.lineWidth = ctx.lineWidth * 2;
-  const occupied = lookupInGrid(game.grid, cursorPos)
-    .map(id => game.entities[id])
-    .filter(e => e != null && (e.type == 'BACKGROUND' && !isAboveSomething(game, cursorPos)))
-    .length > 0;
-  if (!isNeighboringColonyPher(game, cursorPos) || occupied) {
-    ctx.fillStyle = 'rgba(139,0,0, 0.1)';
-    ctx.strokeStyle = 'red';
-  } else {
-    ctx.fillStyle = 'rgba(0,139,0, 0.1)';
-    ctx.strokeStyle = 'green';
-  }
-  let cursorWidth = 1;
-  let cursorHeight = 1;
-  if (game.placeType != null && Entities[game.placeType] != null) {
-    cursorWidth = Entities[game.placeType].config.width || 1;
-    cursorHeight = Entities[game.placeType].config.height || 1;
-  }
-  ctx.fillRect(cursorPos.x, cursorPos.y,   cursorWidth, cursorHeight);
-  ctx.strokeRect(cursorPos.x, cursorPos.y, cursorWidth, cursorHeight);
+  // const cursorPos = game.mouse.curPos;
+  // ctx.lineWidth = ctx.lineWidth * 2;
+  // const occupied = lookupInGrid(game.grid, cursorPos)
+  //   .map(id => game.entities[id])
+  //   .filter(e => e != null && (e.type == 'BACKGROUND' && !isAboveSomething(game, cursorPos)))
+  //   .length > 0;
+  // if (!isNeighboringColonyPher(game, cursorPos) || occupied) {
+  //   ctx.fillStyle = 'rgba(139,0,0, 0.1)';
+  //   ctx.strokeStyle = 'red';
+  // } else {
+  //   ctx.fillStyle = 'rgba(0,139,0, 0.1)';
+  //   ctx.strokeStyle = 'green';
+  // }
+  // let cursorWidth = 1;
+  // let cursorHeight = 1;
+  // if (game.placeType != null && Entities[game.placeType] != null) {
+  //   cursorWidth = Entities[game.placeType].config.width || 1;
+  //   cursorHeight = Entities[game.placeType].config.height || 1;
+  // }
+  // ctx.fillRect(cursorPos.x, cursorPos.y,   cursorWidth, cursorHeight);
+  // ctx.strokeRect(cursorPos.x, cursorPos.y, cursorWidth, cursorHeight);
 
   // marquee
   if (

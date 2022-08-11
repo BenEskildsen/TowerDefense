@@ -5,14 +5,13 @@ const Button = require('./Components/Button.react');
 const Canvas = require('./Canvas.react');
 const Checkbox = require('./Components/Checkbox.react');
 const RadioPicker = require('./Components/RadioPicker.react');
-const TopBar = require('./TopBar.react');
 const BottomBar = require('./BottomBar.react');
 const {config} = require('../config');
 const {initMouseControlsSystem} = require('../systems/mouseControlsSystem');
 const {initGameOverSystem} = require('../systems/gameOverSystem');
 const {initSpriteSheetSystem} = require('../systems/spriteSheetSystem');
 const {initRainSystem} = require('../systems/rainSystem');
-const {initMonsterAttackSystem} = require('../systems/missileAttackSystem');
+const {initMonsterAttackSystem} = require('../systems/monsterAttackSystem');
 const {initPheromoneWorkerSystem} = require('../systems/pheromoneWorkerSystem');
 const {
   initKeyboardControlsSystem
@@ -113,21 +112,6 @@ function Game(props: Props): React.Node {
         focusedEntity={game.focusedEntity}
       />
       <Ticker ticker={game.ticker} />
-      <TopBar dispatch={dispatch}
-        upgradedAt={game.upgradedAt}
-        isExperimental={props.isInLevelEditor}
-        tickInterval={state.game.tickInterval}
-        modal={state.modal}
-        canvasWidth={dims.width}
-        isMuted={state.isMuted}
-        powerMargin={game.bases[game.playerID].powerMargin}
-        totalPowerNeeded={game.bases[game.playerID].totalPowerNeeded}
-        totalPowerGenerated={game.bases[game.playerID].totalPowerGenerated}
-        base={game.bases[game.playerID]}
-        placeType={game.placeType}
-        tick={game.time}
-        game={game}
-      />
       <MiniTicker miniTicker={game.miniTicker} />
       <BottomBar dispatch={dispatch}
         game={game}

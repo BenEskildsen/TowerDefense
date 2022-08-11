@@ -240,12 +240,41 @@ const agentDecideAction = (game: Game, agent: Agent): void => {
 
   switch (agent.type) {
     case 'AGENT':
+    case 'MONSTER':
+      monsterDecideAction(game, agent);
+      break;
     case 'WORM':  {
       // MOVE
       agentDecideMove(game, agent);
+      break;
     }
   }
 
+};
+
+
+const monsterDecideAction = (game, ant) => {
+  // FIGHT
+
+  const hasPathToColony = getPheromoneAtPosition(game, ant.position, 'COLONY', game.playerID);
+  const targets = getNeighborEntities(game, ant, true)
+    .filter(e => {
+      if (e.position == null) return false;
+      if (isDiagonalMove(ant.position, e.position)) return false;
+      return (
+        e.type == 'BASE' || e.type == 'BASIC_TURRET' ||
+        // only attack dirt/stone when path is blocked
+        (!hasPathToColony && (e.type == 'DIRT' || e.type == 'STONE'))
+      );
+    });
+
+  if (targets.length > 0) {
+    queueAction(game, ant, makeAction(game, ant, 'BITE', oneOf(targets)));
+    return;
+  }
+
+  // MOVE
+  agentDecideMove(game, ant);
 };
 
 module.exports = {

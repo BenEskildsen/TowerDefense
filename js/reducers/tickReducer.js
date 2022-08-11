@@ -101,16 +101,6 @@ const doTick = (game: Game): Game => {
       PHEROMONE_EMITTER: game.PHEROMONE_EMITTER || {},
       TURBINE: game.TURBINE || [],
     });
-    const base = game.entities[game.BASE[0]];
-    if (base) {
-      game.focusedEntity = base;
-    }
-  }
-  if (game.time == 45) {
-    game.focusedEntity = null;
-  }
-  if (game.time > 45 && game.controlledEntity == null) {
-    game.controlledEntity = game.entities[game.PLAYER[0]];
   }
 
   // game/frame timing
@@ -122,17 +112,12 @@ const doTick = (game: Game): Game => {
   updateAgents(game);
   updateTiledSprites(game);
   updateViewPos(game, false /*don't clamp to world*/);
-  updateRain(game);
   updateTicker(game);
   updatePheromoneEmitters(game);
   updateTowers(game);
   updateBases(game);
   updateBallistics(game);
-  updateFlammables(game);
-  updateCoal(game);
-  updateMeltables(game);
   updateExplosives(game);
-  updateGenerators(game);
 
   updatePheromones(game);
   render(game);
@@ -303,95 +288,6 @@ const updateBallistics = (game): void => {
 };
 
 //////////////////////////////////////////////////////////////////////////
-// Fire, meltables
-//////////////////////////////////////////////////////////////////////////
-
-const updateFlammables = (game): void => {
-  for (const id in game.FLAMMABLE) {
-    const flammable = game.entities[id];
-    // if on fire, burn
-    if (flammable.onFire) {
-      flammable.COLLECTABLE = false;
-      // check if you just caught on fire, and set quantity
-      if (flammable.quantity == 0) {
-        changePheromoneEmitterQuantity(game, flammable, flammable.heatQuantity);
-      }
-      flammable.fuel -= game.timeSinceLastTick;
-      if (flammable.fuel <= 0) {
-        queueAction(game, flammable, makeAction(game, flammable, 'DIE'));
-      }
-    // if not on fire, check if it should catch on fire
-    } else {
-      const temp = getTemperature(game, flammable.position);
-      if (temp >= flammable.combustionTemp) {
-        if (flammable.type != 'AGENT') {
-          flammable.onFire = true;
-          flammable.COLLECTABLE = false;
-        }
-      }
-    }
-  }
-}
-
-const updateCoal = (game): void => {
-  for (const id of game.COAL) {
-    const coal = game.entities[id];
-
-    // coal + iron = steel
-    const moltenIron = getPheromoneAtPosition(game, coal.position, 'MOLTEN_IRON', 0);
-    if (moltenIron > 0) {
-      const position = {...coal.position};
-      removeEntity(game, coal);
-      fillPheromone(game, position, 'MOLTEN_STEEL', game.gaiaID, moltenIron * 2);
-      setPheromone(game, position, 'MOLTEN_IRON', 0, game.gaiaID);
-    }
-
-    // coal + molten sand = silicon
-    const moltenSand = getPheromoneAtPosition(game, coal.position, 'MOLTEN_SAND', 0);
-    if (moltenSand > 0) {
-      const position = {...coal.position};
-      removeEntity(game, coal);
-      setPheromone(game, position, 'MOLTEN_SAND', 0, game.gaiaID);
-      addEntity(game, Entities.SILICON.make(game, coal.position));
-    }
-  }
-};
-
-const updateMeltables = (game): void => {
-  for (const id in game.MELTABLE) {
-    const meltable = game.entities[id];
-
-    const temp = getTemperature(game, meltable.position);
-    if (temp >= meltable.meltTemp) {
-      // if you're an agent (or food!) then you're en route to being collected
-      let config = Entities[meltable.type].config;
-      if (!config.isMeltable) {
-        meltable.type = meltable.collectedAs;
-        meltable.playerID = 0;
-        config = Entities[meltable.type].config;
-      }
-
-      // if it produces a different pheromone than what it melts to, e.g. ICE,
-      // then need to remove that, then melt
-      if (meltable.meltType) {
-        changePheromoneEmitterQuantity(game, meltable, 0);
-        meltable.pheromoneType = meltable.meltType;
-        game.pheromoneWorker.postMessage({
-          type: 'CHANGE_EMITTER_TYPE',
-          entityID: meltable.id,
-          pheromoneType: meltable.pheromoneType,
-        });
-      }
-      changePheromoneEmitterQuantity(
-        game, meltable, meltable.heatQuantity * (meltable.hp / config.hp),
-      );
-      changeEntityType(game, meltable, meltable.type, 'FOOD');
-      queueAction(game, meltable, makeAction(game, meltable, 'DIE'));
-    }
-  }
-};
-
-//////////////////////////////////////////////////////////////////////////
 // Towers
 //////////////////////////////////////////////////////////////////////////
 
@@ -499,74 +395,9 @@ const updateTowers = (game): void => {
 // Generators, Bases
 //////////////////////////////////////////////////////////////////////////
 
-const updateGenerators = (game: Game): void => {
-  const maxLight = globalConfig.pheromones.LIGHT.quantity;
-  // tally up available power
-  let totalPowerGenerated = 0;
-  for (const id in game.GENERATOR) {
-    const generator = game.entities[id];
-
-    let powerGenerated = Entities[generator.type].config.powerGenerated;
-    const maxPower = powerGenerated;
-
-    // Handle turbines
-    if (generator.type == 'TURBINE') {
-      generator.theta = (generator.theta + generator.thetaSpeed) % (2 * Math.PI);
-      if (generator.thetaSpeed < 0.001) {
-        generator.thetaSpeed = 0;
-      }
-      powerGenerated *= Math.ceil(generator.thetaSpeed / generator.maxThetaSpeed);
-      // generator.powerGenerated = Math.min(powerGenerated * maxPower / 2, maxPower);
-    }
-
-    // Handle solar panels
-    if (generator.type == 'SOLAR_PANEL') {
-      const sunLight = getPheromoneAtPosition(game, generator.position, 'LIGHT', 0);
-      powerGenerated *= sunLight / maxLight;
-    }
-    generator.powerGenerated = powerGenerated;
-
-    totalPowerGenerated += powerGenerated;
-
-  }
-
-  game.bases[game.playerID].totalPowerGenerated = totalPowerGenerated;
-  game.bases[game.playerID].totalPowerNeeded = 0;
-
-  // distribute consumed power
-  for (const id in game.CONSUMER) {
-    const consumer = game.entities[id];
-    consumer.isPowered = false;
-    game.bases[game.playerID].totalPowerNeeded += consumer.powerConsumed;
-    if (totalPowerGenerated >= consumer.powerConsumed) {
-      consumer.isPowered = true;
-      totalPowerGenerated -= consumer.powerConsumed;
-    }
-  }
-
-  game.bases[game.playerID].powerMargin =
-    game.bases[game.playerID].totalPowerGenerated
-    - game.bases[game.playerID].totalPowerNeeded;
-};
-
 const updateBases = (game: Game): void => {
   for (const id of game.BASE) {
     const base = game.entities[id];
-    const collisions = collidesWith(game, base, Object.keys(Entities))
-      .filter(e => e.COLLECTABLE);
-    for (const entity of collisions) {
-      if (!isActionTypeQueued(entity, 'DIE')) {
-        queueAction(game, entity, makeAction(game, entity, 'DIE'));
-        const type = entity.collectedAs ? entity.collectedAs : entity.type;
-        if (!entity.COLLECTABLE) continue;
-        if (game.bases[game.playerID].resources[type] == null) {
-          game.bases[game.playerID].resources[type] = 0;
-        }
-        // pro-rate quantity based on hp
-        let quantity = Math.ceil(entity.hp) / Entities[type].config.hp;
-        game.bases[game.playerID].resources[type] += quantity;
-      }
-    }
   }
 };
 
@@ -792,14 +623,6 @@ const updateTiledSprites = (game): void => {
     entity.dictIndexStr = getDictIndexStr(game, entity);
   }
   game.staleTiles = [];
-}
-
-const updateRain = (game): void => {
-  if (game.rainTicks > 0) {
-    game.rainTicks--;
-  } else {
-    game.timeSinceLastRain += game.timeSinceLastTick;
-  }
 }
 
 const updateTicker = (game): void => {

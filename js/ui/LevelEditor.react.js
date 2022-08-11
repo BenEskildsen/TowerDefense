@@ -50,7 +50,7 @@ function LevelEditor(props: Props): React.Node {
 
     // entity creation mode
     deleteMode: false,
-    entityType: 'MISSILE',
+    entityType: 'MONSTER',
     subdividing: false,
     pheromoneType: 'HEAT',
     background: 'SKYLINE',
@@ -673,6 +673,7 @@ function createEntities(game, dispatch, editor, rect): void {
     case 'TURBINE':
     case 'AGENT':
     case 'PLAYER':
+    case 'MONSTER':
     case 'BASE':
       args = [editor.playerID];
       break;

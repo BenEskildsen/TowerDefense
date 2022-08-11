@@ -34,6 +34,7 @@ const initSpriteSheetSystem = (store) => {
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'WORM', './img/Worm1.png');
+  loadSprite(dispatch, state, 'BEETLE', './img/Beetle1.png');
 
   loadSprite(dispatch, state, 'FLOOR_TILE', './img/FloorTile1.png');
   loadSprite(dispatch, state, 'SKYLINE', './img/Skyline1.png');

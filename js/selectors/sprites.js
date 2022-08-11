@@ -432,7 +432,6 @@ const getSegmentTail = (game: Game, entity: Entity, segment): Object => {
 };
 
 const getBeetleSprite = (game: Game, beetle: Beetle): Object => {
-  const config = game.config;
   let width = 32;
   let height = 32;
   const obj = {

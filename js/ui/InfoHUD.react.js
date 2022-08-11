@@ -11,34 +11,6 @@ const {getPheromoneAtPosition, getTemperature} = require('../selectors/pheromone
 const InfoHUD = (props): React.Node => {
   const {mousePos, game} = props;
 
-  const pheromoneInfoCards = [];
-  const pherInCell = getPheromonesInCell(game.grid, mousePos, 0 /* playerID */);
-  let sunLight = 0;
-  for (const pherType in pherInCell) {
-    if (pherType == 'HEAT' || pherType == 'COLD') continue;
-    if (pherType == 'LIGHT') {
-      sunLight = pherInCell[pherType];
-      continue;
-    }
-    if (pherInCell[pherType] > 0) {
-      pheromoneInfoCards.push(
-        <PheromoneInfoCard
-          key={'pherInfo_' + pherType + encodePosition(mousePos) + pherInCell[pherType]}
-          pheromoneType={pherType}
-          quantity={pherInCell[pherType]}
-        />
-      );
-    }
-  }
-
-  const entityInfoCards = lookupInGrid(game.grid, mousePos)
-    .map(id => game.entities[id])
-    .filter(e => e != null && e.type != 'BACKGROUND')
-    .map(e => (<EntityInfoCard key={'info_' + e.id} entity={e} />));
-
-  const temp = getTemperature(game, mousePos);
-  const maxLight = pheromones.LIGHT.quantity;
-
   return (
     <div
       style={{
@@ -47,11 +19,7 @@ const InfoHUD = (props): React.Node => {
       <InfoCard>
         <div><b>Position: </b></div>
         <div>x: {mousePos.x} y: {mousePos.y}</div>
-        <div><b>Temperature</b>: {temp}</div>
-        <div><b>Sun Light</b>: {(sunLight / maxLight * 100).toFixed(0)}%</div>
       </InfoCard>
-      {entityInfoCards}
-      {pheromoneInfoCards}
     </div>
   );
 }

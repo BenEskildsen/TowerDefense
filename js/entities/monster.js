@@ -23,8 +23,8 @@ const config = {
     'FOOD', 'DIRT', 'AGENT',
     'STONE', 'DOODAD', 'WORM',
     'TOKEN', 'ANT',
-    'TURRET',
-    'STEEL',
+    'TURRET', 'MONSTER',
+    'STEEL', 'BASE',
   ],
 
   // action params
@@ -66,7 +66,7 @@ const config = {
   },
   DIE: {
     duration: 41 * 2,
-    spriteOrder: [8],
+    spriteOrder: [6],
   },
   GRAPPLE: {
     duration: 41 * 6,
@@ -74,7 +74,7 @@ const config = {
   },
   BITE: {
     duration: 41 * 6,
-    spriteOrder: [5, 6, 7],
+    spriteOrder: [3, 4, 0, 5, 3],
   },
 
   // task-specific params
@@ -85,7 +85,7 @@ const config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: -1,
+    COLONY: 10,
   },
   RETRIEVE: {
     base: 1,

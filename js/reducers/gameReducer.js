@@ -178,7 +178,7 @@ const gameReducer = (game: Game, action: Action): Game => {
     case 'UPDATE_ALL_PHEROMONES': {
       const {pheromones} = action;
       // console.log('received pheromone update', pheromones, game.time);
-      let allWaterQuantity = game.ICE.length;
+      let allWaterQuantity = 0;
       let shouldUpdateWaterQuantity = false;
       for (const positionHash of pheromones) {
         for (const encodedPosition in positionHash) {

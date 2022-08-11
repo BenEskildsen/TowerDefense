@@ -9,6 +9,7 @@ const config = {
   height: 3,
   PHEROMONE_EMITTER: true,
   pheromoneType: 'COLONY',
+  AGENT: true,
 
   blockingTypes: [
     'FOOD', 'DIRT', 'AGENT',

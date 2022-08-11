@@ -1,11 +1,7 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
 'use strict';
 
-var _descriptions;
-
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 var config = {
   msPerTick: 16,
@@ -50,106 +46,8 @@ var config = {
       busterTime: 8 * 60 * 1000,
       nukeTime: 10 * 60 * 1000
     }
-  },
+  }
 
-  proceduralFrequencies: {
-    STONE: { numMin: 1, numMax: 2, sizeMin: 4, sizeMax: 12 },
-    IRON: { numMin: 7, numMax: 10, sizeMin: 5, sizeMax: 10 },
-    COAL: { numMin: 6, numMax: 10, sizeMin: 6, sizeMax: 10 },
-    WATER: { numMin: 2, numMax: 5, sizeMin: 7, sizeMax: 14 },
-    SAND: { numMin: 1, numMax: 3, sizeMin: 5, sizeMax: 8 },
-    OIL: { numMin: 2, numMax: 4, sizeMin: 6, sizeMax: 12 },
-    SULPHUR: { numMin: 0, numMax: 1, sizeMin: 3, sizeMax: 4 },
-    GLASS: { numMin: 0, numMax: 1, sizeMin: 3, sizeMax: 4 },
-    ICE: { numMin: 1, numMax: 2, sizeMin: 3, sizeMax: 5 },
-    URANIUM: { numMin: 1, numMax: 2, sizeMin: 3, sizeMax: 3 }
-  },
-
-  descriptions: (_descriptions = {
-    // resources:
-    DIRT: {
-      description: 'low-hp blocks for sculpting the landscape'
-    },
-    STONE: {
-      description: 'high-hp blocks'
-    },
-    COAL: {
-      description: 'carbon-based building block, combusts in HEAT'
-    }
-  }, _defineProperty(_descriptions, 'HOT COAL', {
-    description: 'flaming coal whose HEAT melts resources into their molten form'
-  }), _defineProperty(_descriptions, 'IRON', {
-    description: 'abundant resource that can be smelted into STEEL'
-  }), _defineProperty(_descriptions, 'STEEL', {
-    description: 'high-hp resource used for making buildings',
-    howToMake: 'COAL + MOLTEN_IRON (place coal directly on molten iron OR place HOT_COAL ' + 'directly underneath IRON )'
-  }), _defineProperty(_descriptions, 'GLASS', {
-    description: 'resource used in high-tech buildings',
-    howToMake: 'cooled MOLTEN_SAND'
-  }), _defineProperty(_descriptions, 'SILICON', {
-    description: 'resource used in high-tech buildings',
-    howToMake: 'COAL + MOLTEN_SAND (place coal directly on molten sand OR place HOT_COAL ' + 'directly underneath GLASS )'
-  }), _defineProperty(_descriptions, 'SULPHUR', {
-    description: 'resource used in missiles',
-    howToMake: 'frozen SULPHUR_DIOXIDE'
-  }), _defineProperty(_descriptions, 'ICE', {
-    description: 'frozen WATER that produces COLD in the area around it',
-    howToMake: 'WATER + ICE'
-  }), _defineProperty(_descriptions, 'URANIUM', {
-    description: 'very rare resource that produces indefinite low HEAT'
-  }), _defineProperty(_descriptions, 'SAND', {
-    description: 'naturally-occurring FLUID particulate that melts into MOLTEN_SAND'
-  }), _defineProperty(_descriptions, 'MOLTEN_SAND', {
-    description: 'super-hot FLUID sand that cools to GLASS or combines with COAL to make SILICON',
-    howToMake: 'HEAT + SAND'
-  }), _defineProperty(_descriptions, 'MOLTEN_IRON', {
-    description: 'super-hot FLUID IRON',
-    howToMake: 'HEAT + IRON'
-  }), _defineProperty(_descriptions, 'MOLTEN_STEEL', {
-    description: 'super-hot FLUID STEEL',
-    howToMake: 'HEAT + IRON + COAL'
-  }), _defineProperty(_descriptions, 'WATER', {
-    description: 'FLUID that heats to STEAM and freezes to ICE. Can pass through a TURBINE ' + 'to produce POWER'
-  }), _defineProperty(_descriptions, 'STEAM', {
-    description: 'rising GAS that can pass through a TURBINE to produce POWER'
-  }), _defineProperty(_descriptions, 'SULPHUR_DIOXIDE', {
-    description: 'rising GAS that freezes into SULPHUR',
-    howToMake: 'OIL + low HEAT'
-  }), _defineProperty(_descriptions, 'OIL', {
-    description: 'naturally-occurring FLUID that heats to SULPHUR_DIOXIDE and combusts to ' + 'HOT_OIL'
-  }), _defineProperty(_descriptions, 'HOT_OIL', {
-    description: 'short-lived FLUID that briefly produces HEAT before burning off'
-  }), _defineProperty(_descriptions, 'HEAT', {
-    description: 'primary cause of phase changes in resources',
-    howToMake: 'HOT_COAL or URANIUM or HOT_OIL'
-  }), _defineProperty(_descriptions, 'COLD', {
-    description: 'counteracts HEAT, needed to make ICE and SULPHUR',
-    howToMake: 'ICE'
-  }), _defineProperty(_descriptions, 'BASIC_TURRET', {
-    description: 'turret with poor aim and a low rate of fire that does not require POWER',
-    howToMake: 'IRON'
-  }), _defineProperty(_descriptions, 'FAST_TURRET', {
-    description: 'turret with high fire rate that requires POWER',
-    howToMake: 'STEEL'
-  }), _defineProperty(_descriptions, 'MISSILE_TURRET', {
-    description: 'turret that fires interceptor missiles which each cost some IRON COAL and ' + 'SULPHUR to produce but does not require POWER',
-    howToMake: 'IRON and STEEL'
-  }), _defineProperty(_descriptions, 'LASER_TURRET', {
-    description: 'turret with very high rate of fire with a high POWER requirement',
-    howToMake: 'STEEL and GLASS and SILICON'
-  }), _defineProperty(_descriptions, 'TURBINE', {
-    description: 'building that produces POWER when a FLUID or GAS passes through it',
-    howToMake: 'STEEL'
-  }), _defineProperty(_descriptions, 'SOLAR_PANEL', {
-    description: 'building that passively produces power based on how much sunlight it gets',
-    howToMake: 'STEEL and GLASS and SILICON'
-  }), _defineProperty(_descriptions, 'FLUID', {
-    description: 'uncollectable resource type (like WATER or OIL ) that can pass through a TURBINE' + ' to produce POWER'
-  }), _defineProperty(_descriptions, 'GAS', {
-    description: 'uncollectable, rising resource that can pass through a TURBINE to produce POWER'
-  }), _defineProperty(_descriptions, 'POWER', {
-    description: 'energy produced by passing a FLUID or a GAS through a TURBINE to operate' + ' buildings'
-  }), _descriptions)
 };
 
 var nonMoltenPheromoneBlockingTypes = ['DIRT', 'STONE', 'DOODAD', 'TURRET'];
@@ -539,7 +437,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":45,"../selectors/sprites":55,"../utils/vectors":108,"./makeEntity":18}],3:[function(require,module,exports){
+},{"../render/renderAgent":34,"../selectors/sprites":44,"../utils/vectors":92,"./makeEntity":10}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -576,7 +474,7 @@ var render = function render(ctx, game, bg) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":55,"./makeEntity":18}],4:[function(require,module,exports){
+},{"../selectors/sprites":44,"./makeEntity":10}],4:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -592,6 +490,7 @@ var config = {
   height: 3,
   PHEROMONE_EMITTER: true,
   pheromoneType: 'COLONY',
+  AGENT: true,
 
   blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
 
@@ -615,7 +514,7 @@ var render = function render(ctx, game, base) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"./makeEntity":18}],5:[function(require,module,exports){
+},{"../config":1,"./makeEntity":10}],5:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -747,106 +646,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":45,"../utils/vectors":108,"./makeEntity.js":18}],6:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 2,
-  height: 2,
-  maxHold: 2,
-  age: 0,
-
-  AGENT: true,
-  MANNED: true, // property where you can have a player ride
-  LOADER: true, // property where you can drop things into entities that hold stuff
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('BULLDOZER', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "yellow";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":45,"../selectors/sprites":55,"./makeEntity":18}],7:[function(require,module,exports){
+},{"../render/renderAgent":34,"../utils/vectors":92,"./makeEntity.js":10}],6:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -922,49 +722,7 @@ var render = function render(ctx, game, bullet) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":55,"../simulation/actionQueue":57,"../utils/vectors":108,"./makeEntity":18}],8:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  FLAMMABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'HEAT',
-  hp: 10,
-  combustionTemp: 125, // temperature at which you catch on fire
-  fuel: 3 * 60 * 1000, // ms of burn time
-  heatQuantity: 150, // amount of heat produced when on fire
-  refreshRate: 60 // heat is updated this often
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('COAL', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    onFire: false,
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, coal) {
-  var obj = getTileSprite(game, coal);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, coal.position.x, coal.position.y, coal.width, coal.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],9:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":44,"../simulation/actionQueue":46,"../utils/vectors":92,"./makeEntity":10}],7:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1004,7 +762,7 @@ var render = function render(ctx, game, dirt) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":55,"./makeEntity":18}],10:[function(require,module,exports){
+},{"../selectors/sprites":44,"./makeEntity":10}],8:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1035,200 +793,7 @@ var render = function render(ctx, game, doodad) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"./makeEntity":18}],11:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 2,
-  height: 2,
-  age: 0,
-
-  AGENT: true,
-  RAM: true, // property where you deal damage to things you collide with
-  MANNED: true, // property where you can have a player ride
-
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 12,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('DRILL', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "steelblue";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":45,"../selectors/sprites":55,"./makeEntity":18}],12:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 200,
-  damage: 1,
-  width: 3,
-  height: 3,
-  maxHold: 9,
-  age: 0,
-
-  AGENT: true,
-  MANNED: true, // property where you can have a player ride
-  LOADER: true, // can load held entities into other entities
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 8,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  TURN: {
-    duration: 41 * 10,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position) {
-  var player = _extends({}, makeEntity('DUMPTRUCK', position, config.width, config.height), config, {
-    prevHP: config.hp,
-    prevHPAge: 0,
-    actions: [],
-    riders: [],
-
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, drill) {
-  var width = drill.width,
-      height = drill.height;
-
-  ctx.save();
-  ctx.strokeStyle = "black";
-  ctx.fillStyle = "gray";
-  ctx.fillRect(0, 0, width, height);
-  ctx.strokeRect(0, 0, width, height);
-  ctx.restore();
-
-  // const sprite = getAntSpriteAndOffset(game, ant);
-  // if (sprite.img != null) {
-  //   ctx.drawImage(
-  //     sprite.img, sprite.x, sprite.y, sprite.width, sprite.height,
-  //     0, 0, ant.width, ant.height,
-  //   );
-  // }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":45,"../selectors/sprites":55,"./makeEntity":18}],13:[function(require,module,exports){
+},{"./makeEntity":10}],9:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1300,173 +865,7 @@ var render = function render(ctx, game, dynamite) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":55,"../simulation/actionQueue":57,"./makeEntity":18}],14:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  hp: 120
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('FOOD', position, width, height), config, {
-    dictIndexStr: ''
-  });
-};
-
-var render = function render(ctx, game, food) {
-  var obj = getTileSprite(game, food);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, food.position.x, food.position.y, food.width, food.height);
-
-  if (game.showMarkedFood) {
-    if (game.bases[game.playerID].foodMarkedForRetrieval[food.id]) {
-      ctx.fillStyle = 'rgba(0, 0, 250, 0.2)';
-      ctx.fillRect(food.position.x, food.position.y, food.width, food.height);
-      ctx.fillStyle = 'red';
-      ctx.font = '1px sans serif';
-      ctx.fillText(parseInt(food.id), food.position.x, food.position.y + 1, 1);
-    }
-  }
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],15:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'MOLTEN_SAND',
-  hp: 10,
-  meltTemp: 100, // temperature at which you catch on fire
-  heatQuantity: 120 // amount of glass produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('GLASS', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    hp: hp || config.hp,
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, glass) {
-  var obj = getTileSprite(game, glass);
-  if (obj == null || obj.img == null) return;
-  ctx.save();
-  ctx.globalAlpha = 0.5;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, glass.position.x, glass.position.y, glass.width, glass.height);
-  ctx.restore();
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],16:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'COLD',
-  meltType: 'WATER',
-  hp: 120,
-  meltTemp: 12, // temperature at which you melt
-  heatQuantity: 120, // amount of water produced when melted
-  refreshRate: 60
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('ICE', position, width || 1, height || 1), config, {
-    hp: hp || config.hp,
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: 120 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, ice) {
-  var obj = getTileSprite(game, ice);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, ice.position.x, ice.position.y, ice.width, ice.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],17:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  MELTABLE: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'MOLTEN_IRON',
-  hp: 120,
-  meltTemp: 125, // temperature at which you melt
-  heatQuantity: 120 // amount of iron produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('IRON', position, width || 1, height || 1), config, {
-    hp: hp || config.hp,
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: 0 // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, iron) {
-  var obj = getTileSprite(game, iron);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, iron.position.x, iron.position.y, iron.width, iron.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],18:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":44,"../simulation/actionQueue":46,"./makeEntity":10}],10:[function(require,module,exports){
 'use strict';
 
 var makeEntity = function makeEntity(type, position, width, height) {
@@ -1485,7 +884,7 @@ var makeEntity = function makeEntity(type, position, width, height) {
 module.exports = {
 	makeEntity: makeEntity
 };
-},{}],19:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1583,7 +982,171 @@ var render = function render(ctx, game, missile) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":55,"../simulation/actionQueue":57,"../utils/vectors":108,"./makeEntity":18}],20:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":44,"../simulation/actionQueue":46,"../utils/vectors":92,"./makeEntity":10}],12:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _require = require('./makeEntity'),
+    makeEntity = _require.makeEntity;
+
+var _require2 = require('../selectors/sprites'),
+    getBeetleSprite = _require2.getBeetleSprite;
+
+var _require3 = require('../render/renderAgent'),
+    renderAgent = _require3.renderAgent;
+
+var config = {
+  maxHP: 10, // hack to prevent circular reference with render Agent
+  hp: 10,
+  damage: 1,
+  width: 1,
+  height: 1,
+  maxHold: 1,
+  age: 0,
+
+  AGENT: true,
+
+  pickupTypes: ['FOOD', 'TOKEN', 'DYNAMITE', 'STEEL'],
+  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'STEEL', 'BASE'],
+
+  // action params
+  MOVE: {
+    duration: 41 * 6,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  MAN: {
+    duration: 41 * 4,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  UN_MAN: {
+    duration: 41 * 4,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  MOVE_TURN: {
+    duration: 41 * 7,
+    spriteOrder: [1, 2],
+    maxFrameOffset: 2,
+    frameStep: 2
+  },
+  PICKUP: {
+    duration: 41 * 6,
+    spriteOrder: [5, 6, 7]
+  },
+  PUTDOWN: {
+    duration: 41 * 6,
+    spriteOrder: [7, 6, 5]
+  },
+  TURN: {
+    duration: 41 * 6,
+    spriteOrder: [1, 2, 3, 4]
+  },
+  DIE: {
+    duration: 41 * 2,
+    spriteOrder: [6]
+  },
+  GRAPPLE: {
+    duration: 41 * 6,
+    spriteOrder: [5, 6, 7]
+  },
+  BITE: {
+    duration: 41 * 6,
+    spriteOrder: [3, 4, 0, 5, 3]
+  },
+
+  // task-specific params
+  WANDER: {
+    base: 1,
+    forwardMovementBonus: 0,
+    prevPositionPenalty: -100,
+    ALERT: 500,
+    FOOD: 100,
+    FOLLOW: 2000,
+    COLONY: 10
+  },
+  RETRIEVE: {
+    base: 1,
+    forwardMovementBonus: 100,
+    prevPositionPenalty: -100,
+    ALERT: 300,
+    FOOD: 300,
+    COLONY: -100
+  },
+  RETURN: {
+    base: 3,
+    forwardMovementBonus: 500,
+    prevPositionPenalty: -1000,
+    ALERT: 0,
+    FOOD: 200,
+    COLONY: 1000
+  },
+  DEFEND: {
+    base: 3,
+    forwardMovementBonus: 500,
+    prevPositionPenalty: -1000,
+    ALERT: 50
+  },
+  MOVE_DIRT: {
+    base: 1,
+    forwardMovementBonus: 20,
+    prevPositionPenalty: -100,
+    ALERT: 100,
+    DIRT_DROP: 200
+  },
+  GO_TO_DIRT: {
+    base: 1,
+    forwardMovementBonus: 20,
+    prevPositionPenalty: -100,
+    ALERT: 100,
+    MARKED_DIRT_PHER: 300
+  }
+};
+
+var make = function make(game, position, playerID) {
+  var ant = _extends({}, makeEntity('MONSTER', position, config.width, config.height), config, {
+    playerID: playerID,
+    prevHP: config.hp,
+    prevHPAge: 0,
+    holding: null,
+    holdingIDs: [], // treat holding like a stack
+    actions: [],
+
+    task: 'WANDER',
+    timeOnTask: 0,
+
+    foodPherQuantity: 0, // tracks how much food pheromone to place
+
+    // this frame offset allows iterating through spritesheets across
+    // multiple actions (rn only used by queen ant doing one full walk
+    // cycle across two MOVE actions)
+    frameOffset: 0,
+    timeOnMove: 0 // for turning in place
+  });
+
+  return ant;
+};
+
+var render = function render(ctx, game, agent) {
+  renderAgent(ctx, game, agent, spriteRenderFn);
+};
+
+var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
+  var sprite = getBeetleSprite(game, ant);
+  if (sprite.img != null) {
+    ctx.drawImage(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, ant.width, ant.height);
+  }
+};
+
+module.exports = {
+  config: config, make: make, render: render
+};
+},{"../render/renderAgent":34,"../selectors/sprites":44,"./makeEntity":10}],13:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1655,111 +1218,7 @@ var render = function render(ctx, game, dynamite) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":55,"../simulation/actionQueue":57,"./makeEntity":18}],21:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var _require2 = require('../selectors/sprites'),
-    getAntSpriteAndOffset = _require2.getAntSpriteAndOffset;
-
-var _require3 = require('../render/renderAgent'),
-    renderAgent = _require3.renderAgent;
-
-var config = {
-  hp: 60,
-  damage: 1,
-  width: 1,
-  height: 1,
-  maxHold: 1,
-  age: 0,
-
-  AGENT: true,
-  LOADER: true,
-
-  pickupTypes: ['FOOD', 'DIRT', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'DYNAMITE', 'COAL', 'IRON', 'STEEL'],
-
-  // action params
-  MOVE: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MAN: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  UN_MAN: {
-    duration: 41 * 4,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  MOVE_TURN: {
-    duration: 41 * 5,
-    spriteOrder: [1, 2],
-    maxFrameOffset: 2,
-    frameStep: 2
-  },
-  PICKUP: {
-    duration: 41 * 6,
-    spriteOrder: [5, 6, 7]
-  },
-  PUTDOWN: {
-    duration: 41 * 6,
-    spriteOrder: [7, 6, 5]
-  },
-  TURN: {
-    duration: 41 * 6,
-    spriteOrder: [1, 2, 3, 4]
-  },
-  DIE: {
-    duration: 41 * 2,
-    spriteOrder: [8]
-  }
-};
-
-var make = function make(game, position, playerID) {
-  var player = _extends({}, makeEntity('PLAYER', position, config.width, config.height), config, {
-    playerID: playerID,
-    prevHP: config.hp,
-    prevHPAge: 0,
-    holding: null,
-    holdingIDs: [], // treat holding like a stack
-    actions: [],
-
-    // this frame offset allows iterating through spritesheets across
-    // multiple actions (rn only used by queen ant doing one full walk
-    // cycle across two MOVE actions)
-    frameOffset: 0,
-    timeOnMove: 0 // for turning in place
-  });
-
-  return player;
-};
-
-var render = function render(ctx, game, agent) {
-  renderAgent(ctx, game, agent, spriteRenderFn);
-};
-
-var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
-  var sprite = getAntSpriteAndOffset(game, ant);
-  if (sprite.img != null) {
-    ctx.drawImage(sprite.img, sprite.x, sprite.y, sprite.width, sprite.height, 0, 0, ant.width, ant.height);
-  }
-};
-
-module.exports = {
-  config: config, make: make, render: render
-};
-},{"../render/renderAgent":45,"../selectors/sprites":55,"./makeEntity":18}],22:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":44,"../simulation/actionQueue":46,"./makeEntity":10}],14:[function(require,module,exports){
 'use strict';
 
 var globalConfig = require('../config');
@@ -1779,23 +1238,9 @@ var Entities = {
 
   DIRT: require('./dirt.js'),
   STONE: require('./stone.js'),
-  COAL: require('./coal.js'),
-  IRON: require('./iron.js'),
   STEEL: require('./steel.js'),
-  GLASS: require('./glass.js'),
-  SILICON: require('./silicon.js'),
-  SULPHUR: require('./sulphur.js'),
-  ICE: require('./ice.js'),
-  URANIUM: require('./uranium.js'),
 
-  FOOD: require('./food.js'),
   AGENT: require('./agent.js'),
-  TOKEN: require('./token.js'),
-
-  PLAYER: require('./player.js'),
-  DRILL: require('./drill.js'),
-  BULLDOZER: require('./bulldozer.js'),
-  DUMPTRUCK: require('./dumptruck.js'),
 
   BASIC_TURRET: require('./basicTurret.js'),
   FAST_TURRET: require('./turret.js'),
@@ -1805,57 +1250,15 @@ var Entities = {
   MISSILE: require('./missile.js'),
   BULLET: require('./bullet.js'),
 
-  BASE: require('./base.js')
+  BASE: require('./base.js'),
+
+  MONSTER: require('./monster.js')
 };
 
 module.exports = {
   Entities: Entities
 };
-},{"../config":1,"./agent.js":2,"./background.js":3,"./base.js":4,"./basicTurret.js":5,"./bulldozer.js":6,"./bullet.js":7,"./coal.js":8,"./dirt.js":9,"./doodad.js":10,"./drill.js":11,"./dumptruck.js":12,"./dynamite.js":13,"./food.js":14,"./glass.js":15,"./ice.js":16,"./iron.js":17,"./missile.js":19,"./nuke.js":20,"./player.js":21,"./silicon.js":23,"./steel.js":24,"./stone.js":25,"./sulphur.js":26,"./token.js":27,"./turret.js":28,"./uranium.js":29}],23:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  hp: 10
-  // pheromoneType: 'MOLTEN_SAND',
-  // meltTemp: 100, // temperature at which you melt
-  // heatQuantity: 120, // amount of glass produced when melted
-};
-
-var make = function make(game, position, width, height, hp) {
-  return _extends({}, makeEntity('SILICON', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    hp: hp || config.hp,
-    playerID: 0 // gaia
-  });
-};
-
-var render = function render(ctx, game, silicon) {
-  // const obj = getTileSprite(game, silicon);
-  // if (obj == null || obj.img == null) return;
-  // ctx.drawImage(
-  //   obj.img,
-  //   obj.x, obj.y, obj.width, obj.height,
-  //   silicon.position.x, silicon.position.y, silicon.width, silicon.height,
-  // );
-
-  ctx.fillStyle = "#006400";
-  ctx.fillRect(silicon.position.x, silicon.position.y, silicon.width, silicon.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],24:[function(require,module,exports){
+},{"../config":1,"./agent.js":2,"./background.js":3,"./base.js":4,"./basicTurret.js":5,"./bullet.js":6,"./dirt.js":7,"./doodad.js":8,"./dynamite.js":9,"./missile.js":11,"./monster.js":12,"./nuke.js":13,"./steel.js":15,"./stone.js":16,"./turret.js":17}],15:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1895,7 +1298,7 @@ var render = function render(ctx, game, steel) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":55,"./makeEntity":18}],25:[function(require,module,exports){
+},{"../selectors/sprites":44,"./makeEntity":10}],16:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1929,78 +1332,7 @@ var render = function render(ctx, game, stone) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../selectors/sprites":55,"./makeEntity":18}],26:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  hp: 10
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('SULPHUR', position, width, height), config, {
-    marked: null,
-    dictIndexStr: ''
-  });
-};
-
-var render = function render(ctx, game, sulphur) {
-  var obj = getTileSprite(game, sulphur);
-
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, sulphur.position.x, sulphur.position.y, sulphur.width, sulphur.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],27:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('./makeEntity'),
-    makeEntity = _require.makeEntity;
-
-var globalConfig = require('../config');
-
-var config = {
-  PHEROMONE_EMITTER: true
-};
-
-var make = function make(game, position, playerID, pheromoneType, quantity) {
-  return _extends({}, makeEntity('TOKEN', position, 1, 1), config, {
-    pheromoneType: pheromoneType,
-    playerID: playerID,
-    quantity: quantity || globalConfig.pheromones[pheromoneType].quantity
-  });
-};
-
-var render = function render(ctx, game, token) {
-  ctx.save();
-  ctx.translate(token.position.x, token.position.y);
-  ctx.strokeStyle = 'black';
-  ctx.fillStyle = 'steelblue';
-  ctx.beginPath();
-  var radius = token.width / 2;
-  ctx.arc(token.width / 2, token.height / 2, radius, 0, Math.PI * 2);
-  ctx.closePath();
-  ctx.stroke();
-  ctx.fill();
-  ctx.restore();
-};
-
-module.exports = { config: config, make: make, render: render };
-},{"../config":1,"./makeEntity":18}],28:[function(require,module,exports){
+},{"../selectors/sprites":44,"./makeEntity":10}],17:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2142,45 +1474,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":45,"../selectors/sprites":55,"../utils/vectors":108,"./makeEntity.js":18}],29:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var _require = require('../selectors/sprites'),
-    getTileSprite = _require.getTileSprite;
-
-var _require2 = require('./makeEntity'),
-    makeEntity = _require2.makeEntity;
-
-var config = {
-  TILED: true,
-  COLLECTABLE: true,
-  PHEROMONE_EMITTER: true,
-  pheromoneType: 'HEAT',
-  hp: 100,
-  heatQuantity: 125, // amount of heat produced when on fire
-  refreshRate: 60
-};
-
-var make = function make(game, position, width, height) {
-  return _extends({}, makeEntity('URANIUM', position, width || 1, height || 1), config, {
-    dictIndexStr: '',
-    playerID: 0, // gaia
-    quantity: config.heatQuantity // amount of pheromone emitted
-  });
-};
-
-var render = function render(ctx, game, uranium) {
-  var obj = getTileSprite(game, uranium);
-  if (obj == null || obj.img == null) return;
-  ctx.drawImage(obj.img, obj.x, obj.y, obj.width, obj.height, uranium.position.x, uranium.position.y, uranium.width, uranium.height);
-};
-
-module.exports = {
-  make: make, render: render, config: config
-};
-},{"../selectors/sprites":55,"./makeEntity":18}],30:[function(require,module,exports){
+},{"../render/renderAgent":34,"../selectors/sprites":44,"../utils/vectors":92,"./makeEntity.js":10}],18:[function(require,module,exports){
 'use strict';
 
 var _require = require('redux'),
@@ -2209,10 +1503,11 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":42,"./ui/Main.react":91,"react":146,"react-dom":143,"redux":147}],31:[function(require,module,exports){
+},{"./reducers/rootReducer":31,"./ui/Main.react":77,"react":130,"react-dom":127,"redux":131}],19:[function(require,module,exports){
 // @flow
 
 module.exports = {
+  towerDefenseLevel: require('./towerDefenseLevel'),
   testLevel: require('./testLevel'),
   smallBallisticsLevel: require('./smallBallisticsLevel'),
   mediumBallisticsLevel: require('./mediumBallisticsLevel'),
@@ -2220,17 +1515,19 @@ module.exports = {
   mediumDemoLevel: require('./mediumDemoLevel'),
 }
 
-},{"./mediumBallisticsLevel":32,"./mediumDemoLevel":33,"./smallBallisticsLevel":34,"./smallPhaseChangeTestLevel":35,"./testLevel":36}],32:[function(require,module,exports){
+},{"./mediumBallisticsLevel":20,"./mediumDemoLevel":21,"./smallBallisticsLevel":22,"./smallPhaseChangeTestLevel":23,"./testLevel":24,"./towerDefenseLevel":25}],20:[function(require,module,exports){
 module.exports = {"numPlayers":3,"gridWidth":100,"gridHeight":100,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":63,"y":64},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":64,"y":62},"width":7,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":71,"y":63},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":71,"y":65},"width":2,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":63,"y":63},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":73,"y":64},"width":1,"height":2},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":67,"y":61},"width":3,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":65,"y":64},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":70,"y":64},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":63,"y":64},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":62,"y":65},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":74,"y":65},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":0,"y":51},"width":101,"height":49},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":66,"y":64},"width":4,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":66},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":65,"y":65},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":65},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":62,"y":66},"width":3,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":66,"y":68},"width":5,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":71,"y":67},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":63,"y":69},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":61,"y":66},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":73,"y":67},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":69},"width":8,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":63,"y":70},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":66,"y":72},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":72,"y":69},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":71,"y":68},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":72,"y":68},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":72,"y":67},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":51},"width":9,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":51},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":52},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":54},"width":6,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":56},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":6,"y":54},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":-2,"y":56},"width":6,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":56},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":57},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":82,"y":50},"width":20,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":58},"width":9,"height":8}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":57},"width":7,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":93,"y":60},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":60},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":66},"width":7,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":87,"y":67},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":86,"y":67},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":71},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":82,"y":74},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":88,"y":82},"width":4,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":71,"y":72},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":72,"y":73},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":73,"y":74},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":74,"y":75},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":75,"y":76},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":76,"y":77},"width":2,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":77,"y":80},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":78,"y":82},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":73,"y":71},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":73,"y":71},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":72,"y":71},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":73},"width":1,"height":1}},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":62},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":61},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":60},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"CREATE_ENTITIES","entityType":"MISSILE","rect":{"position":{"x":84,"y":82},"width":4,"height":3},"args":[0,{"id":-1,"type":"DYNAMITE","position":null,"prevPosition":null,"width":1,"height":1,"theta":0,"prevTheta":0,"EXPLOSIVE":true,"hp":1,"explosionRadius":5,"damage":4,"timer":15,"age":0,"DIE":{"duration":300,"effectIndex":250,"spriteOrder":[0]},"playerID":0,"actions":[]},-0.6,70]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":82},"width":4,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":80},"width":3,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":82},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":83},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":84},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":80,"y":81},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":79,"y":81},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":83},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":84},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":76},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":67},"width":3,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":70},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":72},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":68},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":82,"y":69},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":69},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":82,"y":70},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":70},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":66},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":67},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":66},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":66},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":63},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":65},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":66},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":88,"y":72},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":86,"y":71},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":86,"y":70},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":89,"y":73},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":90,"y":75},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":88,"y":75},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":71},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":69},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":69},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":71},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":74},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":73},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":74},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":77},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":79},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":93,"y":82},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":83},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":82},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":83},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":82},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":81},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":97,"y":80},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":80},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":81},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":78},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":78},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":79},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":85},"width":12,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":84},"width":4,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":86,"y":82},"width":2,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":81},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":95,"y":86},"width":1,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":63,"y":75},"width":5,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":74},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":73},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":68,"y":76},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":62,"y":76},"width":1,"height":2}},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":61,"y":74},"width":8,"height":6},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":67,"y":68},"width":1,"height":1},"args":["1"]},{"type":"CREATE_ENTITIES","entityType":"TURRET","rect":{"position":{"x":82,"y":49},"width":1,"height":1},"args":["1","BULLET",150]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":67,"y":69},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"BASE","rect":{"position":{"x":67,"y":66},"width":1,"height":1},"args":["1"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":55,"y":66},"width":5,"height":6}},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":55,"y":66},"width":5,"height":6},"args":[1,1]}]};
-},{}],33:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 module.exports = {"numPlayers":3,"gridWidth":100,"gridHeight":125,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":0,"y":50},"width":100,"height":75},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":52,"y":49},"width":35,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":55,"y":48},"width":29,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":60,"y":47},"width":18,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":11,"y":49},"width":20,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":17,"y":48},"width":9,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":20,"y":47},"width":3,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":61},"width":9,"height":9}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":11,"y":60},"width":7,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":63},"width":1,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":63},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":11,"y":70},"width":6,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":58},"width":3,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":59},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":57},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":59},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":70},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":116},"width":3,"height":9}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":121},"width":4,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":3,"y":119},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":120},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":124},"width":7,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":123},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":14,"y":124},"width":38,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":23,"y":123},"width":10,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":28,"y":121},"width":4,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":29,"y":119},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":118},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":117},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":116},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":27,"y":122},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":44,"y":123},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":48,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":40,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":37,"y":118},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":37,"y":122},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":120},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":120},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":18,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":17,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":0,"y":112},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":1,"y":115},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":116},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":5,"y":115},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":4,"y":113},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":6,"y":113},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":54,"y":124},"width":13,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":68,"y":124},"width":32,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":69,"y":123},"width":31,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":98,"y":117},"width":2,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":90,"y":122},"width":8,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":97,"y":120},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":96,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":99,"y":116},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":88,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":120},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":121},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":91,"y":118},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":115},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":119},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":65,"y":122},"width":2,"height":2}},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":0,"y":112},"width":101,"height":13},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":82,"y":105},"width":9,"height":9}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":91,"y":106},"width":1,"height":7}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":81,"y":106},"width":1,"height":7}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":114},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":115},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":104},"width":6,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":85,"y":103},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":80,"y":107},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":107},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":94,"y":109},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":93,"y":110},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":110},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":111},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":44,"y":76},"width":10,"height":8}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":75},"width":8,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":46,"y":74},"width":6,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":77},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":46,"y":84},"width":6,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":82},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":54,"y":77},"width":1,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":52,"y":84},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":84},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":46,"y":85},"width":6,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":40,"y":89},"width":5,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":41,"y":88},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":41,"y":94},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":90},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":39,"y":90},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":57,"y":65},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":56,"y":66},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":61,"y":66},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":58,"y":64},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":63},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":62},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":64},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":30,"y":65},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":30,"y":64},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":30,"y":66},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":68},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":69},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":61},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":60},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":83,"y":57},"width":5,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":56},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":88,"y":58},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":82,"y":58},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":84,"y":62},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":63,"y":52},"width":7,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":51},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":58},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":62,"y":52},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":54},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":11,"y":89},"width":5,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":16,"y":90},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":90},"width":1,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":12,"y":88},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":13,"y":95},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":23,"y":115},"width":6,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":23,"y":121},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":116},"width":2,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":114},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":29,"y":116},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":120},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":117},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":57,"y":104},"width":7,"height":7}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":57,"y":102},"width":6,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":58,"y":101},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":56,"y":103},"width":1,"height":7}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":58,"y":111},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":64,"y":105},"width":1,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":74,"y":86},"width":6,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":75,"y":85},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":75,"y":92},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":80,"y":88},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":73,"y":87},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":91,"y":75},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":74},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":80},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":95,"y":76},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":90,"y":76},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":98},"width":5,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":25,"y":97},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":25,"y":103},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":29,"y":99},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":23,"y":99},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":26,"y":96},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":26,"y":104},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":30,"y":100},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":100},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":55,"y":63},"width":8,"height":7},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":89,"y":73},"width":8,"height":8},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":21,"y":96},"width":11,"height":10},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":38,"y":88},"width":10,"height":7},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":20,"y":113},"width":11,"height":9},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":10,"y":87},"width":8,"height":9},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":71,"y":84},"width":12,"height":10},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"BASE","rect":{"position":{"x":47,"y":78},"width":1,"height":1},"args":["1"]},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":81,"y":56},"width":9,"height":7},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":30,"y":60},"width":6,"height":10},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":69,"y":116},"width":5,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":115},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":70,"y":120},"width":3,"height":1}},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":68,"y":115},"width":7,"height":7},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":44,"y":109},"width":4,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":108},"width":2,"height":1}},{"type":"CREATE_ENTITIES","entityType":"IRON","rect":{"position":{"x":43,"y":107},"width":6,"height":7},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":94},"width":5,"height":5}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":92,"y":93},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":93,"y":92},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":91,"y":94},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":93,"y":99},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":97,"y":96},"width":1,"height":2}},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":91,"y":92},"width":7,"height":8},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":52},"width":4,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":42,"y":55},"width":4,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":56},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":46,"y":55},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":56},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":42,"y":52},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":44,"y":51},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":47,"y":53},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":41,"y":53},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":42,"y":54},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"COAL","rect":{"position":{"x":40,"y":51},"width":9,"height":7},"args":[1,1]},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":115},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":115},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":114},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":114},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":114},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":114},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":114},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":113},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":112},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":80,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":94,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":80,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":94,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":80,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":80,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":92,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":93,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":81,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":82,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":83,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":84,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":85,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":86,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":87,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":88,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":89,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":90,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":91,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":111},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":110},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":56,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":109},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":56,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":108},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":56,"y":107},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":56,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":106},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":61,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":60,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":59,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":58,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":57,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":56,"y":105},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":71},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":70},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":69},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":68},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":9,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":67},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":9,"y":66},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":9,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":65},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":9,"y":64},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":9,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":10,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":11,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":12,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":13,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":14,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":15,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":16,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":17,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":18,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":19,"y":63},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":58},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":58},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":58},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":58},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":58},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":70,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":70,"y":57},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":70,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":56},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":70,"y":55},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":70,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":54},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":53},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":69,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":63,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":62,"y":52},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":64,"y":51},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":65,"y":51},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":66,"y":51},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":67,"y":51},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":68,"y":51},"pheromoneType":"SAND","playerID":0,"quantity":120},{"type":"CREATE_ENTITIES","entityType":"PLAYER","rect":{"position":{"x":52,"y":80},"width":1,"height":1},"args":[0]},{"type":"CREATE_ENTITIES","entityType":"DRILL","rect":{"position":{"x":50,"y":76},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"BULLDOZER","rect":{"position":{"x":49,"y":82},"width":1,"height":1},"args":[]},{"type":"CREATE_ENTITIES","entityType":"DUMPTRUCK","rect":{"position":{"x":43,"y":78},"width":1,"height":1},"args":[]}]};
-},{}],34:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 module.exports = {"numPlayers":2,"gridWidth":50,"gridHeight":50,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":0,"y":26},"width":50,"height":24},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":36},"width":6,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":28,"y":37},"width":2,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":23,"y":37},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":38},"width":3,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":38},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":41,"y":45},"width":9,"height":6}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":47},"width":6,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":49},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":48},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":27,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":25,"y":35},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":7,"y":35},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":6,"y":38},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":8,"y":40},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":9,"y":41},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":10,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":36},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":42,"y":34},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":33},"width":2,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":45,"y":33},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":44,"y":36},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":43,"y":36},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":31,"y":24},"width":20,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":35,"y":22},"width":15,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":32,"y":23},"width":3,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":30,"y":25},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":40,"y":21},"width":10,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":44,"y":20},"width":6,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":46,"y":19},"width":4,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":5,"y":32},"width":46,"height":18},"args":["STONE",1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":40},"width":8,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":25,"y":38},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":27,"y":39},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":39},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":20,"y":40},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":44},"width":6,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":29,"y":41},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":19,"y":42},"width":1,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":20,"y":43},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":44},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":21,"y":44},"width":6,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":46},"width":5,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":20,"y":44},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":39},"width":4,"height":4}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":36,"y":38},"width":3,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":34,"y":40},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":36,"y":43},"width":2,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":41},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":41},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":42},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":41},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":30,"y":42},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":39,"y":39},"width":1,"height":3}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":36,"y":36},"width":3,"height":2}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":37},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":35,"y":43},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"FOOD","rect":{"position":{"x":37,"y":39},"width":3,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":22,"y":42},"width":1,"height":1},"args":[1]}]};
-},{}],35:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 module.exports = {"numPlayers":3,"gridWidth":50,"gridHeight":50,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":0,"y":31},"width":1,"height":19},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":1,"y":42},"width":50,"height":8},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":49,"y":32},"width":1,"height":10},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"TOKEN","rect":{"position":{"x":24,"y":37},"width":1,"height":1},"args":[0,"HEAT"]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":18,"y":33},"width":1,"height":9},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":22,"y":31},"width":1,"height":4},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":22,"y":35},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":23,"y":30},"width":1,"height":4},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":22,"y":31},"width":1,"height":4}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":23,"y":34},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":24,"y":29},"width":1,"height":5},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":25,"y":23},"width":1,"height":7},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":26,"y":20},"width":1,"height":4},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":27,"y":20},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":28,"y":19},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":29,"y":18},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":30,"y":32},"width":1,"height":10},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":27,"y":21},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":27,"y":22},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":28,"y":20},"width":2,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":28,"y":21},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":30,"y":19},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":31,"y":18},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":32,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":29,"y":18},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":28,"y":19},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":28,"y":20},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":27,"y":20},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":26,"y":20},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":26,"y":21},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":27,"y":21},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":27,"y":21},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":28,"y":20},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":29,"y":19},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":30,"y":13},"width":1,"height":6},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":30,"y":12},"width":7,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":34,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":20,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":19,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":18,"y":13},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":18,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":20,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":19,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":18,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":17,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":16,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":14,"y":14},"width":2,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":19,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":20,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":49,"y":29},"width":1,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":48,"y":29},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":49,"y":26},"width":1,"height":4},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":47,"y":29},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":46,"y":29},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":45,"y":29},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":44,"y":28},"width":1,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":43,"y":29},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":43,"y":29},"width":1,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":42,"y":30},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":41,"y":31},"width":2,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":40,"y":31},"width":1,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":39,"y":33},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":38,"y":34},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":37,"y":35},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":34,"y":35},"width":3,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":21,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":21,"y":18},"width":3,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":24,"y":18},"width":1,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":24,"y":20},"width":1,"height":4},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":17,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":13,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":12,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":31,"y":18},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":34,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":15},"width":3,"height":3}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":32,"y":15},"width":1,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":32,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":32,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":15},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":34,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":33,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":34,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":32,"y":14},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":33,"y":15},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":35,"y":17},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":23,"y":19},"width":1,"height":1},"args":[1,1]},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":22},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":21},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":21},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":20},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":20},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":20},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":19},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":19},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":19},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":28,"y":19},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":18},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":18},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":18},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":28,"y":18},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":29,"y":18},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":22,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":23,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":24,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":28,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":29,"y":17},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":21,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":22,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":23,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":24,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":28,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":29,"y":16},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":21,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":22,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":23,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":24,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":25,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":26,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":27,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":28,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":29,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"FILL_PHEROMONE","gridPos":{"x":29,"y":15},"pheromoneType":"WATER","playerID":0,"quantity":120},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":38},"width":1,"height":1}},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":37},"width":1,"height":1}},{"type":"CREATE_ENTITIES","entityType":"TOKEN","rect":{"position":{"x":24,"y":41},"width":1,"height":1},"args":[0,"HEAT"]},{"type":"DELETE_ENTITIES","rect":{"position":{"x":24,"y":22},"width":1,"height":2}},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":37,"y":12},"width":2,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":38,"y":13},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":11,"y":14},"width":1,"height":2},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":11,"y":16},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":38,"y":14},"width":1,"height":1},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":24,"y":22},"width":1,"height":2},"args":[1,1]}]};
-},{}],36:[function(require,module,exports){
+},{}],24:[function(require,module,exports){
 module.exports = {"numPlayers":1,"gridWidth":25,"gridHeight":25,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"AGENT","rect":{"position":{"x":5,"y":13},"width":1,"height":1},"args":[1,null]},{"type":"CREATE_ENTITIES","entityType":"WORM","rect":{"position":{"x":13,"y":14},"width":1,"height":1},"args":[[{"x":13,"y":15},{"x":13,"y":16},{"x":14,"y":16},{"x":15,"y":16},{"x":15,"y":17},{"x":16,"y":17},{"x":16,"y":18}],1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":0,"y":16},"width":1,"height":9},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":20,"y":24},"width":1,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":1,"y":24},"width":19,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":10,"y":22},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":20,"y":19},"width":1,"height":5},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":21,"y":24},"width":5,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":4,"y":2},"width":5,"height":4},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":9,"y":1},"width":1,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":21,"y":9},"width":3,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"FOOD","rect":{"position":{"x":6,"y":8},"width":2,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DOODAD","rect":{"position":{"x":18,"y":2},"width":3,"height":4},"args":[3,4,"QUESTION"]},{"type":"CREATE_ENTITIES","entityType":"BACKGROUND","rect":{"position":{"x":14,"y":0},"width":2,"height":2},"args":[1,1,"FLOOR_TILE"]}]};
-},{}],37:[function(require,module,exports){
+},{}],25:[function(require,module,exports){
+module.exports = {"numPlayers":3,"gridWidth":25,"gridHeight":50,"upgrades":[],"actions":[{"type":"CREATE_ENTITIES","entityType":"BASE","rect":{"position":{"x":11,"y":22},"width":1,"height":1},"args":["1"]},{"type":"CREATE_ENTITIES","entityType":"BASIC_TURRET","rect":{"position":{"x":14,"y":20},"width":1,"height":1},"args":["1"]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":7,"y":10},"width":1,"height":3},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"STONE","rect":{"position":{"x":8,"y":10},"width":2,"height":1},"args":["STONE",1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":7,"y":31},"width":1,"height":3},"args":[1,1]},{"type":"CREATE_ENTITIES","entityType":"DIRT","rect":{"position":{"x":8,"y":33},"width":2,"height":1},"args":[1,1]}]};
+},{}],26:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/registry'),
@@ -2297,7 +1594,7 @@ var Properties = {
 module.exports = {
   Properties: Properties
 };
-},{"../entities/registry":22}],38:[function(require,module,exports){
+},{"../entities/registry":14}],27:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -2595,7 +1892,7 @@ var gameReducer = function gameReducer(game, action) {
         var pheromones = action.pheromones;
         // console.log('received pheromone update', pheromones, game.time);
 
-        var allWaterQuantity = game.ICE.length;
+        var allWaterQuantity = 0;
         var shouldUpdateWaterQuantity = false;
         var _iteratorNormalCompletion2 = true;
         var _didIteratorError2 = false;
@@ -2929,7 +2226,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":22,"../render/render":44,"../selectors/pheromones":54,"../simulation/actionQueue":57,"../simulation/entityOperations":59,"../simulation/pheromones":62,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],39:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":33,"../selectors/pheromones":43,"../simulation/actionQueue":46,"../simulation/entityOperations":48,"../simulation/pheromones":51,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],28:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -2959,7 +2256,7 @@ var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
 };
 
 module.exports = { hotKeysReducer: hotKeysReducer };
-},{}],40:[function(require,module,exports){
+},{}],29:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -2983,7 +2280,7 @@ var modalReducer = function modalReducer(state, action) {
 };
 
 module.exports = { modalReducer: modalReducer };
-},{}],41:[function(require,module,exports){
+},{}],30:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3018,7 +2315,7 @@ var mouseReducer = function mouseReducer(mouse, action) {
 };
 
 module.exports = { mouseReducer: mouseReducer };
-},{}],42:[function(require,module,exports){
+},{}],31:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3485,7 +2782,7 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":31,"../simulation/entityOperations":59,"../state/gameState":63,"../state/state":64,"../utils/helpers":105,"./gameReducer":38,"./hotKeysReducer":39,"./modalReducer":40,"./mouseReducer":41,"./tickReducer":43}],43:[function(require,module,exports){
+},{"../levels/levels":19,"../simulation/entityOperations":48,"../state/gameState":52,"../state/state":53,"../utils/helpers":89,"./gameReducer":27,"./hotKeysReducer":28,"./modalReducer":29,"./mouseReducer":30,"./tickReducer":32}],32:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3636,16 +2933,6 @@ var doTick = function doTick(game) {
       PHEROMONE_EMITTER: game.PHEROMONE_EMITTER || {},
       TURBINE: game.TURBINE || []
     });
-    var base = game.entities[game.BASE[0]];
-    if (base) {
-      game.focusedEntity = base;
-    }
-  }
-  if (game.time == 45) {
-    game.focusedEntity = null;
-  }
-  if (game.time > 45 && game.controlledEntity == null) {
-    game.controlledEntity = game.entities[game.PLAYER[0]];
   }
 
   // game/frame timing
@@ -3657,17 +2944,12 @@ var doTick = function doTick(game) {
   updateAgents(game);
   updateTiledSprites(game);
   updateViewPos(game, false /*don't clamp to world*/);
-  updateRain(game);
   updateTicker(game);
   updatePheromoneEmitters(game);
   updateTowers(game);
   updateBases(game);
   updateBallistics(game);
-  updateFlammables(game);
-  updateCoal(game);
-  updateMeltables(game);
   updateExplosives(game);
-  updateGenerators(game);
 
   updatePheromones(game);
   render(game);
@@ -3851,114 +3133,6 @@ var updateBallistics = function updateBallistics(game) {
 };
 
 //////////////////////////////////////////////////////////////////////////
-// Fire, meltables
-//////////////////////////////////////////////////////////////////////////
-
-var updateFlammables = function updateFlammables(game) {
-  for (var id in game.FLAMMABLE) {
-    var flammable = game.entities[id];
-    // if on fire, burn
-    if (flammable.onFire) {
-      flammable.COLLECTABLE = false;
-      // check if you just caught on fire, and set quantity
-      if (flammable.quantity == 0) {
-        changePheromoneEmitterQuantity(game, flammable, flammable.heatQuantity);
-      }
-      flammable.fuel -= game.timeSinceLastTick;
-      if (flammable.fuel <= 0) {
-        queueAction(game, flammable, makeAction(game, flammable, 'DIE'));
-      }
-      // if not on fire, check if it should catch on fire
-    } else {
-      var temp = getTemperature(game, flammable.position);
-      if (temp >= flammable.combustionTemp) {
-        if (flammable.type != 'AGENT') {
-          flammable.onFire = true;
-          flammable.COLLECTABLE = false;
-        }
-      }
-    }
-  }
-};
-
-var updateCoal = function updateCoal(game) {
-  var _iteratorNormalCompletion2 = true;
-  var _didIteratorError2 = false;
-  var _iteratorError2 = undefined;
-
-  try {
-    for (var _iterator2 = game.COAL[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-      var id = _step2.value;
-
-      var coal = game.entities[id];
-
-      // coal + iron = steel
-      var moltenIron = getPheromoneAtPosition(game, coal.position, 'MOLTEN_IRON', 0);
-      if (moltenIron > 0) {
-        var position = _extends({}, coal.position);
-        removeEntity(game, coal);
-        fillPheromone(game, position, 'MOLTEN_STEEL', game.gaiaID, moltenIron * 2);
-        setPheromone(game, position, 'MOLTEN_IRON', 0, game.gaiaID);
-      }
-
-      // coal + molten sand = silicon
-      var moltenSand = getPheromoneAtPosition(game, coal.position, 'MOLTEN_SAND', 0);
-      if (moltenSand > 0) {
-        var _position = _extends({}, coal.position);
-        removeEntity(game, coal);
-        setPheromone(game, _position, 'MOLTEN_SAND', 0, game.gaiaID);
-        addEntity(game, Entities.SILICON.make(game, coal.position));
-      }
-    }
-  } catch (err) {
-    _didIteratorError2 = true;
-    _iteratorError2 = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion2 && _iterator2.return) {
-        _iterator2.return();
-      }
-    } finally {
-      if (_didIteratorError2) {
-        throw _iteratorError2;
-      }
-    }
-  }
-};
-
-var updateMeltables = function updateMeltables(game) {
-  for (var id in game.MELTABLE) {
-    var meltable = game.entities[id];
-
-    var temp = getTemperature(game, meltable.position);
-    if (temp >= meltable.meltTemp) {
-      // if you're an agent (or food!) then you're en route to being collected
-      var config = Entities[meltable.type].config;
-      if (!config.isMeltable) {
-        meltable.type = meltable.collectedAs;
-        meltable.playerID = 0;
-        config = Entities[meltable.type].config;
-      }
-
-      // if it produces a different pheromone than what it melts to, e.g. ICE,
-      // then need to remove that, then melt
-      if (meltable.meltType) {
-        changePheromoneEmitterQuantity(game, meltable, 0);
-        meltable.pheromoneType = meltable.meltType;
-        game.pheromoneWorker.postMessage({
-          type: 'CHANGE_EMITTER_TYPE',
-          entityID: meltable.id,
-          pheromoneType: meltable.pheromoneType
-        });
-      }
-      changePheromoneEmitterQuantity(game, meltable, meltable.heatQuantity * (meltable.hp / config.hp));
-      changeEntityType(game, meltable, meltable.type, 'FOOD');
-      queueAction(game, meltable, makeAction(game, meltable, 'DIE'));
-    }
-  }
-};
-
-//////////////////////////////////////////////////////////////////////////
 // Towers
 //////////////////////////////////////////////////////////////////////////
 
@@ -3972,13 +3146,13 @@ var updateTowers = function updateTowers(game) {
     // choose target if possible
     if (tower.targetID == null) {
       var possibleTargets = [];
-      var _iteratorNormalCompletion3 = true;
-      var _didIteratorError3 = false;
-      var _iteratorError3 = undefined;
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
 
       try {
-        for (var _iterator3 = game.MISSILE[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
-          var missileID = _step3.value;
+        for (var _iterator2 = game.MISSILE[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var missileID = _step2.value;
 
           var missile = game.entities[missileID];
           if (missile.playerID != tower.playerID) {
@@ -3986,16 +3160,16 @@ var updateTowers = function updateTowers(game) {
           }
         }
       } catch (err) {
-        _didIteratorError3 = true;
-        _iteratorError3 = err;
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion3 && _iterator3.return) {
-            _iterator3.return();
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
           }
         } finally {
-          if (_didIteratorError3) {
-            throw _iteratorError3;
+          if (_didIteratorError2) {
+            throw _iteratorError2;
           }
         }
       }
@@ -4074,112 +3248,28 @@ var updateTowers = function updateTowers(game) {
 // Generators, Bases
 //////////////////////////////////////////////////////////////////////////
 
-var updateGenerators = function updateGenerators(game) {
-  var maxLight = globalConfig.pheromones.LIGHT.quantity;
-  // tally up available power
-  var totalPowerGenerated = 0;
-  for (var id in game.GENERATOR) {
-    var generator = game.entities[id];
-
-    var powerGenerated = Entities[generator.type].config.powerGenerated;
-    var maxPower = powerGenerated;
-
-    // Handle turbines
-    if (generator.type == 'TURBINE') {
-      generator.theta = (generator.theta + generator.thetaSpeed) % (2 * Math.PI);
-      if (generator.thetaSpeed < 0.001) {
-        generator.thetaSpeed = 0;
-      }
-      powerGenerated *= Math.ceil(generator.thetaSpeed / generator.maxThetaSpeed);
-      // generator.powerGenerated = Math.min(powerGenerated * maxPower / 2, maxPower);
-    }
-
-    // Handle solar panels
-    if (generator.type == 'SOLAR_PANEL') {
-      var sunLight = getPheromoneAtPosition(game, generator.position, 'LIGHT', 0);
-      powerGenerated *= sunLight / maxLight;
-    }
-    generator.powerGenerated = powerGenerated;
-
-    totalPowerGenerated += powerGenerated;
-  }
-
-  game.bases[game.playerID].totalPowerGenerated = totalPowerGenerated;
-  game.bases[game.playerID].totalPowerNeeded = 0;
-
-  // distribute consumed power
-  for (var _id2 in game.CONSUMER) {
-    var consumer = game.entities[_id2];
-    consumer.isPowered = false;
-    game.bases[game.playerID].totalPowerNeeded += consumer.powerConsumed;
-    if (totalPowerGenerated >= consumer.powerConsumed) {
-      consumer.isPowered = true;
-      totalPowerGenerated -= consumer.powerConsumed;
-    }
-  }
-
-  game.bases[game.playerID].powerMargin = game.bases[game.playerID].totalPowerGenerated - game.bases[game.playerID].totalPowerNeeded;
-};
-
 var updateBases = function updateBases(game) {
-  var _iteratorNormalCompletion4 = true;
-  var _didIteratorError4 = false;
-  var _iteratorError4 = undefined;
+  var _iteratorNormalCompletion3 = true;
+  var _didIteratorError3 = false;
+  var _iteratorError3 = undefined;
 
   try {
-    for (var _iterator4 = game.BASE[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
-      var id = _step4.value;
+    for (var _iterator3 = game.BASE[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+      var id = _step3.value;
 
       var base = game.entities[id];
-      var _collisions = collidesWith(game, base, Object.keys(Entities)).filter(function (e) {
-        return e.COLLECTABLE;
-      });
-      var _iteratorNormalCompletion5 = true;
-      var _didIteratorError5 = false;
-      var _iteratorError5 = undefined;
-
-      try {
-        for (var _iterator5 = _collisions[Symbol.iterator](), _step5; !(_iteratorNormalCompletion5 = (_step5 = _iterator5.next()).done); _iteratorNormalCompletion5 = true) {
-          var entity = _step5.value;
-
-          if (!isActionTypeQueued(entity, 'DIE')) {
-            queueAction(game, entity, makeAction(game, entity, 'DIE'));
-            var type = entity.collectedAs ? entity.collectedAs : entity.type;
-            if (!entity.COLLECTABLE) continue;
-            if (game.bases[game.playerID].resources[type] == null) {
-              game.bases[game.playerID].resources[type] = 0;
-            }
-            // pro-rate quantity based on hp
-            var quantity = Math.ceil(entity.hp) / Entities[type].config.hp;
-            game.bases[game.playerID].resources[type] += quantity;
-          }
-        }
-      } catch (err) {
-        _didIteratorError5 = true;
-        _iteratorError5 = err;
-      } finally {
-        try {
-          if (!_iteratorNormalCompletion5 && _iterator5.return) {
-            _iterator5.return();
-          }
-        } finally {
-          if (_didIteratorError5) {
-            throw _iteratorError5;
-          }
-        }
-      }
     }
   } catch (err) {
-    _didIteratorError4 = true;
-    _iteratorError4 = err;
+    _didIteratorError3 = true;
+    _iteratorError3 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion4 && _iterator4.return) {
-        _iterator4.return();
+      if (!_iteratorNormalCompletion3 && _iterator3.return) {
+        _iterator3.return();
       }
     } finally {
-      if (_didIteratorError4) {
-        throw _iteratorError4;
+      if (_didIteratorError3) {
+        throw _iteratorError3;
       }
     }
   }
@@ -4377,41 +3467,33 @@ var stepAction = function stepAction(game, entity, decisionFunction) {
 //////////////////////////////////////////////////////////////////////////
 
 var updateTiledSprites = function updateTiledSprites(game) {
-  var _iteratorNormalCompletion6 = true;
-  var _didIteratorError6 = false;
-  var _iteratorError6 = undefined;
+  var _iteratorNormalCompletion4 = true;
+  var _didIteratorError4 = false;
+  var _iteratorError4 = undefined;
 
   try {
-    for (var _iterator6 = game.staleTiles[Symbol.iterator](), _step6; !(_iteratorNormalCompletion6 = (_step6 = _iterator6.next()).done); _iteratorNormalCompletion6 = true) {
-      var id = _step6.value;
+    for (var _iterator4 = game.staleTiles[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+      var id = _step4.value;
 
       var entity = game.entities[id];
       entity.dictIndexStr = getDictIndexStr(game, entity);
     }
   } catch (err) {
-    _didIteratorError6 = true;
-    _iteratorError6 = err;
+    _didIteratorError4 = true;
+    _iteratorError4 = err;
   } finally {
     try {
-      if (!_iteratorNormalCompletion6 && _iterator6.return) {
-        _iterator6.return();
+      if (!_iteratorNormalCompletion4 && _iterator4.return) {
+        _iterator4.return();
       }
     } finally {
-      if (_didIteratorError6) {
-        throw _iteratorError6;
+      if (_didIteratorError4) {
+        throw _iteratorError4;
       }
     }
   }
 
   game.staleTiles = [];
-};
-
-var updateRain = function updateRain(game) {
-  if (game.rainTicks > 0) {
-    game.rainTicks--;
-  } else {
-    game.timeSinceLastRain += game.timeSinceLastTick;
-  }
 };
 
 var updateTicker = function updateTicker(game) {
@@ -4431,7 +3513,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":22,"../render/render":44,"../selectors/buildings":49,"../selectors/collisions":50,"../selectors/misc":51,"../selectors/neighbors":53,"../selectors/pheromones":54,"../selectors/sprites":55,"../simulation/actionOperations":56,"../simulation/actionQueue.js":57,"../simulation/agentOperations":58,"../simulation/entityOperations":59,"../simulation/miscOperations":61,"../simulation/pheromones":62,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/stochastic":107,"../utils/vectors":108}],44:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":33,"../selectors/buildings":38,"../selectors/collisions":39,"../selectors/misc":40,"../selectors/neighbors":42,"../selectors/pheromones":43,"../selectors/sprites":44,"../simulation/actionOperations":45,"../simulation/actionQueue.js":46,"../simulation/agentOperations":47,"../simulation/entityOperations":48,"../simulation/miscOperations":50,"../simulation/pheromones":51,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/stochastic":91,"../utils/vectors":92}],33:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -4536,7 +3618,7 @@ var renderFrame = function renderFrame(game) {
     renderView(canvas, ctx, game, bigDims);
     ctx.save();
     ctx.translate(globalConfig.config.canvasWidth - pxWidth - 8, globalConfig.config.canvasHeight - pxHeight - 8);
-    renderMinimap(ctx, game, miniDims);
+    // renderMinimap(ctx, game, miniDims);
     ctx.restore();
   } else {
     var nextViewPos = {
@@ -4560,7 +3642,7 @@ var renderFrame = function renderFrame(game) {
       viewHeight: game.viewHeight,
       viewPos: _extends({}, game.viewPos)
     };
-    renderMinimap(ctx, game, _bigDims);
+    // renderMinimap(ctx, game, bigDims);
     ctx.save();
     ctx.translate(globalConfig.config.canvasWidth - pxWidth - 8, 8);
     ctx.globalAlpha = 0.8;
@@ -4659,28 +3741,27 @@ var renderView = function renderView(canvas, ctx2d, game, dims, isMini) {
   }
 
   // render cursor square
-  var cursorPos = game.mouse.curPos;
-  ctx.lineWidth = ctx.lineWidth * 2;
-  var occupied = lookupInGrid(game.grid, cursorPos).map(function (id) {
-    return game.entities[id];
-  }).filter(function (e) {
-    return e != null && e.type == 'BACKGROUND' && !isAboveSomething(game, cursorPos);
-  }).length > 0;
-  if (!isNeighboringColonyPher(game, cursorPos) || occupied) {
-    ctx.fillStyle = 'rgba(139,0,0, 0.1)';
-    ctx.strokeStyle = 'red';
-  } else {
-    ctx.fillStyle = 'rgba(0,139,0, 0.1)';
-    ctx.strokeStyle = 'green';
-  }
-  var cursorWidth = 1;
-  var cursorHeight = 1;
-  if (game.placeType != null && Entities[game.placeType] != null) {
-    cursorWidth = Entities[game.placeType].config.width || 1;
-    cursorHeight = Entities[game.placeType].config.height || 1;
-  }
-  ctx.fillRect(cursorPos.x, cursorPos.y, cursorWidth, cursorHeight);
-  ctx.strokeRect(cursorPos.x, cursorPos.y, cursorWidth, cursorHeight);
+  // const cursorPos = game.mouse.curPos;
+  // ctx.lineWidth = ctx.lineWidth * 2;
+  // const occupied = lookupInGrid(game.grid, cursorPos)
+  //   .map(id => game.entities[id])
+  //   .filter(e => e != null && (e.type == 'BACKGROUND' && !isAboveSomething(game, cursorPos)))
+  //   .length > 0;
+  // if (!isNeighboringColonyPher(game, cursorPos) || occupied) {
+  //   ctx.fillStyle = 'rgba(139,0,0, 0.1)';
+  //   ctx.strokeStyle = 'red';
+  // } else {
+  //   ctx.fillStyle = 'rgba(0,139,0, 0.1)';
+  //   ctx.strokeStyle = 'green';
+  // }
+  // let cursorWidth = 1;
+  // let cursorHeight = 1;
+  // if (game.placeType != null && Entities[game.placeType] != null) {
+  //   cursorWidth = Entities[game.placeType].config.width || 1;
+  //   cursorHeight = Entities[game.placeType].config.height || 1;
+  // }
+  // ctx.fillRect(cursorPos.x, cursorPos.y,   cursorWidth, cursorHeight);
+  // ctx.strokeRect(cursorPos.x, cursorPos.y, cursorWidth, cursorHeight);
 
   // marquee
   if (game.isExperimental && document.onmousemove != null && (game.mouse.isLeftDown || game.keepMarquee) && game.mouseMode != 'COLLECT') {
@@ -5066,7 +4147,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":22,"../selectors/misc":51,"../selectors/mouseInteractionSelectors":52,"../selectors/sprites":55,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108,"./renderMinimap":47}],45:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/misc":40,"../selectors/mouseInteractionSelectors":41,"../selectors/sprites":44,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92,"./renderMinimap":36}],34:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5158,7 +4239,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108,"./renderHealthBar":46}],46:[function(require,module,exports){
+},{"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92,"./renderHealthBar":35}],35:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5200,7 +4281,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":104,"../utils/vectors":108}],47:[function(require,module,exports){
+},{"../utils/gridHelpers":88,"../utils/vectors":92}],36:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5643,7 +4724,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":22,"../selectors/misc":51,"../selectors/sprites":55,"../utils/gridHelpers":104,"../utils/vectors":108,"./renderSegmented":48}],48:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/misc":40,"../selectors/sprites":44,"../utils/gridHelpers":88,"../utils/vectors":92,"./renderSegmented":37}],37:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -5791,7 +4872,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":51,"../selectors/sprites":55,"../utils/vectors":108,"./renderHealthBar":46}],49:[function(require,module,exports){
+},{"../selectors/misc":40,"../selectors/sprites":44,"../utils/vectors":92,"./renderHealthBar":35}],38:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5828,7 +4909,7 @@ module.exports = {
   canAffordBuilding: canAffordBuilding,
   getModifiedCost: getModifiedCost
 };
-},{"../entities/registry":22}],50:[function(require,module,exports){
+},{"../entities/registry":14}],39:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/gridHelpers'),
@@ -5892,7 +4973,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":104}],51:[function(require,module,exports){
+},{"../utils/gridHelpers":88}],40:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6141,7 +5222,7 @@ module.exports = {
   getControlledEntityInteraction: getControlledEntityInteraction,
   getManningAction: getManningAction
 };
-},{"../selectors/collisions":50,"../selectors/neighbors":53,"../simulation/actionQueue":57,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],52:[function(require,module,exports){
+},{"../selectors/collisions":39,"../selectors/neighbors":42,"../simulation/actionQueue":46,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],41:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6236,7 +5317,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":22,"../selectors/buildings":49,"../selectors/neighbors":53,"../selectors/pheromones":54,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],53:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/buildings":38,"../selectors/neighbors":42,"../selectors/pheromones":43,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],42:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -6503,7 +5584,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":50,"../utils/gridHelpers":104,"../utils/vectors":108}],54:[function(require,module,exports){
+},{"../selectors/collisions":39,"../utils/gridHelpers":88,"../utils/vectors":92}],43:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6685,7 +5766,7 @@ module.exports = {
   getQuantityForStalePos: getQuantityForStalePos,
   isPositionBlockingPheromone: isPositionBlockingPheromone
 };
-},{"../config":1,"../selectors/neighbors":53,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],55:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":42,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],44:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -7163,6 +6244,26 @@ var getSegmentTail = function getSegmentTail(game, entity, segment) {
   }
 };
 
+var getBeetleSprite = function getBeetleSprite(game, beetle) {
+  var width = 32;
+  var height = 32;
+  var obj = {
+    img: game.sprites.BEETLE,
+    x: 0, y: 0,
+    width: width, height: height
+  };
+  var index = getInterpolatedIndex(game, beetle);
+  if (beetle.type == 'DEAD_BEETLE') {
+    index = 6;
+    obj.x = index * width;
+  } else if (beetle.actions.length == 0) {
+    return obj;
+  } else {
+    obj.x = getFrame(game, beetle, index) * width;
+  }
+  return obj;
+};
+
 module.exports = {
   getInterpolatedPos: getInterpolatedPos,
   getInterpolatedTheta: getInterpolatedTheta,
@@ -7177,9 +6278,10 @@ module.exports = {
   getMaxFrameOffset: getMaxFrameOffset,
   getSegmentSprite: getSegmentSprite,
   getSegmentHead: getSegmentHead,
-  getSegmentTail: getSegmentTail
+  getSegmentTail: getSegmentTail,
+  getBeetleSprite: getBeetleSprite
 };
-},{"../config":1,"../selectors/misc":51,"../selectors/neighbors":53,"../simulation/actionQueue":57,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],56:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":40,"../selectors/neighbors":42,"../simulation/actionQueue":46,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],45:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7210,38 +6312,46 @@ var _require3 = require('../simulation/actionQueue'),
 var _require4 = require('../selectors/sprites'),
     getMaxFrameOffset = _require4.getMaxFrameOffset;
 
-var _require5 = require('../selectors/misc'),
-    getPositionsInFront = _require5.getPositionsInFront,
-    getPositionsBehind = _require5.getPositionsBehind,
-    isFacing = _require5.isFacing,
-    canDoMove = _require5.canDoMove;
+var _require5 = require('../utils/gridHelpers'),
+    getEntityPositions = _require5.getEntityPositions;
 
-var _require6 = require('../selectors/collisions'),
-    collidesWith = _require6.collidesWith;
+var _require6 = require('../selectors/misc'),
+    getPositionsInFront = _require6.getPositionsInFront,
+    getPositionsBehind = _require6.getPositionsBehind,
+    isFacing = _require6.isFacing,
+    canDoMove = _require6.canDoMove;
 
-var _require7 = require('../simulation/entityOperations'),
-    addEntity = _require7.addEntity,
-    removeEntity = _require7.removeEntity,
-    moveEntity = _require7.moveEntity,
-    pickupEntity = _require7.pickupEntity,
-    putdownEntity = _require7.putdownEntity,
-    rotateEntity = _require7.rotateEntity,
-    changeEntityType = _require7.changeEntityType,
-    removeEntityFromGrid = _require7.removeEntityFromGrid,
-    addSegmentToEntity = _require7.addSegmentToEntity;
+var _require7 = require('../selectors/collisions'),
+    collidesWith = _require7.collidesWith;
 
-var _require8 = require('../simulation/agentOperations'),
-    agentPutdown = _require8.agentPutdown,
-    agentPickup = _require8.agentPickup;
+var _require8 = require('../simulation/entityOperations'),
+    addEntity = _require8.addEntity,
+    removeEntity = _require8.removeEntity,
+    moveEntity = _require8.moveEntity,
+    pickupEntity = _require8.pickupEntity,
+    putdownEntity = _require8.putdownEntity,
+    rotateEntity = _require8.rotateEntity,
+    changeEntityType = _require8.changeEntityType,
+    removeEntityFromGrid = _require8.removeEntityFromGrid,
+    addSegmentToEntity = _require8.addSegmentToEntity;
 
-var _require9 = require('../simulation/explosiveOperations'),
-    triggerExplosion = _require9.triggerExplosion;
+var _require9 = require('../simulation/agentOperations'),
+    agentPutdown = _require9.agentPutdown,
+    agentPickup = _require9.agentPickup;
 
-var _require10 = require('../simulation/miscOperations'),
-    dealDamageToEntity = _require10.dealDamageToEntity;
+var _require10 = require('../simulation/explosiveOperations'),
+    triggerExplosion = _require10.triggerExplosion;
 
-var _require11 = require('../entities/registry'),
-    Entities = _require11.Entities;
+var _require11 = require('../simulation/miscOperations'),
+    dealDamageToEntity = _require11.dealDamageToEntity;
+
+var _require12 = require('../entities/registry'),
+    Entities = _require12.Entities;
+
+var _require13 = require('../selectors/neighbors'),
+    areNeighbors = _require13.areNeighbors,
+    getNeighborPositions = _require13.getNeighborPositions,
+    getNeighborEntities = _require13.getNeighborEntities;
 
 var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
   if (entity.actions.length == 0) return;
@@ -7289,6 +6399,9 @@ var entityStartCurrentAction = function entityStartCurrentAction(game, entity) {
       break;
     case 'DIE':
       entityDie(game, entity);
+      break;
+    case 'BITE':
+      entityFight(game, entity, curAction.payload);
       break;
     case 'SHOOT':
       entityShoot(game, entity, curAction.payload);
@@ -7404,6 +6517,41 @@ var entityDie = function entityDie(game, entity) {
   removeEntity(game, entity);
 };
 
+var entityFight = function entityFight(game, entity, target) {
+  if (!areNeighbors(game, entity, target)) return;
+  if (target.type.slice(0, 4) === 'DEAD') return;
+  if (target.position == null) return;
+
+  var isFacingAtAll = false;
+  getEntityPositions(game, target).forEach(function (pos) {
+    getPositionsInFront(game, entity).forEach(function (fp) {
+      if (equals(pos, fp)) {
+        isFacingAtAll = true;
+      }
+    });
+  });
+  if (!isFacingAtAll) {
+    var nextTheta = vectorTheta(subtract(entity.position, target.position));
+    getEntityPositions(game, target).forEach(function (pos) {
+      getNeighborPositions(game, entity).forEach(function (fp) {
+        if (equals(pos, fp)) {
+          nextTheta = vectorTheta(subtract(entity.position, fp));
+        }
+      });
+    });
+    // HACK: isFacing doesn't quite working for some diagonal directions,
+    // so if you're already facing the direction you should be, then just let
+    // the attack go through
+    if (!closeTo(entity.theta, nextTheta)) {
+      stackAction(game, entity, makeAction(game, entity, 'TURN', nextTheta));
+      entityStartCurrentAction(game, entity);
+      return;
+    }
+  }
+
+  dealDamageToEntity(game, target, entity.damage);
+};
+
 var entityMan = function entityMan(game, entity, mannedEntity) {
   if (!mannedEntity.MANNED) return;
   pickupEntity(game, entity, entity.position);
@@ -7468,7 +6616,7 @@ var entityUnMan = function entityUnMan(game, entity, mannedEntity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":22,"../selectors/collisions":50,"../selectors/misc":51,"../selectors/sprites":55,"../simulation/actionQueue":57,"../simulation/agentOperations":58,"../simulation/entityOperations":59,"../simulation/explosiveOperations":60,"../simulation/miscOperations":61,"../utils/helpers":105,"../utils/vectors":108}],57:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/collisions":39,"../selectors/misc":40,"../selectors/neighbors":42,"../selectors/sprites":44,"../simulation/actionQueue":46,"../simulation/agentOperations":47,"../simulation/entityOperations":48,"../simulation/explosiveOperations":49,"../simulation/miscOperations":50,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],46:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7700,7 +6848,7 @@ module.exports = {
   makeAction: makeAction,
   getFrame: getFrame
 };
-},{"../selectors/pheromones":54,"../utils/helpers":105,"../utils/vectors":108}],58:[function(require,module,exports){
+},{"../selectors/pheromones":43,"../utils/helpers":89,"../utils/vectors":92}],47:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8007,12 +7155,37 @@ var agentDecideAction = function agentDecideAction(game, agent) {
 
   switch (agent.type) {
     case 'AGENT':
+    case 'MONSTER':
+      monsterDecideAction(game, agent);
+      break;
     case 'WORM':
       {
         // MOVE
         agentDecideMove(game, agent);
+        break;
       }
   }
+};
+
+var monsterDecideAction = function monsterDecideAction(game, ant) {
+  // FIGHT
+
+  var hasPathToColony = getPheromoneAtPosition(game, ant.position, 'COLONY', game.playerID);
+  var targets = getNeighborEntities(game, ant, true).filter(function (e) {
+    if (e.position == null) return false;
+    if (isDiagonalMove(ant.position, e.position)) return false;
+    return e.type == 'BASE' || e.type == 'BASIC_TURRET' ||
+    // only attack dirt/stone when path is blocked
+    !hasPathToColony && (e.type == 'DIRT' || e.type == 'STONE');
+  });
+
+  if (targets.length > 0) {
+    queueAction(game, ant, makeAction(game, ant, 'BITE', oneOf(targets)));
+    return;
+  }
+
+  // MOVE
+  agentDecideMove(game, ant);
 };
 
 module.exports = {
@@ -8022,7 +7195,7 @@ module.exports = {
   agentDecideMove: agentDecideMove,
   agentSwitchTask: agentSwitchTask
 };
-},{"../config":1,"../entities/registry":22,"../selectors/collisions":50,"../selectors/misc":51,"../selectors/neighbors":53,"../selectors/pheromones":54,"../simulation/actionQueue":57,"../simulation/entityOperations":59,"../simulation/pheromones":62,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/stochastic":107,"../utils/vectors":108}],59:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/collisions":39,"../selectors/misc":40,"../selectors/neighbors":42,"../selectors/pheromones":43,"../simulation/actionQueue":46,"../simulation/entityOperations":48,"../simulation/pheromones":51,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/stochastic":91,"../utils/vectors":92}],48:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8737,7 +7910,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":18,"../entities/registry":22,"../properties/registry":37,"../selectors/neighbors":53,"../selectors/pheromones":54,"../simulation/pheromones":62,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],60:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":26,"../selectors/neighbors":42,"../selectors/pheromones":43,"../simulation/pheromones":51,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],49:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8868,7 +8041,7 @@ var triggerExplosion = function triggerExplosion(game, explosive, precompute) {
 module.exports = {
   triggerExplosion: triggerExplosion
 };
-},{"../simulation/actionQueue":57,"../simulation/entityOperations":59,"../simulation/miscOperations":61,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],61:[function(require,module,exports){
+},{"../simulation/actionQueue":46,"../simulation/entityOperations":48,"../simulation/miscOperations":50,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],50:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8895,7 +8068,7 @@ var dealDamageToEntity = function dealDamageToEntity(game, entity, damage) {
 module.exports = {
   dealDamageToEntity: dealDamageToEntity
 };
-},{"../simulation/actionQueue":57,"../simulation/entityOperations":59}],62:[function(require,module,exports){
+},{"../simulation/actionQueue":46,"../simulation/entityOperations":48}],51:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -9255,7 +8428,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":53,"../selectors/pheromones":54,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],63:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":42,"../selectors/pheromones":43,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],52:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -9456,7 +8629,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":18,"../entities/registry":22,"../properties/registry":37,"../simulation/entityOperations":59,"../utils/gridHelpers":104,"../utils/stochastic":107,"../utils/vectors":108}],64:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":10,"../entities/registry":14,"../properties/registry":26,"../simulation/entityOperations":48,"../utils/gridHelpers":88,"../utils/stochastic":91,"../utils/vectors":92}],53:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -9471,7 +8644,7 @@ var initState = function initState() {
 };
 
 module.exports = { initState: initState };
-},{}],65:[function(require,module,exports){
+},{}],54:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -9621,7 +8794,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../render/render":44,"../ui/components/Button.react":95,"../ui/components/Divider.react":97,"../ui/components/Modal.react":100,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108,"axios":111,"react":146}],66:[function(require,module,exports){
+},{"../render/render":33,"../ui/components/Button.react":79,"../ui/components/Divider.react":81,"../ui/components/Modal.react":84,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92,"axios":95,"react":130}],55:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -9756,7 +8929,7 @@ var getUpDownLeftRight = function getUpDownLeftRight(ev) {
 };
 
 module.exports = { initKeyboardControlsSystem: initKeyboardControlsSystem };
-},{}],67:[function(require,module,exports){
+},{}],56:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -9768,7 +8941,7 @@ var globalConfig = require('../config');
 var _require2 = require('../entities/registry'),
     Entities = _require2.Entities;
 
-var initMissileAttackSystem = function initMissileAttackSystem(store) {
+var initMonsterAttackSystem = function initMonsterAttackSystem(store) {
   var dispatch = store.dispatch;
 
   var time = -1;
@@ -9897,8 +9070,8 @@ function doStartWave(dispatch, game, missileFrequency) {
   }
 }
 
-module.exports = { initMissileAttackSystem: initMissileAttackSystem };
-},{"../config":1,"../entities/registry":22,"../utils/stochastic":107}],68:[function(require,module,exports){
+module.exports = { initMonsterAttackSystem: initMonsterAttackSystem };
+},{"../config":1,"../entities/registry":14,"../utils/stochastic":91}],57:[function(require,module,exports){
 'use strict';
 
 var _require = require('../config'),
@@ -10131,7 +9304,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],69:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],58:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -10224,7 +9397,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":22,"../utils/helpers":105,"../utils/vectors":108}],70:[function(require,module,exports){
+},{"../entities/registry":14,"../utils/helpers":89,"../utils/vectors":92}],59:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -10274,7 +9447,7 @@ var initRainSystem = function initRainSystem(store) {
 };
 
 module.exports = { initRainSystem: initRainSystem };
-},{"../config":1,"../simulation/pheromones":62,"../utils/stochastic":107}],71:[function(require,module,exports){
+},{"../config":1,"../simulation/pheromones":51,"../utils/stochastic":91}],60:[function(require,module,exports){
 'use strict';
 
 var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
@@ -10311,6 +9484,7 @@ var initSpriteSheetSystem = function initSpriteSheetSystem(store) {
 
   loadSprite(dispatch, state, 'ANT', './img/Ant2.png');
   loadSprite(dispatch, state, 'WORM', './img/Worm1.png');
+  loadSprite(dispatch, state, 'BEETLE', './img/Beetle1.png');
 
   loadSprite(dispatch, state, 'FLOOR_TILE', './img/FloorTile1.png');
   loadSprite(dispatch, state, 'SKYLINE', './img/Skyline1.png');
@@ -10334,7 +9508,7 @@ var loadSprite = function loadSprite(dispatch, state, name, src) {
 };
 
 module.exports = { initSpriteSheetSystem: initSpriteSheetSystem };
-},{}],72:[function(require,module,exports){
+},{}],61:[function(require,module,exports){
 'use strict';
 
 var levels = require('../levels/levels');
@@ -10375,7 +9549,7 @@ function loadLevel(store, levelName, additionalUpgrades) {
 module.exports = {
   loadLevel: loadLevel
 };
-},{"../levels/levels":31,"../utils/proceduralLevel":106}],73:[function(require,module,exports){
+},{"../levels/levels":19,"../utils/proceduralLevel":90}],62:[function(require,module,exports){
 'use strict';
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
@@ -10505,7 +9679,7 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":22,"../selectors/buildings":49,"../selectors/mouseInteractionSelectors":52,"../selectors/neighbors":53,"../selectors/pheromones":54,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108}],74:[function(require,module,exports){
+},{"../entities/registry":14,"../selectors/buildings":38,"../selectors/mouseInteractionSelectors":41,"../selectors/neighbors":42,"../selectors/pheromones":43,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92}],63:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10538,7 +9712,7 @@ var BottomBar = function BottomBar(props) {
 };
 
 module.exports = BottomBar;
-},{"./InfoHUD.react":88,"react":146}],75:[function(require,module,exports){
+},{"./InfoHUD.react":74,"react":130}],64:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10677,95 +9851,7 @@ function withPropsChecker(WrappedComponent) {
 }
 
 module.exports = React.memo(Canvas);
-},{"../config":1,"react":146}],76:[function(require,module,exports){
-'use strict';
-
-var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
-
-var React = require('react');
-var Button = require('./Button.react');
-var useState = React.useState,
-    useEffect = React.useEffect,
-    useMemo = React.useMemo;
-
-/**
- * Props:
- *
- * audioFiles, // array of {path, type} pairs
- * isMuted, // optional boolean for outside control of this widget
- * setIsMuted, // optional function called when this is toggled
- * isShuffled, // optional boolean for whether audio should play in random order
- * style, // optional object of css styles
- *
- */
-
-var AudioWidget = function AudioWidget(props) {
-  var _useState = useState(!!props.isMuted),
-      _useState2 = _slicedToArray(_useState, 2),
-      isMuted = _useState2[0],
-      setIsMuted = _useState2[1];
-
-  var _useState3 = useState(0),
-      _useState4 = _slicedToArray(_useState3, 2),
-      playIndex = _useState4[0],
-      setPlayIndex = _useState4[1];
-
-  var playOrder = useMemo(function () {
-    var initialOrder = props.audioFiles.map(function (a, i) {
-      return i;
-    });
-    if (props.isShuffled) {
-      // TODO: shuffle the playOrder array
-    }
-    return initialOrder;
-  }, [props.audioFiles]);
-
-  var widgetStyle = {
-    margin: 5,
-    borderRadius: 8,
-    left: 5
-  };
-
-  // player
-  var audioPlayer = useMemo(function () {
-    var a = new Audio(props.audioFiles[playIndex].path);
-    return a;
-  }, [playIndex, isMuted, props.audioFiles]);
-
-  useEffect(function () {
-    if (!isMuted) {
-      audioPlayer.addEventListener('loadeddata', function () {
-        audioPlayer.play();
-        setTimeout(function () {
-          return setPlayIndex((playIndex + 1) % props.audioFiles.length);
-        }, audioPlayer.duration * 1000);
-      });
-    }
-    return function () {
-      audioPlayer.pause();
-    };
-  }, [playIndex, isMuted, props.audioFiles, audioPlayer]);
-
-  return React.createElement(
-    'div',
-    {
-      style: props.style ? props.style : widgetStyle
-    },
-    React.createElement(Button, {
-      label: isMuted ? 'Turn Music ON' : 'Turn Music OFF',
-      onClick: function onClick() {
-        audioPlayer.pause();
-        setIsMuted(!isMuted);
-        if (props.setIsMuted) {
-          props.setIsMuted(!isMuted);
-        }
-      }
-    })
-  );
-};
-
-module.exports = AudioWidget;
-},{"./Button.react":77,"react":146}],77:[function(require,module,exports){
+},{"../config":1,"react":130}],65:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10849,7 +9935,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":146}],78:[function(require,module,exports){
+},{"react":130}],66:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10889,7 +9975,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":146}],79:[function(require,module,exports){
+},{"react":130}],67:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10909,7 +9995,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":146}],80:[function(require,module,exports){
+},{"react":130}],68:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10950,111 +10036,7 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":146}],81:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
-
-var React = require('react');
-
-var InfoCard = function InfoCard(props) {
-  var overrideStyle = props.overrideStyle || {};
-  var underrideStyle = props.underrideStyle || {};
-  return React.createElement(
-    'div',
-    {
-      style: _extends({}, underrideStyle, {
-        border: props.border != null ? props.border : '1px solid black',
-        backgroundColor: 'white',
-        opacity: props.opacity != null ? props.opacity : 1,
-        // width: 200,
-        // height: 148,
-        verticalAlign: 'top',
-        marginLeft: 4,
-        display: 'inline-block',
-        padding: 4
-      }, overrideStyle)
-    },
-    props.children
-  );
-};
-
-module.exports = InfoCard;
-},{"react":146}],82:[function(require,module,exports){
-'use strict';
-
-var React = require('react');
-var Button = require('./Button.react');
-
-var _require = require('../../utils/helpers'),
-    isMobile = _require.isMobile;
-
-function Modal(props) {
-  var content = props.content,
-      title = props.title,
-      body = props.body,
-      buttons = props.buttons;
-
-  var height = props.height ? props.height : 450;
-
-  // using 2 rects to properly position width and height
-  var rect = document.getElementById('container').getBoundingClientRect();
-  var canvasRect = null;
-  var canvas = document.getElementById('canvas');
-  if (canvas != null) {
-    canvasRect = canvas.getBoundingClientRect();
-  } else {
-    canvasRect = rect;
-  }
-
-  var buttonHTML = buttons.map(function (b) {
-    return React.createElement(Button, {
-      key: "b_" + b.label,
-      disabled: !!b.disabled,
-      label: b.label, onClick: b.onClick
-    });
-  });
-
-  var width = props.width ? props.width : Math.min(rect.width * 0.8, 350);
-  return React.createElement(
-    'div',
-    {
-      style: {
-        position: 'absolute',
-        backgroundColor: 'whitesmoke',
-        border: '1px solid black',
-        padding: 4,
-        boxShadow: '2px 2px #666666',
-        borderRadius: 3,
-        color: '#46403a',
-        textAlign: 'center',
-        width: width,
-        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
-        left: (rect.width - width) / 2
-      }
-    },
-    React.createElement(
-      'h3',
-      null,
-      React.createElement(
-        'b',
-        null,
-        title
-      )
-    ),
-    body,
-    React.createElement(
-      'div',
-      {
-        style: {}
-      },
-      buttonHTML
-    )
-  );
-}
-
-module.exports = Modal;
-},{"../../utils/helpers":105,"./Button.react":77,"react":146}],83:[function(require,module,exports){
+},{"react":130}],69:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -11144,7 +10126,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":146}],84:[function(require,module,exports){
+},{"react":130}],70:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -11233,7 +10215,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":146}],85:[function(require,module,exports){
+},{"react":130}],71:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11304,7 +10286,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":83,"react":146}],86:[function(require,module,exports){
+},{"./NumberField.react":69,"react":130}],72:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -11483,7 +10465,7 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":77,"./Components/Checkbox.react":78,"./Components/Divider.react":79,"./Components/Dropdown.react":80,"./Components/Slider.react":85,"react":146}],87:[function(require,module,exports){
+},{"./Components/Button.react":65,"./Components/Checkbox.react":66,"./Components/Divider.react":67,"./Components/Dropdown.react":68,"./Components/Slider.react":71,"react":130}],73:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -11493,7 +10475,6 @@ var Button = require('./Components/Button.react');
 var Canvas = require('./Canvas.react');
 var Checkbox = require('./Components/Checkbox.react');
 var RadioPicker = require('./Components/RadioPicker.react');
-var TopBar = require('./TopBar.react');
 var BottomBar = require('./BottomBar.react');
 
 var _require = require('../config'),
@@ -11511,8 +10492,8 @@ var _require4 = require('../systems/spriteSheetSystem'),
 var _require5 = require('../systems/rainSystem'),
     initRainSystem = _require5.initRainSystem;
 
-var _require6 = require('../systems/missileAttackSystem'),
-    initMissileAttackSystem = _require6.initMissileAttackSystem;
+var _require6 = require('../systems/monsterAttackSystem'),
+    initMonsterAttackSystem = _require6.initMonsterAttackSystem;
 
 var _require7 = require('../systems/pheromoneWorkerSystem'),
     initPheromoneWorkerSystem = _require7.initPheromoneWorkerSystem;
@@ -11579,8 +10560,8 @@ function Game(props) {
     // initSpriteSheetSystem(store);
     initGameOverSystem(store);
     initPheromoneWorkerSystem(store);
-    initMissileAttackSystem(store);
-    initRainSystem(store);
+    initMonsterAttackSystem(store);
+    // initRainSystem(store);
     // initUpgradeSystem(store);
     registerHotkeys(dispatch);
   }, [gameID]);
@@ -11628,21 +10609,6 @@ function Game(props) {
       focusedEntity: game.focusedEntity
     }),
     React.createElement(Ticker, { ticker: game.ticker }),
-    React.createElement(TopBar, { dispatch: dispatch,
-      upgradedAt: game.upgradedAt,
-      isExperimental: props.isInLevelEditor,
-      tickInterval: state.game.tickInterval,
-      modal: state.modal,
-      canvasWidth: dims.width,
-      isMuted: state.isMuted,
-      powerMargin: game.bases[game.playerID].powerMargin,
-      totalPowerNeeded: game.bases[game.playerID].totalPowerNeeded,
-      totalPowerGenerated: game.bases[game.playerID].totalPowerGenerated,
-      base: game.bases[game.playerID],
-      placeType: game.placeType,
-      tick: game.time,
-      game: game
-    }),
     React.createElement(MiniTicker, { miniTicker: game.miniTicker }),
     React.createElement(BottomBar, { dispatch: dispatch,
       game: game,
@@ -11856,7 +10822,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":44,"../selectors/misc":51,"../simulation/actionQueue":57,"../systems/gameOverSystem":65,"../systems/keyboardControlsSystem":66,"../systems/missileAttackSystem":67,"../systems/mouseControlsSystem":68,"../systems/pheromoneWorkerSystem":69,"../systems/rainSystem":70,"../systems/spriteSheetSystem":71,"../thunks/mouseInteractions":73,"../utils/gridHelpers":104,"../utils/helpers":105,"../utils/vectors":108,"./BottomBar.react":74,"./Canvas.react":75,"./Components/Button.react":77,"./Components/Checkbox.react":78,"./Components/RadioPicker.react":84,"./ExperimentalSidebar.react":86,"./TopBar.react":93,"react":146}],88:[function(require,module,exports){
+},{"../config":1,"../render/render":33,"../selectors/misc":40,"../simulation/actionQueue":46,"../systems/gameOverSystem":54,"../systems/keyboardControlsSystem":55,"../systems/monsterAttackSystem":56,"../systems/mouseControlsSystem":57,"../systems/pheromoneWorkerSystem":58,"../systems/rainSystem":59,"../systems/spriteSheetSystem":60,"../thunks/mouseInteractions":62,"../utils/gridHelpers":88,"../utils/helpers":89,"../utils/vectors":92,"./BottomBar.react":63,"./Canvas.react":64,"./Components/Button.react":65,"./Components/Checkbox.react":66,"./Components/RadioPicker.react":70,"./ExperimentalSidebar.react":72,"react":130}],74:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11885,35 +10851,6 @@ var InfoHUD = function InfoHUD(props) {
       game = props.game;
 
 
-  var pheromoneInfoCards = [];
-  var pherInCell = getPheromonesInCell(game.grid, mousePos, 0 /* playerID */);
-  var sunLight = 0;
-  for (var pherType in pherInCell) {
-    if (pherType == 'HEAT' || pherType == 'COLD') continue;
-    if (pherType == 'LIGHT') {
-      sunLight = pherInCell[pherType];
-      continue;
-    }
-    if (pherInCell[pherType] > 0) {
-      pheromoneInfoCards.push(React.createElement(PheromoneInfoCard, {
-        key: 'pherInfo_' + pherType + encodePosition(mousePos) + pherInCell[pherType],
-        pheromoneType: pherType,
-        quantity: pherInCell[pherType]
-      }));
-    }
-  }
-
-  var entityInfoCards = lookupInGrid(game.grid, mousePos).map(function (id) {
-    return game.entities[id];
-  }).filter(function (e) {
-    return e != null && e.type != 'BACKGROUND';
-  }).map(function (e) {
-    return React.createElement(EntityInfoCard, { key: 'info_' + e.id, entity: e });
-  });
-
-  var temp = getTemperature(game, mousePos);
-  var maxLight = pheromones.LIGHT.quantity;
-
   return React.createElement(
     'div',
     {
@@ -11938,33 +10875,8 @@ var InfoHUD = function InfoHUD(props) {
         mousePos.x,
         ' y: ',
         mousePos.y
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Temperature'
-        ),
-        ': ',
-        temp
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Sun Light'
-        ),
-        ': ',
-        (sunLight / maxLight * 100).toFixed(0),
-        '%'
       )
-    ),
-    entityInfoCards,
-    pheromoneInfoCards
+    )
   );
 };
 
@@ -12150,7 +11062,7 @@ var EntityInfoCard = function EntityInfoCard(props) {
 };
 
 module.exports = InfoHUD;
-},{"../config":1,"../entities/registry":22,"../selectors/pheromones":54,"../ui/components/InfoCard.react":99,"../utils/gridHelpers":104,"../utils/helpers":105,"react":146}],89:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../selectors/pheromones":43,"../ui/components/InfoCard.react":83,"../utils/gridHelpers":88,"../utils/helpers":89,"react":130}],75:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -12218,7 +11130,7 @@ function LevelEditor(props) {
 
     // entity creation mode
     deleteMode: false,
-    entityType: 'MISSILE',
+    entityType: 'MONSTER',
     subdividing: false,
     pheromoneType: 'HEAT',
     background: 'SKYLINE',
@@ -12919,6 +11831,7 @@ function createEntities(game, dispatch, editor, rect) {
     case 'TURBINE':
     case 'AGENT':
     case 'PLAYER':
+    case 'MONSTER':
     case 'BASE':
       args = [editor.playerID];
       break;
@@ -13176,7 +12089,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":22,"../render/render":44,"../systems/mouseControlsSystem":68,"../utils/vectors":108,"./components/Button.react":95,"./components/Checkbox.react":96,"./components/Divider.react":97,"./components/Dropdown.react":98,"./components/NumberField.react":101,"./components/Slider.react":103,"react":146}],90:[function(require,module,exports){
+},{"../config":1,"../entities/registry":14,"../render/render":33,"../systems/mouseControlsSystem":57,"../utils/vectors":92,"./components/Button.react":79,"./components/Checkbox.react":80,"./components/Divider.react":81,"./components/Dropdown.react":82,"./components/NumberField.react":85,"./components/Slider.react":87,"react":130}],76:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -13501,7 +12414,7 @@ function MadeBy(props) {
 function LevelEditor(props) {
   var dispatch = props.dispatch;
 
-  var _useState15 = useState('mediumDemoLevel'),
+  var _useState15 = useState('towerDefenseLevel'),
       _useState16 = _slicedToArray(_useState15, 2),
       level = _useState16[0],
       setLevel = _useState16[1];
@@ -13606,7 +12519,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":31,"../systems/spriteSheetSystem":71,"../thunks/levelThunks":72,"../ui/components/Modal.react":100,"../ui/components/QuitButton.react":102,"../utils/helpers":105,"./components/AudioWidget.react":94,"./components/Button.react":95,"./components/Checkbox.react":96,"./components/Divider.react":97,"./components/Dropdown.react":98,"axios":111,"react":146}],91:[function(require,module,exports){
+},{"../config":1,"../levels/levels":19,"../systems/spriteSheetSystem":60,"../thunks/levelThunks":61,"../ui/components/Modal.react":84,"../ui/components/QuitButton.react":86,"../utils/helpers":89,"./components/AudioWidget.react":78,"./components/Button.react":79,"./components/Checkbox.react":80,"./components/Divider.react":81,"./components/Dropdown.react":82,"axios":95,"react":130}],77:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -13653,804 +12566,209 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":87,"./LevelEditor.react":89,"./Lobby.react":90,"react":146}],92:[function(require,module,exports){
+},{"./Game.react":73,"./LevelEditor.react":75,"./Lobby.react":76,"react":130}],78:[function(require,module,exports){
 'use strict';
 
-var React = require('react');
-var InfoCard = require('../ui/Components/InfoCard.react');
-var globalConfig = require('../config');
-
-var _require = require('../entities/registry'),
-    Entities = _require.Entities;
-
-var _require2 = require('../selectors/buildings'),
-    canAffordBuilding = _require2.canAffordBuilding,
-    getModifiedCost = _require2.getModifiedCost;
-
-var useMemo = React.useMemo,
-    useEffect = React.useEffect;
-
-
-function PlacementPalette(props) {
-  var dispatch = props.dispatch,
-      game = props.game,
-      base = props.base,
-      placeType = props.placeType;
-
-
-  var placeEntityCards = [];
-  for (var entityType in Entities) {
-    var config = Entities[entityType].config;
-    if (!config.COLLECTABLE) continue;
-    placeEntityCards.push(React.createElement(PlaceEntityCard, { key: "placeEntityCard_" + entityType,
-      dispatch: dispatch,
-      entityType: entityType,
-      quantity: base.resources[entityType] || 0,
-      isSelected: entityType == placeType
-    }));
-    if (entityType == 'COAL') {
-      placeEntityCards.push(React.createElement(PlaceEntityCard, { key: "placeEntityCard_HOT_COAL",
-        dispatch: dispatch,
-        entityType: 'HOT COAL',
-        quantity: base.resources.COAL || 0,
-        isSelected: 'HOT COAL' == placeType
-      }));
-    }
-  }
-  var placeBuildingCards = [];
-  for (var _entityType in Entities) {
-    var _config = Entities[_entityType].config;
-    if (_config.cost == null) continue;
-    placeBuildingCards.push(React.createElement(PlaceBuildingCard, { key: "placeEntityCard_" + _entityType,
-      dispatch: dispatch,
-      base: base,
-      entityType: _entityType,
-      cost: getModifiedCost(game, _entityType),
-      isSelected: _entityType == placeType
-    }));
-  }
-
-  return React.createElement(
-    'span',
-    null,
-    React.createElement(
-      'div',
-      { style: { marginBottom: 6 } },
-      placeEntityCards
-    ),
-    React.createElement(
-      'div',
-      null,
-      placeBuildingCards
-    )
-  );
-}
-
-function PlaceEntityCard(props) {
-  var dispatch = props.dispatch,
-      entityType = props.entityType,
-      quantity = props.quantity,
-      isSelected = props.isSelected;
-
-
-  var hover = useMemo(function () {
-    return React.createElement(HoverCard, { entityType: entityType, depth: 0 });
-  }, []);
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block',
-        position: 'relative'
-      },
-      className: 'displayChildOnHover',
-      onClick: function onClick() {
-        return dispatch({ type: 'SET_PLACE_TYPE', placeType: entityType });
-      }
-    },
-    React.createElement(
-      InfoCard,
-      {
-        border: isSelected ? '2px solid orange' : null,
-        opacity: quantity != null && quantity > 0 ? null : 0.5
-      },
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Resource, { resource: entityType })
-      ),
-      React.createElement(
-        'div',
-        null,
-        quantity.toFixed(1)
-      )
-    ),
-    hover
-  );
-}
-
-function PlaceBuildingCard(props) {
-  var dispatch = props.dispatch,
-      entityType = props.entityType,
-      cost = props.cost,
-      isSelected = props.isSelected,
-      base = props.base;
-
-
-  var costBreakdown = [];
-  for (var type in cost) {
-    costBreakdown.push(React.createElement(
-      'div',
-      { key: "cost_" + entityType + "_" + type },
-      type,
-      ': ',
-      cost[type]
-    ));
-  }
-
-  var hover = useMemo(function () {
-    return React.createElement(HoverCard, { entityType: entityType, depth: 0 });
-  }, []);
-
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block',
-        position: 'relative'
-      },
-      className: 'displayChildOnHover',
-      onClick: function onClick() {
-        return dispatch({ type: 'SET_PLACE_TYPE', placeType: entityType });
-      }
-    },
-    React.createElement(
-      InfoCard,
-      {
-        border: isSelected ? '2px solid orange' : null,
-        opacity: canAffordBuilding(base, cost) ? null : 0.5
-      },
-      React.createElement(Resource, { resource: entityType }),
-      React.createElement(
-        'div',
-        null,
-        'Cost:'
-      ),
-      costBreakdown
-    ),
-    hover
-  );
-}
-
-function HoverCard(props) {
-  var entityType = props.entityType,
-      depth = props.depth;
-
-  var allDescriptions = globalConfig.config.descriptions;
-  var _allDescriptions$enti = allDescriptions[entityType],
-      description = _allDescriptions$enti.description,
-      howToMake = _allDescriptions$enti.howToMake;
-
-
-  var hoverableDescription = [];
-  var hoverableHowToMake = [];
-  if (depth < 4) {
-    var splitDescription = description.split(' ');
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-      for (var _iterator = splitDescription[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var term = _step.value;
-
-        if (term == 'HOT_COAL') term = 'HOT COAL';
-        if (allDescriptions[term] != null) {
-          hoverableDescription.push(React.createElement(
-            'div',
-            {
-              style: {
-                display: 'inline'
-              },
-              key: "hoverDesc_" + entityType + "_" + term + depth,
-              className: 'displayChildOnHover'
-            },
-            React.createElement(Resource, { resource: term }),
-            React.createElement(HoverCard, { entityType: term, depth: depth + 1 })
-          ));
-          hoverableDescription.push(' ');
-        } else {
-          hoverableDescription.push(term + ' ');
-        }
-      }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
-      }
-    }
-
-    var splitHowToMake = [];
-    if (howToMake != null) {
-      splitHowToMake = howToMake.split(' ');
-    }
-    var _iteratorNormalCompletion2 = true;
-    var _didIteratorError2 = false;
-    var _iteratorError2 = undefined;
-
-    try {
-      for (var _iterator2 = splitHowToMake[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
-        var _term = _step2.value;
-
-        if (_term == 'HOT_COAL') _term = 'HOT COAL';
-        if (allDescriptions[_term] != null) {
-          hoverableHowToMake.push(React.createElement(
-            'div',
-            {
-              style: {
-                display: 'inline'
-              },
-              key: "hoverHowTo_" + entityType + "_" + _term + depth,
-              className: 'displayChildOnHover'
-            },
-            React.createElement(Resource, { resource: _term }),
-            React.createElement(HoverCard, { entityType: _term, depth: depth + 1 })
-          ));
-          hoverableHowToMake.push(' ');
-        } else {
-          hoverableHowToMake.push(_term + ' ');
-        }
-      }
-    } catch (err) {
-      _didIteratorError2 = true;
-      _iteratorError2 = err;
-    } finally {
-      try {
-        if (!_iteratorNormalCompletion2 && _iterator2.return) {
-          _iterator2.return();
-        }
-      } finally {
-        if (_didIteratorError2) {
-          throw _iteratorError2;
-        }
-      }
-    }
-  } else {
-    hoverableDescription = description;
-    hoverableHowToMake = howToMake;
-  }
-
-  return React.createElement(
-    'div',
-    {
-      className: 'hidden',
-      style: {
-        position: 'absolute',
-        top: 35,
-        left: 35,
-        width: 300,
-        zIndex: depth + 5
-      }
-    },
-    React.createElement(
-      InfoCard,
-      null,
-      React.createElement(
-        'div',
-        { style: { textAlign: 'center' } },
-        React.createElement(
-          'b',
-          null,
-          depth == 0 ? "Details" : entityType
-        )
-      ),
-      React.createElement(
-        'div',
-        null,
-        hoverableDescription
-      ),
-      howToMake != null ? React.createElement(
-        'div',
-        null,
-        React.createElement(
-          'b',
-          null,
-          'Made From: '
-        ),
-        hoverableHowToMake
-      ) : null
-    )
-  );
-}
-
-function Resource(props) {
-  var resource = props.resource;
-
-  if (resource == 'HOT COAL') {
-    resource = 'HOT_COAL';
-  }
-
-  var image = null;
-  switch (resource) {
-    case 'DIRT':
-    case 'STONE':
-    case 'COAL':
-    case 'HOT_COAL':
-    case 'IRON':
-    case 'STEEL':
-    case 'SULPHUR':
-    case 'ICE':
-    case 'URANIUM':
-      image = React.createElement(
-        'div',
-        {
-          style: {
-            display: 'inline-block',
-            position: 'relative',
-            overflow: 'hidden',
-            width: 16,
-            height: 16
-          }
-        },
-        React.createElement('img', {
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: -64
-          },
-          src: "./img/" + resource + ".png"
-        })
-      );
-      break;
-    case 'TURBINE':
-    case 'SOLAR_PANEL':
-      image = React.createElement('img', {
-        width: 16,
-        height: 16,
-        src: "./img/" + resource + ".png"
-      });
-      break;
-    case 'BASIC_TURRET':
-    case 'FAST_TURRET':
-    case 'MISSILE_TURRET':
-    case 'LASER_TURRET':
-      image = React.createElement('img', {
-        width: 16,
-        height: 16,
-        src: "./img/TURRET.png"
-      });
-      break;
-    case 'SAND':
-    case 'MOLTEN_SAND':
-    case 'MOLTEN_IRON':
-    case 'MOLTEN_STEEL':
-    case 'WATER':
-    case 'STEAM':
-    case 'SULPHUR_DIOXIDE':
-    case 'OIL':
-    case 'HOT_OIL':
-    case 'HEAT':
-    case 'COLD':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones[resource].color
-        }
-      });
-      break;
-    case 'POWER':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.SAND.color
-        }
-      });
-      break;
-    case 'FLUID':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.WATER.color
-        }
-      });
-      break;
-    case 'GAS':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          border: '1px solid black',
-          backgroundColor: globalConfig.pheromones.STEAM.color
-        }
-      });
-      break;
-    case 'SILICON':
-      image = React.createElement('div', {
-        style: {
-          display: 'inline-block',
-          width: 16,
-          height: 16,
-          backgroundColor: '#006400'
-        }
-      });
-      break;
-    case 'GLASS':
-      image = React.createElement(
-        'div',
-        {
-          style: {
-            display: 'inline-block',
-            position: 'relative',
-            overflow: 'hidden',
-            width: 16,
-            height: 16
-          }
-        },
-        React.createElement('img', {
-          style: {
-            position: 'absolute',
-            top: 0,
-            left: -64,
-            opacity: 0.7
-          },
-          src: "./img/STEEL.png"
-        })
-      );
-      break;
-  }
-
-  return React.createElement(
-    'div',
-    {
-      style: {
-        display: 'inline-block'
-      }
-    },
-    React.createElement(
-      'b',
-      null,
-      React.createElement(
-        'span',
-        { style: { color: 'steelblue' } },
-        resource
-      )
-    ),
-    React.createElement(
-      'div',
-      { style: {
-          display: 'inline-block',
-          marginLeft: 2,
-          verticalAlign: 'top'
-        }
-      },
-      image
-    )
-  );
-}
-
-module.exports = PlacementPalette;
-},{"../config":1,"../entities/registry":22,"../selectors/buildings":49,"../ui/Components/InfoCard.react":81,"react":146}],93:[function(require,module,exports){
-'use strict';
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
 
 var React = require('react');
-var AudioWidget = require('./Components/AudioWidget.react');
-var Button = require('./Components/Button.react');
-var Divider = require('./Components/Divider.react');
-var Modal = require('./Components/Modal.react');
-var QuitButton = require('../ui/components/QuitButton.react');
-var globalConfig = require('../config');
+var Button = require('./Button.react');
+var useState = React.useState,
+    useEffect = React.useEffect,
+    useMemo = React.useMemo;
 
-var _require = require('../utils/helpers'),
-    getDisplayTime = _require.getDisplayTime,
-    isElectron = _require.isElectron;
+/**
+ * Props:
+ *
+ * audioFiles, // array of {path, type} pairs
+ * isMuted, // optional boolean for outside control of this widget
+ * setIsMuted, // optional function called when this is toggled
+ * isShuffled, // optional boolean for whether audio should play in random order
+ * style, // optional object of css styles
+ *
+ */
 
-var InfoCard = require('../ui/components/InfoCard.react');
-var PlacementPalette = require('../ui/PlacementPalette.react');
-var memo = React.memo;
+var AudioWidget = function AudioWidget(props) {
+  var _useState = useState(!!props.isMuted),
+      _useState2 = _slicedToArray(_useState, 2),
+      isMuted = _useState2[0],
+      setIsMuted = _useState2[1];
 
-var _require2 = require('../entities/registry'),
-    Entities = _require2.Entities;
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      playIndex = _useState4[0],
+      setPlayIndex = _useState4[1];
 
-function TopBar(props) {
-  var dispatch = props.dispatch,
-      isExperimental = props.isExperimental,
-      modal = props.modal,
-      tickInterval = props.tickInterval,
-      canvasWidth = props.canvasWidth,
-      isMuted = props.isMuted,
-      totalPowerGenerated = props.totalPowerGenerated,
-      powerMargin = props.powerMargin,
-      totalPowerNeeded = props.totalPowerNeeded,
-      base = props.base,
-      placeType = props.placeType,
-      game = props.game;
+  var playOrder = useMemo(function () {
+    var initialOrder = props.audioFiles.map(function (a, i) {
+      return i;
+    });
+    if (props.isShuffled) {
+      // TODO: shuffle the playOrder array
+    }
+    return initialOrder;
+  }, [props.audioFiles]);
 
+  var widgetStyle = {
+    margin: 5,
+    borderRadius: 8,
+    left: 5
+  };
 
-  if (isExperimental && tickInterval == null) {
-    return null;
-  }
+  // player
+  var audioPlayer = useMemo(function () {
+    var a = new Audio(props.audioFiles[playIndex].path);
+    return a;
+  }, [playIndex, isMuted, props.audioFiles]);
 
-  var height = 100;
-  var topPadding = 8;
-  var leftPadding = canvasWidth / 2 - 100;
-  var powerStuff = React.createElement(
-    'div',
-    null,
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Generated: '
-      ),
-      (totalPowerGenerated || 0).toFixed(1)
-    ),
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Consumed: '
-      ),
-      (totalPowerNeeded || 0).toFixed(1)
-    ),
-    React.createElement(
-      'div',
-      null,
-      React.createElement(
-        'b',
-        null,
-        'Power Available: '
-      ),
-      React.createElement(
-        'span',
-        { style: { color: powerMargin > 0 ? 'green' : 'red' } },
-        (powerMargin || 0).toFixed(1)
-      )
-    )
-  );
+  useEffect(function () {
+    if (!isMuted) {
+      audioPlayer.addEventListener('loadeddata', function () {
+        audioPlayer.play();
+        setTimeout(function () {
+          return setPlayIndex((playIndex + 1) % props.audioFiles.length);
+        }, audioPlayer.duration * 1000);
+      });
+    }
+    return function () {
+      audioPlayer.pause();
+    };
+  }, [playIndex, isMuted, props.audioFiles, audioPlayer]);
 
   return React.createElement(
     'div',
     {
-      id: 'topBar',
-      style: {
-        position: 'absolute',
-        top: topPadding,
-        height: height,
-        width: '100%',
-        zIndex: 2,
-        textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff'
-      }
+      style: props.style ? props.style : widgetStyle
     },
-    React.createElement(
-      'div',
-      {
-        style: {
-          // float: 'left',
-          paddingLeft: 8,
-          display: 'inline-block',
-          color: 'black'
+    React.createElement(Button, {
+      label: isMuted ? 'Turn Music ON' : 'Turn Music OFF',
+      onClick: function onClick() {
+        audioPlayer.pause();
+        setIsMuted(!isMuted);
+        if (props.setIsMuted) {
+          props.setIsMuted(!isMuted);
         }
-      },
-      React.createElement(QuitButton, { isInGame: true, dispatch: dispatch }),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: 'Instructions',
-          onClick: function onClick() {
-            instructionsModal(dispatch);
-          }
-        })
-      ),
-      React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: tickInterval ? 'Pause' : 'Play',
-          disabled: modal != null,
-          onClick: function onClick() {
-            if (tickInterval != null) {
-              dispatch({ type: 'STOP_TICK' });
-            } else {
-              dispatch({ type: 'START_TICK' });
-            }
-          }
-        })
-      ),
-      game.difficulty == 'EASY' ? React.createElement(
-        'div',
-        null,
-        React.createElement(Button, {
-          label: game.pauseMissiles ? 'Send Missiles' : 'Pause Missiles',
-          onClick: function onClick() {
-            return dispatch({ type: 'PAUSE_MISSILES', pauseMissiles: !game.pauseMissiles });
-          }
-        })
-      ) : null
-    ),
-    React.createElement(
-      'div',
-      {
-        style: {
-          display: 'inline-block',
-          verticalAlign: 'top'
-        }
-      },
-      React.createElement(PlacementPalette, {
-        game: game,
-        dispatch: dispatch,
-        base: base,
-        placeType: placeType
-      })
-    ),
-    React.createElement(
-      'div',
-      {
-        style: {
-          // left: leftPadding,
-          width: 200,
-          marginLeft: 10,
-          display: 'inline-block'
-          // position: 'absolute',
-        }
-      },
-      powerStuff
-    ),
-    React.createElement(
-      'div',
-      {
-        style: {
-          width: 200,
-          marginLeft: 10,
-          fontSize: '1.5em',
-          display: 'inline-block'
-        }
-      },
-      React.createElement(
-        'b',
-        null,
-        'Missiles Survived'
-      ),
-      ': ',
-      game.missilesSurvived
-    )
-  );
-}
-
-function instructionsModal(dispatch) {
-  dispatch({ type: 'STOP_TICK' });
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyUp',
-    key: 'enter',
-    fn: function fn(s) {
-      return dismissModal(s.dispatch);
-    }
-  });
-  dispatch({
-    type: 'SET_MODAL',
-    modal: React.createElement(Modal, {
-      title: 'Instructions',
-      body: React.createElement(
-        'span',
-        { style: { textAlign: 'initial' } },
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'div',
-            { style: { textAlign: 'center' } },
-            React.createElement(
-              'b',
-              null,
-              'Controls:'
-            )
-          ),
-          React.createElement(
-            'div',
-            null,
-            'Arrow Keys: move screen'
-          ),
-          React.createElement(
-            'div',
-            null,
-            'Left Click: collect non-fluid resource'
-          ),
-          React.createElement(
-            'div',
-            null,
-            'Right Click: place selected resource or building'
-          ),
-          React.createElement(
-            'div',
-            null,
-            'NOTE: resources can only be collected/placed if there is a path to the base. A red cursor means collection/placement is blocked, green cursor means it is possible'
-          )
-        ),
-        React.createElement(
-          'div',
-          null,
-          React.createElement(
-            'div',
-            { style: { textAlign: 'center' } },
-            React.createElement(
-              'b',
-              null,
-              'Goal:'
-            )
-          ),
-          React.createElement(
-            'div',
-            null,
-            'Survive as long as you can!'
-          )
-        ),
-        React.createElement(Divider, { style: {
-            marginTop: 6,
-            marginBottom: 6
-          } }),
-        React.createElement(
-          'div',
-          null,
-          'Additional information about how resources interact can be displayed by hovering over each resource in the selector at the top of the screen'
-        )
-      ),
-      buttons: [{ label: 'Dismiss (Enter)', onClick: function onClick() {
-          dismissModal(dispatch);
-        } }]
+      }
     })
+  );
+};
+
+module.exports = AudioWidget;
+},{"./Button.react":79,"react":130}],79:[function(require,module,exports){
+arguments[4][65][0].apply(exports,arguments)
+},{"dup":65,"react":130}],80:[function(require,module,exports){
+arguments[4][66][0].apply(exports,arguments)
+},{"dup":66,"react":130}],81:[function(require,module,exports){
+arguments[4][67][0].apply(exports,arguments)
+},{"dup":67,"react":130}],82:[function(require,module,exports){
+arguments[4][68][0].apply(exports,arguments)
+},{"dup":68,"react":130}],83:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var React = require('react');
+
+var InfoCard = function InfoCard(props) {
+  var overrideStyle = props.overrideStyle || {};
+  var underrideStyle = props.underrideStyle || {};
+  return React.createElement(
+    'div',
+    {
+      style: _extends({}, underrideStyle, {
+        border: props.border != null ? props.border : '1px solid black',
+        backgroundColor: 'white',
+        opacity: props.opacity != null ? props.opacity : 1,
+        // width: 200,
+        // height: 148,
+        verticalAlign: 'top',
+        marginLeft: 4,
+        display: 'inline-block',
+        padding: 4
+      }, overrideStyle)
+    },
+    props.children
+  );
+};
+
+module.exports = InfoCard;
+},{"react":130}],84:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Button = require('./Button.react');
+
+var _require = require('../../utils/helpers'),
+    isMobile = _require.isMobile;
+
+function Modal(props) {
+  var content = props.content,
+      title = props.title,
+      body = props.body,
+      buttons = props.buttons;
+
+  var height = props.height ? props.height : 450;
+
+  // using 2 rects to properly position width and height
+  var rect = document.getElementById('container').getBoundingClientRect();
+  var canvasRect = null;
+  var canvas = document.getElementById('canvas');
+  if (canvas != null) {
+    canvasRect = canvas.getBoundingClientRect();
+  } else {
+    canvasRect = rect;
+  }
+
+  var buttonHTML = buttons.map(function (b) {
+    return React.createElement(Button, {
+      key: "b_" + b.label,
+      disabled: !!b.disabled,
+      label: b.label, onClick: b.onClick
+    });
   });
+
+  var width = props.width ? props.width : Math.min(rect.width * 0.8, 350);
+  return React.createElement(
+    'div',
+    {
+      style: {
+        position: 'absolute',
+        backgroundColor: 'whitesmoke',
+        border: '1px solid black',
+        padding: 4,
+        boxShadow: '2px 2px #666666',
+        borderRadius: 3,
+        color: '#46403a',
+        textAlign: 'center',
+        width: width,
+        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
+        left: (rect.width - width) / 2
+      }
+    },
+    React.createElement(
+      'h3',
+      null,
+      React.createElement(
+        'b',
+        null,
+        title
+      )
+    ),
+    body,
+    React.createElement(
+      'div',
+      {
+        style: {}
+      },
+      buttonHTML
+    )
+  );
 }
 
-function dismissModal(dispatch) {
-  dispatch({ type: 'DISMISS_MODAL' });
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyUp',
-    key: 'enter',
-    fn: function fn(s) {}
-  });
-  dispatch({ type: 'START_TICK' });
-}
-
-module.exports = TopBar;
-},{"../config":1,"../entities/registry":22,"../ui/PlacementPalette.react":92,"../ui/components/InfoCard.react":99,"../ui/components/QuitButton.react":102,"../utils/helpers":105,"./Components/AudioWidget.react":76,"./Components/Button.react":77,"./Components/Divider.react":79,"./Components/Modal.react":82,"react":146}],94:[function(require,module,exports){
-arguments[4][76][0].apply(exports,arguments)
-},{"./Button.react":95,"dup":76,"react":146}],95:[function(require,module,exports){
-arguments[4][77][0].apply(exports,arguments)
-},{"dup":77,"react":146}],96:[function(require,module,exports){
-arguments[4][78][0].apply(exports,arguments)
-},{"dup":78,"react":146}],97:[function(require,module,exports){
-arguments[4][79][0].apply(exports,arguments)
-},{"dup":79,"react":146}],98:[function(require,module,exports){
-arguments[4][80][0].apply(exports,arguments)
-},{"dup":80,"react":146}],99:[function(require,module,exports){
-arguments[4][81][0].apply(exports,arguments)
-},{"dup":81,"react":146}],100:[function(require,module,exports){
-arguments[4][82][0].apply(exports,arguments)
-},{"../../utils/helpers":105,"./Button.react":95,"dup":82,"react":146}],101:[function(require,module,exports){
-arguments[4][83][0].apply(exports,arguments)
-},{"dup":83,"react":146}],102:[function(require,module,exports){
+module.exports = Modal;
+},{"../../utils/helpers":89,"./Button.react":79,"react":130}],85:[function(require,module,exports){
+arguments[4][69][0].apply(exports,arguments)
+},{"dup":69,"react":130}],86:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -14539,9 +12857,9 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":105,"./Button.react":95,"./Modal.react":100,"react":146}],103:[function(require,module,exports){
-arguments[4][85][0].apply(exports,arguments)
-},{"./NumberField.react":101,"dup":85,"react":146}],104:[function(require,module,exports){
+},{"../../utils/helpers":89,"./Button.react":79,"./Modal.react":84,"react":130}],87:[function(require,module,exports){
+arguments[4][71][0].apply(exports,arguments)
+},{"./NumberField.react":85,"dup":71,"react":130}],88:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -14677,7 +12995,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":105,"../utils/vectors":108}],105:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":89,"../utils/vectors":92}],89:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -14860,7 +13178,7 @@ module.exports = {
   forEachObj: forEachObj,
   filterObj: filterObj
 };
-},{"./vectors":108}],106:[function(require,module,exports){
+},{"./vectors":92}],90:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -14985,7 +13303,7 @@ var clearOutPocket = function clearOutPocket(level, rect) {
 };
 
 module.exports = { getProceduralLevel: getProceduralLevel };
-},{"../config":1,"../utils/stochastic":107}],107:[function(require,module,exports){
+},{"../config":1,"../utils/stochastic":91}],91:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -15040,7 +13358,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],108:[function(require,module,exports){
+},{}],92:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -15239,7 +13557,7 @@ module.exports = {
   rotate: rotate,
   abs: abs
 };
-},{}],109:[function(require,module,exports){
+},{}],93:[function(require,module,exports){
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -15257,7 +13575,7 @@ function _defineProperty(obj, key, value) {
 
 module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],110:[function(require,module,exports){
+},{}],94:[function(require,module,exports){
 var defineProperty = require("./defineProperty.js");
 
 function ownKeys(object, enumerableOnly) {
@@ -15300,9 +13618,9 @@ function _objectSpread2(target) {
 
 module.exports = _objectSpread2;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"./defineProperty.js":109}],111:[function(require,module,exports){
+},{"./defineProperty.js":93}],95:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":113}],112:[function(require,module,exports){
+},{"./lib/axios":97}],96:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15516,7 +13834,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../cancel/Cancel":114,"../core/buildFullPath":119,"../core/createError":120,"../defaults":126,"./../core/settle":124,"./../helpers/buildURL":129,"./../helpers/cookies":131,"./../helpers/isURLSameOrigin":134,"./../helpers/parseHeaders":136,"./../utils":139}],113:[function(require,module,exports){
+},{"../cancel/Cancel":98,"../core/buildFullPath":103,"../core/createError":104,"../defaults":110,"./../core/settle":108,"./../helpers/buildURL":113,"./../helpers/cookies":115,"./../helpers/isURLSameOrigin":118,"./../helpers/parseHeaders":120,"./../utils":123}],97:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -15575,7 +13893,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":114,"./cancel/CancelToken":115,"./cancel/isCancel":116,"./core/Axios":117,"./core/mergeConfig":123,"./defaults":126,"./env/data":127,"./helpers/bind":128,"./helpers/isAxiosError":133,"./helpers/spread":137,"./utils":139}],114:[function(require,module,exports){
+},{"./cancel/Cancel":98,"./cancel/CancelToken":99,"./cancel/isCancel":100,"./core/Axios":101,"./core/mergeConfig":107,"./defaults":110,"./env/data":111,"./helpers/bind":112,"./helpers/isAxiosError":117,"./helpers/spread":121,"./utils":123}],98:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15596,7 +13914,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],115:[function(require,module,exports){
+},{}],99:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -15717,14 +14035,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":114}],116:[function(require,module,exports){
+},{"./Cancel":98}],100:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],117:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15874,7 +14192,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":129,"../helpers/validator":138,"./../utils":139,"./InterceptorManager":118,"./dispatchRequest":121,"./mergeConfig":123}],118:[function(require,module,exports){
+},{"../helpers/buildURL":113,"../helpers/validator":122,"./../utils":123,"./InterceptorManager":102,"./dispatchRequest":105,"./mergeConfig":107}],102:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15930,7 +14248,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":139}],119:[function(require,module,exports){
+},{"./../utils":123}],103:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -15952,7 +14270,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":130,"../helpers/isAbsoluteURL":132}],120:[function(require,module,exports){
+},{"../helpers/combineURLs":114,"../helpers/isAbsoluteURL":116}],104:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -15972,7 +14290,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":122}],121:[function(require,module,exports){
+},{"./enhanceError":106}],105:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16061,7 +14379,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/Cancel":114,"../cancel/isCancel":116,"../defaults":126,"./../utils":139,"./transformData":125}],122:[function(require,module,exports){
+},{"../cancel/Cancel":98,"../cancel/isCancel":100,"../defaults":110,"./../utils":123,"./transformData":109}],106:[function(require,module,exports){
 'use strict';
 
 /**
@@ -16106,7 +14424,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],123:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -16207,7 +14525,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":139}],124:[function(require,module,exports){
+},{"../utils":123}],108:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -16234,7 +14552,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":120}],125:[function(require,module,exports){
+},{"./createError":104}],109:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16258,7 +14576,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../defaults":126,"./../utils":139}],126:[function(require,module,exports){
+},{"./../defaults":110,"./../utils":123}],110:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -16396,11 +14714,11 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":112,"./adapters/xhr":112,"./core/enhanceError":122,"./helpers/normalizeHeaderName":135,"./utils":139,"_process":154}],127:[function(require,module,exports){
+},{"./adapters/http":96,"./adapters/xhr":96,"./core/enhanceError":106,"./helpers/normalizeHeaderName":119,"./utils":123,"_process":138}],111:[function(require,module,exports){
 module.exports = {
   "version": "0.24.0"
 };
-},{}],128:[function(require,module,exports){
+},{}],112:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -16413,7 +14731,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],129:[function(require,module,exports){
+},{}],113:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16485,7 +14803,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":139}],130:[function(require,module,exports){
+},{"./../utils":123}],114:[function(require,module,exports){
 'use strict';
 
 /**
@@ -16501,7 +14819,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],131:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16556,7 +14874,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":139}],132:[function(require,module,exports){
+},{"./../utils":123}],116:[function(require,module,exports){
 'use strict';
 
 /**
@@ -16572,7 +14890,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],133:[function(require,module,exports){
+},{}],117:[function(require,module,exports){
 'use strict';
 
 /**
@@ -16585,7 +14903,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],134:[function(require,module,exports){
+},{}],118:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16655,7 +14973,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":139}],135:[function(require,module,exports){
+},{"./../utils":123}],119:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -16669,7 +14987,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":139}],136:[function(require,module,exports){
+},{"../utils":123}],120:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -16724,7 +15042,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":139}],137:[function(require,module,exports){
+},{"./../utils":123}],121:[function(require,module,exports){
 'use strict';
 
 /**
@@ -16753,7 +15071,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],138:[function(require,module,exports){
+},{}],122:[function(require,module,exports){
 'use strict';
 
 var VERSION = require('../env/data').version;
@@ -16837,7 +15155,7 @@ module.exports = {
   validators: validators
 };
 
-},{"../env/data":127}],139:[function(require,module,exports){
+},{"../env/data":111}],123:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -17188,7 +15506,7 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":128}],140:[function(require,module,exports){
+},{"./helpers/bind":112}],124:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -17280,7 +15598,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],141:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react-dom.development.js
@@ -43546,7 +41864,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":154,"object-assign":140,"react":146,"scheduler":152,"scheduler/tracing":153}],142:[function(require,module,exports){
+},{"_process":138,"object-assign":124,"react":130,"scheduler":136,"scheduler/tracing":137}],126:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -43845,7 +42163,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":140,"react":146,"scheduler":152}],143:[function(require,module,exports){
+},{"object-assign":124,"react":130,"scheduler":136}],127:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -43887,7 +42205,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":141,"./cjs/react-dom.production.min.js":142,"_process":154}],144:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":125,"./cjs/react-dom.production.min.js":126,"_process":138}],128:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react.development.js
@@ -46224,7 +44542,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":154,"object-assign":140}],145:[function(require,module,exports){
+},{"_process":138,"object-assign":124}],129:[function(require,module,exports){
 /** @license React v17.0.2
  * react.production.min.js
  *
@@ -46249,7 +44567,7 @@ key:d,ref:k,props:e,_owner:h}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:v,_payload:{_status:-1,_result:a},_init:Q}};exports.memo=function(a,b){return{$$typeof:u,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return S().useCallback(a,b)};exports.useContext=function(a,b){return S().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return S().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return S().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.2";
 
-},{"object-assign":140}],146:[function(require,module,exports){
+},{"object-assign":124}],130:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -46260,7 +44578,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":144,"./cjs/react.production.min.js":145,"_process":154}],147:[function(require,module,exports){
+},{"./cjs/react.development.js":128,"./cjs/react.production.min.js":129,"_process":138}],131:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -46961,7 +45279,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"@babel/runtime/helpers/objectSpread2":110,"_process":154}],148:[function(require,module,exports){
+},{"@babel/runtime/helpers/objectSpread2":94,"_process":138}],132:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -47312,7 +45630,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":154}],149:[function(require,module,exports){
+},{"_process":138}],133:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -47323,7 +45641,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],150:[function(require,module,exports){
+},{}],134:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -47973,7 +46291,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":154}],151:[function(require,module,exports){
+},{"_process":138}],135:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -47995,7 +46313,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],152:[function(require,module,exports){
+},{}],136:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -48006,7 +46324,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":150,"./cjs/scheduler.production.min.js":151,"_process":154}],153:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":134,"./cjs/scheduler.production.min.js":135,"_process":138}],137:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -48017,7 +46335,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":148,"./cjs/scheduler-tracing.production.min.js":149,"_process":154}],154:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":132,"./cjs/scheduler-tracing.production.min.js":133,"_process":138}],138:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -48203,4 +46521,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[30]);
+},{}]},{},[18]);

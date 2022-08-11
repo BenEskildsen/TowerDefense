@@ -2,20 +2,33 @@
 - - - - - - - FIX - - - - - - - -
 
 - - - - - - GAME MECHANICS - - - - - -
-  - level
-    - base in the center
   - monster entity
-    - goes towards base
-    - attacks things when it can't reach the base
     - monsterAttackSystem spawns waves of monsters
   - turrets
     - shoot at monsters
   - UI
     - place turrets, dirt, stone
+    - get healthbar to render for turret and base and dirt and stone
+  - game
+    - game over when base destroyed
+    - get points for killing monsters
   - economy
     - money-making tower
+    - make sure monsters attack the tower
     - costs money to place buildings
+  - level
+    - surrounded by walls at first?
+
+
+- - - - - - POLISH - - - - - -
+  - Remove WASD and scroll (add hotkeys for pause, etc)
+  - use same sprite loading system as SidewalkEmpire
+  - Remove main menu
+  - Reset should pass through lobby again
+  - switch to fullscreen canvas component
+  - heroku app
 
 
 - - - - - - STRETCH - - - - - -
+  - have dead beetle bodies that slowly fade
   - detect sideways screen and rotate grid rendering

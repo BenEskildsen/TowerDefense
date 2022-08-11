@@ -10,6 +10,7 @@ const {
   queueAction, stackAction, cancelAction,
 } = require('../simulation/actionQueue');
 const {getMaxFrameOffset} = require('../selectors/sprites');
+const {getEntityPositions} = require('../utils/gridHelpers');
 const {
   getPositionsInFront, getPositionsBehind, isFacing,
   canDoMove,
@@ -26,6 +27,10 @@ const {
 const {triggerExplosion} = require('../simulation/explosiveOperations');
 const {dealDamageToEntity} = require('../simulation/miscOperations');
 const {Entities} = require('../entities/registry');
+const {
+  areNeighbors, getNeighborPositions,
+  getNeighborEntities
+} = require('../selectors/neighbors');
 
 
 const entityStartCurrentAction = (
@@ -68,6 +73,9 @@ const entityStartCurrentAction = (
       break;
     case 'DIE':
       entityDie(game, entity);
+      break;
+    case 'BITE':
+      entityFight(game, entity, curAction.payload);
       break;
     case 'SHOOT':
       entityShoot(game, entity, curAction.payload);
@@ -186,6 +194,43 @@ const entityDie = (game: Game, entity: Entity): void => {
   }
 
   removeEntity(game, entity);
+};
+
+const entityFight = (game: Game, entity: Entity, target: ?Entity): void => {
+  if (!areNeighbors(game, entity, target)) return;
+  if (target.type.slice(0, 4) === 'DEAD') return;
+  if (target.position == null) return;
+
+  let isFacingAtAll = false;
+  getEntityPositions(game, target)
+    .forEach(pos => {
+      getPositionsInFront(game, entity).forEach(fp => {
+        if (equals(pos, fp)) {
+          isFacingAtAll = true;
+        }
+      })
+    });
+  if (!isFacingAtAll) {
+    let nextTheta = vectorTheta(subtract(entity.position, target.position));
+    getEntityPositions(game, target)
+      .forEach(pos => {
+        getNeighborPositions(game, entity).forEach(fp => {
+          if (equals(pos, fp)) {
+            nextTheta = vectorTheta(subtract(entity.position, fp));
+          }
+        })
+      });
+    // HACK: isFacing doesn't quite working for some diagonal directions,
+    // so if you're already facing the direction you should be, then just let
+    // the attack go through
+    if (!closeTo(entity.theta, nextTheta)) {
+      stackAction(game, entity, makeAction(game, entity, 'TURN', nextTheta));
+      entityStartCurrentAction(game, entity);
+      return;
+    }
+  }
+
+  dealDamageToEntity(game, target, entity.damage);
 };
 
 const entityMan = (game: Game, entity: Entity, mannedEntity: Entity): void => {
