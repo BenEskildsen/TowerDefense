@@ -538,9 +538,6 @@ var config = {
   width: 1,
   height: 1,
   damage: 10,
-  thetaAccel: 0.00005,
-  minTheta: 0,
-  maxTheta: 2 * Math.PI,
   maxThetaSpeed: 0.04,
 
   // action overrides
@@ -572,7 +569,7 @@ var make = function make(game, position, playerID, projectileType, fireRate, nam
     name: name != null ? name : 'Basic Turret',
 
     // angle of the turret
-    theta: theta != null ? theta : config.minTheta,
+    theta: theta != null ? theta : 0,
     thetaSpeed: 0,
     thetaAccel: 0,
 
@@ -3160,6 +3157,7 @@ var updateTowers = function updateTowers(game) {
             possibleTargets.push(monsterID);
           }
         }
+        // TODO: sort targets by theta difference
       } catch (err) {
         _didIteratorError2 = true;
         _iteratorError2 = err;
@@ -3178,8 +3176,8 @@ var updateTowers = function updateTowers(game) {
       tower.targetID = oneOf(possibleTargets);
     }
 
-    // aim at target
-    var targetTheta = config.minTheta;
+    // get theta to target
+    var targetTheta = 0;
     if (tower.targetID != null) {
       var target = game.entities[tower.targetID];
       // clear dead target
@@ -3188,33 +3186,18 @@ var updateTowers = function updateTowers(game) {
         // else aim at living target
       } else {
         var targetPos = game.entities[tower.targetID].position;
-        targetTheta = vectorTheta(subtract(targetPos, tower.position)) % (Math.PI / 2);
-        if (targetPos.y >= tower.position.y) {
-          targetTheta = config.minTheta;
-        }
+        targetTheta = vectorTheta(subtract(tower.position, targetPos));
       }
     }
 
-    // treat missile turrets as a special case
-    if (tower.type == 'MISSILE_TURRET') {
-      tower.thetaAccel = 0;
-      tower.theta = clamp(targetTheta, config.minTheta, config.maxTheta);
-    } else if (closeTo(tower.theta, targetTheta)) {
-      tower.thetaAccel /= -2;
+    if (closeTo(tower.theta, targetTheta)) {
+      tower.theta = targetTheta;
     } else if (tower.theta < targetTheta) {
-      tower.thetaAccel = config.thetaAccel;
+      tower.thetaSpeed = config.maxThetaSpeed;
     } else if (tower.theta > targetTheta) {
-      tower.thetaAccel = -1 * config.thetaAccel;
+      tower.thetaSpeed = -1 * config.maxThetaSpeed;
     }
-    tower.thetaSpeed += tower.thetaAccel;
-    tower.thetaSpeed = clamp(tower.thetaSpeed, -config.maxThetaSpeed, config.maxThetaSpeed);
     tower.theta += tower.thetaSpeed;
-    var clamped = clamp(tower.theta, config.minTheta, config.maxTheta);
-    if (!closeTo(clamped, tower.theta)) {
-      tower.thetaSpeed = 0;
-      tower.thetaAccel = 0;
-    }
-    tower.theta = clamped;
 
     // shoot at target
     if (tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT')) {

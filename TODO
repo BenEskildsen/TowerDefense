@@ -4,8 +4,7 @@
 - - - - - - GAME MECHANICS - - - - - -
   - monster entity
     - monsterAttackSystem spawns waves of monsters
-  - turrets
-    - shoot at monsters
+    - pass-through pheromone to continue to attract monsters
   - UI
     - place turrets, dirt, stone
     - get healthbar to render for turret and base and dirt and stone
@@ -21,6 +20,9 @@
     - costs money to place buildings
   - level
     - surrounded by walls at first?
+  - turrets
+    - only shoot when aimed at target
+    - make the smaller turn towards target
 
 
 - - - - - - POLISH - - - - - -

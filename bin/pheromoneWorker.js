@@ -538,9 +538,6 @@ var config = {
   width: 1,
   height: 1,
   damage: 10,
-  thetaAccel: 0.00005,
-  minTheta: 0,
-  maxTheta: 2 * Math.PI,
   maxThetaSpeed: 0.04,
 
   // action overrides
@@ -572,7 +569,7 @@ var make = function make(game, position, playerID, projectileType, fireRate, nam
     name: name != null ? name : 'Basic Turret',
 
     // angle of the turret
-    theta: theta != null ? theta : config.minTheta,
+    theta: theta != null ? theta : 0,
     thetaSpeed: 0,
     thetaAccel: 0,
 

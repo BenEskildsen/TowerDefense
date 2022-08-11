@@ -305,11 +305,12 @@ const updateTowers = (game): void => {
           possibleTargets.push(monsterID);
         }
       }
+      // TODO: sort targets by theta difference
       tower.targetID = oneOf(possibleTargets);
     }
 
-    // aim at target
-    let targetTheta = config.minTheta;
+    // get theta to target
+    let targetTheta = 0;
     if (tower.targetID != null) {
       const target = game.entities[tower.targetID];
       // clear dead target
@@ -318,36 +319,23 @@ const updateTowers = (game): void => {
       // else aim at living target
       } else {
         const targetPos = game.entities[tower.targetID].position;
-        targetTheta = vectorTheta(subtract(targetPos, tower.position)) % (Math.PI / 2);
-        if (targetPos.y >= tower.position.y) {
-          targetTheta = config.minTheta;
-        }
+        targetTheta = vectorTheta(subtract(tower.position, targetPos));
       }
     }
 
-    // treat missile turrets as a special case
-    if (tower.type == 'MISSILE_TURRET') {
-      tower.thetaAccel = 0;
-      tower.theta = clamp(targetTheta, config.minTheta, config.maxTheta);
-    } else if (closeTo(tower.theta, targetTheta)) {
-      tower.thetaAccel /= -2;
+    if (closeTo(tower.theta, targetTheta)) {
+      tower.theta = targetTheta;
     } else if (tower.theta < targetTheta) {
-      tower.thetaAccel = config.thetaAccel;
+      tower.thetaSpeed = config.maxThetaSpeed;
     } else if (tower.theta > targetTheta) {
-      tower.thetaAccel = -1 * config.thetaAccel;
+      tower.thetaSpeed= -1 * config.maxThetaSpeed;
     }
-    tower.thetaSpeed += tower.thetaAccel;
-    tower.thetaSpeed = clamp(tower.thetaSpeed, -config.maxThetaSpeed, config.maxThetaSpeed);
     tower.theta += tower.thetaSpeed;
-    const clamped = clamp(tower.theta, config.minTheta, config.maxTheta);
-    if (!closeTo(clamped, tower.theta)) {
-      tower.thetaSpeed = 0;
-      tower.thetaAccel = 0;
-    }
-    tower.theta = clamped;
 
     // shoot at target
-    if (tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT')) {
+    if (
+      tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT')
+    ) {
       if (tower.needsCooldown) {
         tower.shotsSinceCooldown += 1;
         if (tower.shotsSinceCooldown > tower.shotsTillCooldown) {
