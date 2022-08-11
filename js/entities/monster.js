@@ -23,7 +23,7 @@ const config = {
     'FOOD', 'DIRT', 'AGENT',
     'STONE', 'DOODAD', 'WORM',
     'TOKEN', 'ANT',
-    'TURRET', 'MONSTER',
+    'TURRET', 'MONSTER', 'FARM',
     'STEEL', 'BASE',
   ],
 

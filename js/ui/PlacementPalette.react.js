@@ -47,7 +47,7 @@ function PlaceBuildingCard(props) {
   return (
     <div
       style={{
-        display: 'inline-block',
+        // display: 'inline-block',
         position: 'relative',
       }}
       onClick={() => dispatch({type: 'SET_PLACE_TYPE', placeType: entityType})}

@@ -115,6 +115,7 @@ const doTick = (game: Game): Game => {
   updateTicker(game);
   updatePheromoneEmitters(game);
   updateTowers(game);
+  updateFarms(game);
   updateBases(game);
   updateBallistics(game);
   updateExplosives(game);
@@ -380,6 +381,14 @@ const updateBases = (game: Game): void => {
     const base = game.entities[id];
   }
 };
+
+const updateFarms = (game: Game): void => {
+  for (const id of game.FARM) {
+    const farm = game.entities[id];
+    farm.theta += farm.maxThetaSpeed;
+    farm.theta = farm.theta % (2 * Math.PI);
+  }
+}
 
 //////////////////////////////////////////////////////////////////////////
 // Move controlledEntity/View

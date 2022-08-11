@@ -693,7 +693,8 @@ function createEntities(game, dispatch, editor, rect): void {
       break;
     }
     case 'LASER_TURRET':
-    case 'BASIC_TURRET':
+    case 'TURRET':
+    case 'FARM':
     case 'MISSILE_TURRET':
       args = [editor.playerID];
       break;

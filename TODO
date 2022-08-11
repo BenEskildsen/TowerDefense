@@ -1,32 +1,27 @@
 
 - - - - - - - FIX - - - - - - - -
 
+
 - - - - - - GAME MECHANICS - - - - - -
-  - monster entity
-    - monsterAttackSystem spawns waves of monsters
   - UI
     - get healthbar to render for turret and base and dirt and stone
       - maxHP
       - render healthbars for non-agents
       - render location
-    - display score/num enemies killed
-  - game
-    - get points for killing monsters
-  - economy
-    - money-making tower
-    - make sure monsters attack the tower
-    - costs money to place buildings
-  - level
-    - surrounded by walls at first?
   - turrets
     - only shoot when aimed at target
     - make the smaller turn towards target
 
 
+- - - - - - - PLAYTESTING - - - - - - - -
+  - any monsters attacking base need to be targeted first
+  - pacing kinda weird: what to do while waiting for kills?
+    cheaper dirt?
+
+
 - - - - - - POLISH - - - - - -
   - UI
     - nicer cards for buildings
-    - allow clicking behind them
   - make sure touch events work like in SidewalkEmpire
   - Remove WASD and scroll (add hotkeys for pause, etc)
   - use same sprite loading system as SidewalkEmpire

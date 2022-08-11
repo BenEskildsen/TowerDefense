@@ -22,8 +22,9 @@ const Entities = {
 
   AGENT: require('./agent.js'),
 
-  BASIC_TURRET: require('./basicTurret.js'),
+  TURRET: require('./basicTurret.js'),
   FAST_TURRET: require('./turret.js'),
+  FARM: require('./farm.js'),
 
   DYNAMITE: require('./dynamite.js'),
   NUKE: require('./nuke.js'),

@@ -43,7 +43,7 @@ const make = (
     }
   }
   return {
-    ...makeEntity('BASIC_TURRET', position, config.width, config.height),
+    ...makeEntity('TURRET', position, config.width, config.height),
     ...configCopy,
     playerID,
 

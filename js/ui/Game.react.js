@@ -122,10 +122,6 @@ function Game(props: Props): React.Node {
       />
       <Ticker ticker={game.ticker} />
       <MiniTicker miniTicker={game.miniTicker} />
-      <BottomBar dispatch={dispatch}
-        game={game}
-        mousePos={game.mouse.curPos}
-      />
     </div>
   );
 }

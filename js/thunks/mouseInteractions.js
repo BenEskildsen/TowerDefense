@@ -47,7 +47,6 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
   // if (!state.game.mouse.isRightDown) return;
 
 
-  console.log("in handle place");
   // don't interact with the same position twice
   if (
     !ignorePrevPos &&
@@ -63,7 +62,6 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
   // }
 
   let entityType = game.placeType;
-  console.log("placeType", entityType);
   // can't place if there's no entity type selected
   if (entityType == null) return;
 
@@ -76,7 +74,6 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
   if (config.cost && !canAffordBuilding(game, config.cost)) {
     return;
   }
-  console.log("can afford");
 
   // can't place on top of other resources
   const occupied = lookupInGrid(game.grid, gridPos)
@@ -94,7 +91,6 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
     });
     entity = Entities[entityType].make(game, gridPos, game.playerID);
   }
-  console.log("want to place", entity);
 
   if (entity != null) {
     if (game.placeType == 'HOT COAL') {

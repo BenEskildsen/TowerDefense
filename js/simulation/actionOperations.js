@@ -155,7 +155,8 @@ const entityShoot = (game: Game, entity: Entity, payload) => {
   switch (projectileType) {
     case 'LASER':
     case 'BULLET': {
-      const position = round(add(makeVector(theta, -2), entity.position));
+      // const position = round(add(makeVector(theta, -2), entity.position));
+      const position = {...entity.position};
       projectile = Entities[projectileType].make(
         game, position, entity.playerID, theta + Math.PI,
       );
@@ -191,6 +192,11 @@ const entityDie = (game: Game, entity: Entity): void => {
 
   if (entity.holding != null) {
     putdownEntity(game, entity.holding, entity.position);
+  }
+
+  if (entity.type == 'MONSTER') {
+    game.money += 1 + game.FARM.length;
+    game.score += 1;
   }
 
   removeEntity(game, entity);

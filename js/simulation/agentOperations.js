@@ -255,14 +255,13 @@ const agentDecideAction = (game: Game, agent: Agent): void => {
 
 const monsterDecideAction = (game, ant) => {
   // FIGHT
-
   const hasPathToColony = getPheromoneAtPosition(game, ant.position, 'COLONY', game.playerID);
   const targets = getNeighborEntities(game, ant, true)
     .filter(e => {
       if (e.position == null) return false;
       if (isDiagonalMove(ant.position, e.position)) return false;
       return (
-        e.type == 'BASE' || e.type == 'BASIC_TURRET' ||
+        e.type == 'BASE' || e.type == 'TURRET' || e.type == 'FARM' ||
         // only attack dirt/stone when path is blocked
         (!hasPathToColony && (e.type == 'DIRT' || e.type == 'STONE'))
       );

@@ -53,7 +53,8 @@ const initBaseState = (
     numPlayers,
 
     // tower-defense-specific
-    money: 50,
+    money: 150,
+    score: 0,
 
     // for tracking difficulty and missiles
     difficulty: 'NORMAL',

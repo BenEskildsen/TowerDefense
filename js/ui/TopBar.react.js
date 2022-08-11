@@ -22,16 +22,13 @@ function TopBar(props) {
     tickInterval,
   } = props;
 
+  if (base == null) return null;
+
   if (isExperimental && tickInterval == null) return null;
 
   const height = 100;
   const topPadding = 8;
   const leftPadding = 4;
-  let powerStuff = (
-    <div>
-    Money: {game.money}
-    </div>
-  );
 
 
   return (
@@ -41,7 +38,6 @@ function TopBar(props) {
         position: 'absolute',
         top: topPadding,
         height,
-        width: '100%',
         zIndex: 2,
         textShadow: '-1px -1px 0 #FFF, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff',
       }}
@@ -60,24 +56,17 @@ function TopBar(props) {
       </div>
       <div
         style={{
+          pointerEvents: 'none',
           // left: leftPadding,
-          width: 200,
+          // width: 50,
           marginLeft: 10,
           display: 'inline-block',
           // position: 'absolute',
         }}
       >
-        {powerStuff}
-      </div>
-      <div
-        style={{
-          width: 200,
-          marginLeft: 10,
-          fontSize: '1.5em',
-          display: 'inline-block',
-        }}
-      >
-        <b>Missiles Survived</b>: {0}
+        <div><b>Monsters Killed:</b>: {game.score}</div>
+        <div><b>Money:</b> {game.money}</div>
+        <div><b>Base HP:</b> {base.hp}/{base.maxHP}</div>
       </div>
     </div>
   );
