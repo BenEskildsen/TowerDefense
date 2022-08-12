@@ -8790,7 +8790,7 @@ var initGameOverSystem = function initGameOverSystem(store) {
   var dispatch = store.dispatch;
 
   var time = -1;
-  store.subscribe(function () {
+  return store.subscribe(function () {
     var state = store.getState();
     var game = state.game;
 
@@ -9057,7 +9057,7 @@ var initMonsterAttackSystem = function initMonsterAttackSystem(store) {
   var dispatch = store.dispatch;
 
   var time = -1;
-  store.subscribe(function () {
+  return store.subscribe(function () {
     var state = store.getState();
     var game = state.game;
 
@@ -10770,12 +10770,16 @@ function Game(props) {
   useEffect(function () {
     initKeyboardControlsSystem(store);
     // initSpriteSheetSystem(store);
-    initGameOverSystem(store);
+    var unSubGameOver = initGameOverSystem(store);
     initPheromoneWorkerSystem(store);
-    initMonsterAttackSystem(store);
+    var unSubMonsterAttacks = initMonsterAttackSystem(store);
     // initRainSystem(store);
     // initUpgradeSystem(store);
     registerHotkeys(dispatch);
+    return function () {
+      unSubGameOver();
+      unSubMonsterAttacks();
+    };
   }, [gameID]);
 
   useEffect(function () {
