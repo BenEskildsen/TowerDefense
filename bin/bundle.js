@@ -1147,7 +1147,7 @@ var config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: 5,
+    COLONY: 50,
     PASS_THROUGH_COLONY: 5
   },
   RETRIEVE: {
@@ -9071,7 +9071,7 @@ var initMonsterAttackSystem = function initMonsterAttackSystem(store) {
 
     var gameSeconds = game.totalGameTime / 1000;
 
-    var spawnRate = Math.max(5, Math.round(100 - game.score / 2));
+    var spawnRate = Math.max(5, Math.round(100 - game.score));
 
     if (game.time > 0 && game.time % spawnRate == 0) {
       var position = { x: 0, y: 0 };
@@ -13218,6 +13218,8 @@ function TopBar(props) {
       tickInterval = props.tickInterval;
 
 
+  if (base == null) return null;
+
   if (isExperimental && tickInterval == null) return null;
 
   var height = 100;
@@ -13270,7 +13272,7 @@ function TopBar(props) {
           null,
           'Monsters Killed:'
         ),
-        ': ',
+        ' ',
         game.score
       ),
       React.createElement(

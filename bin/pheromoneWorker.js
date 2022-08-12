@@ -1147,7 +1147,7 @@ var config = {
     ALERT: 500,
     FOOD: 100,
     FOLLOW: 2000,
-    COLONY: 5,
+    COLONY: 50,
     PASS_THROUGH_COLONY: 5
   },
   RETRIEVE: {

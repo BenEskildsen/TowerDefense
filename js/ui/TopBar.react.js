@@ -64,7 +64,7 @@ function TopBar(props) {
           // position: 'absolute',
         }}
       >
-        <div><b>Monsters Killed:</b>: {game.score}</div>
+        <div><b>Monsters Killed:</b> {game.score}</div>
         <div><b>Money:</b> {game.money}</div>
         <div><b>Base HP:</b> {base.hp}/{base.maxHP}</div>
       </div>
