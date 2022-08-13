@@ -11,6 +11,7 @@ const config = {
   PHEROMONE_EMITTER: true,
   pheromoneType: 'COLONY',
   AGENT: true,
+  isExplosionImmune: true,
 
   blockingTypes: [
     'FOOD', 'DIRT', 'AGENT',

@@ -12,6 +12,8 @@ const config = {
   damage: 10,
   maxThetaSpeed: 0.04,
 
+  isExplosionImmune: true,
+
   // action overrides
   DIE: {
     duration: 2,

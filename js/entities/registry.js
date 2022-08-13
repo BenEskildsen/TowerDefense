@@ -25,6 +25,7 @@ const Entities = {
   TURRET: require('./basicTurret.js'),
   FAST_TURRET: require('./turret.js'),
   FARM: require('./farm.js'),
+  SPLASH_TURRET: require('./splashTurret.js'),
 
   DYNAMITE: require('./dynamite.js'),
   NUKE: require('./nuke.js'),

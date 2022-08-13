@@ -16,7 +16,7 @@ const config = {
   hp: 10,
   width: 1,
   height: 1,
-  explosionRadius: 5,
+  explosionRadius: 6,
   damage: 40,
   timer: 1,
   age: 0,

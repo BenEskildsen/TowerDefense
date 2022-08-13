@@ -36,7 +36,10 @@ const {
   entityStartCurrentAction,
 } = require('../simulation/actionOperations');
 const {agentDecideAction} = require('../simulation/agentOperations');
-const {getFreeNeighborPositions, areNeighbors} = require('../selectors/neighbors');
+const {
+  getFreeNeighborPositions, areNeighbors,
+  getNeighborEntities,
+} = require('../selectors/neighbors');
 const {
   getPheromoneAtPosition, getTemperature,
 } = require('../selectors/pheromones');
@@ -306,8 +309,22 @@ const updateTowers = (game): void => {
           possibleTargets.push(monsterID);
         }
       }
-      // TODO: sort targets by theta difference
-      tower.targetID = oneOf(possibleTargets);
+
+      const highPriTargets = [];
+      const baseNeighbors =
+        getNeighborEntities(game, game.entities[game.BASE[0]], true /*external*/)
+          .concat(getNeighborEntities(game, tower, true /*external*/));
+      for (const entity of baseNeighbors) {
+        if (entity.type == 'MONSTER') {
+          highPriTargets.push(entity.id);
+        }
+      }
+
+      if (highPriTargets.length > 0) {
+        tower.targetID = oneOf(highPriTargets);
+      } else {
+        tower.targetID = oneOf(possibleTargets);
+      }
     }
 
     // get theta to target

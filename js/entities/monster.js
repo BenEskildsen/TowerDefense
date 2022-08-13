@@ -24,6 +24,7 @@ const config = {
     'STONE', 'DOODAD', 'WORM',
     'TOKEN', 'ANT',
     'TURRET', 'MONSTER', 'FARM',
+    'SPLASH_TURRET',
     'STEEL', 'BASE',
   ],
 

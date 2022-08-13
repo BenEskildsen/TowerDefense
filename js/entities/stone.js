@@ -11,6 +11,8 @@ const config = {
   COLLECTABLE: true,
   hp: 50,
   cost: 10,
+
+  isExplosionImmune: true,
 };
 
 const make = (

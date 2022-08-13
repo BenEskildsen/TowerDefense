@@ -174,6 +174,12 @@ const entityShoot = (game: Game, entity: Entity, payload) => {
       projectile.blockingTypes.push('MISSILE');
       break;
     }
+    case 'DYNAMITE': {
+      const position = {...entity.position};
+      projectile = Entities[projectileType].make(
+        game, add({x: 0.5, y: 0.5}, position), entity.playerID,
+      );
+    }
   }
   if (projectile != null) {
     addEntity(game, projectile);
