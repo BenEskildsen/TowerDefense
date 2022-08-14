@@ -144,7 +144,7 @@ const agentDecideMove = (game: Game, agent: Agent): Game => {
   }
   if (freeNeighbors.length == 0) {
     agent.prevPosition = {...agent.position};
-    return game;
+    return false;
   }
 
   let taskConfig = config[agent.task];
@@ -214,7 +214,7 @@ const agentDecideMove = (game: Game, agent: Agent): Game => {
   agentDecideTask(game, agent, nextPos);
 
   queueAction(game, agent, makeAction(game, agent, 'MOVE', {nextPos}));
-  return game;
+  return true;
 }
 
 
@@ -273,7 +273,25 @@ const monsterDecideAction = (game, ant) => {
   }
 
   // MOVE
-  agentDecideMove(game, ant);
+  const didMove = agentDecideMove(game, ant);
+  if (didMove) return;
+
+  // FIGHT again if it didn't move
+  const nextTargets = getNeighborEntities(game, ant, true)
+    .filter(e => {
+      if (e.position == null) return false;
+      if (isDiagonalMove(ant.position, e.position)) return false;
+      return (
+        e.type == 'BASE' || e.type == 'TURRET' || e.type == 'FARM' ||
+        // only attack dirt/stone when path is blocked
+        e.type == 'DIRT' || e.type == 'STONE'
+      );
+    });
+
+  if (nextTargets.length > 0) {
+    queueAction(game, ant, makeAction(game, ant, 'BITE', oneOf(nextTargets)));
+    return;
+  }
 };
 
 module.exports = {

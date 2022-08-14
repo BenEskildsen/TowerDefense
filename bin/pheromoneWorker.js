@@ -86,7 +86,7 @@ var config = {
 };
 
 var nonMoltenPheromoneBlockingTypes = ['DIRT', 'STONE', 'DOODAD', 'TURRET'];
-var pheromoneBlockingTypes = [].concat(nonMoltenPheromoneBlockingTypes, ['ICE', 'SULPHUR', 'STEEL', 'IRON', 'SILICON', 'GLASS']);
+var pheromoneBlockingTypes = [].concat(nonMoltenPheromoneBlockingTypes, ['ICE', 'SULPHUR', 'STEEL', 'IRON', 'SILICON', 'GLASS', 'TURRET', 'SPLASH_TURRET']);
 
 var pheromones = {
   COLONY: {
@@ -1128,7 +1128,7 @@ var config = {
   AGENT: true,
 
   pickupTypes: ['FOOD', 'TOKEN', 'DYNAMITE', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'FARM', 'STEEL', 'BASE'],
+  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'FARM', 'SPLASH_TURRET', 'STEEL', 'BASE'],
 
   // action params
   MOVE: {

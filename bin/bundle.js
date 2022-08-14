@@ -86,7 +86,7 @@ var config = {
 };
 
 var nonMoltenPheromoneBlockingTypes = ['DIRT', 'STONE', 'DOODAD', 'TURRET'];
-var pheromoneBlockingTypes = [].concat(nonMoltenPheromoneBlockingTypes, ['ICE', 'SULPHUR', 'STEEL', 'IRON', 'SILICON', 'GLASS']);
+var pheromoneBlockingTypes = [].concat(nonMoltenPheromoneBlockingTypes, ['ICE', 'SULPHUR', 'STEEL', 'IRON', 'SILICON', 'GLASS', 'TURRET', 'SPLASH_TURRET']);
 
 var pheromones = {
   COLONY: {
@@ -1128,7 +1128,7 @@ var config = {
   AGENT: true,
 
   pickupTypes: ['FOOD', 'TOKEN', 'DYNAMITE', 'STEEL'],
-  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'FARM', 'STEEL', 'BASE'],
+  blockingTypes: ['FOOD', 'DIRT', 'AGENT', 'STONE', 'DOODAD', 'WORM', 'TOKEN', 'ANT', 'TURRET', 'MONSTER', 'FARM', 'SPLASH_TURRET', 'STEEL', 'BASE'],
 
   // action params
   MOVE: {
@@ -7354,7 +7354,7 @@ var agentDecideMove = function agentDecideMove(game, agent) {
   }
   if (freeNeighbors.length == 0) {
     agent.prevPosition = _extends({}, agent.position);
-    return game;
+    return false;
   }
 
   var taskConfig = config[agent.task];
@@ -7428,7 +7428,7 @@ var agentDecideMove = function agentDecideMove(game, agent) {
   agentDecideTask(game, agent, nextPos);
 
   queueAction(game, agent, makeAction(game, agent, 'MOVE', { nextPos: nextPos }));
-  return game;
+  return true;
 };
 
 var agentDecideTask = function agentDecideTask(game, agent, nextPos) {
@@ -7482,7 +7482,22 @@ var monsterDecideAction = function monsterDecideAction(game, ant) {
   }
 
   // MOVE
-  agentDecideMove(game, ant);
+  var didMove = agentDecideMove(game, ant);
+  if (didMove) return;
+
+  // FIGHT again if it didn't move
+  var nextTargets = getNeighborEntities(game, ant, true).filter(function (e) {
+    if (e.position == null) return false;
+    if (isDiagonalMove(ant.position, e.position)) return false;
+    return e.type == 'BASE' || e.type == 'TURRET' || e.type == 'FARM' ||
+    // only attack dirt/stone when path is blocked
+    e.type == 'DIRT' || e.type == 'STONE';
+  });
+
+  if (nextTargets.length > 0) {
+    queueAction(game, ant, makeAction(game, ant, 'BITE', oneOf(nextTargets)));
+    return;
+  }
 };
 
 module.exports = {
