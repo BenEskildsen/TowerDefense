@@ -22,18 +22,27 @@
   - ramps up to screen filled with monsters by about 350 kills
 
 
+- - - - - - REFACTOR - - - - - - - -
+  - touch events should work like in SidewalkEmpire (fix in Sandcastle too)
+  - switch to fullscreen canvas component
+  - use ui + utils packages
+  - properties
+    - add to registry, all named the same way
+    - added to memos automatically
+  - add levelEditor UI stuff to entities themselves
+  - level loading should exist outside of Lobby as a thunk
+  - clean up pheromone worker
+
+
 - - - - - - POLISH - - - - - -
   - UI
     - nicer cards for buildings
-  - make sure touch events work like in SidewalkEmpire
   - Remove WASD and scroll (add hotkeys for pause, etc)
-  - use same sprite loading system as SidewalkEmpire
   - Remove main menu
   - Reset should pass through lobby again
-  - switch to fullscreen canvas component
   - favicon
   - heroku app
-  - rune integration
+  - rune integration + toggle for it
 
 
 - - - - - - STRETCH - - - - - -
