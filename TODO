@@ -23,7 +23,6 @@
 
 
 - - - - - - REFACTOR - - - - - - - -
-  - touch events should work like in SidewalkEmpire (fix in Sandcastle too)
   - switch to fullscreen canvas component
   - use ui + utils packages
   - properties

@@ -9429,7 +9429,7 @@ var onMouseDown = function onMouseDown(store, ev, handlers) {
   var dispatch = store.dispatch;
 
 
-  if (ev.button == 0) {
+  if (ev.button == 0 || ev.type == 'touchstart') {
     // left click
     var _game = state.game;
 
@@ -9464,7 +9464,7 @@ var onMouseUp = function onMouseUp(store, ev, handlers) {
   var dispatch = store.dispatch;
 
 
-  if (ev.button == 0) {
+  if (ev.button == 0 || ev.type == 'touchend') {
     // left click
     dispatch({ type: 'SET_MOUSE_DOWN', isLeft: true, isDown: false });
     if (handlers.leftUp != null) {
@@ -9530,10 +9530,15 @@ var getMousePixel = function getMousePixel(ev, canvas) {
   var rect = canvas.getBoundingClientRect();
   var x = ev.clientX;
   var y = ev.clientY;
-  if (ev.type === 'touchstart' || ev.type === 'touchmove' || ev.type === 'touchend') {
+  if (ev.type === 'touchstart' || ev.type === 'touchmove') {
     var touch = ev.touches[0];
     x = touch.clientX;
     y = touch.clientY;
+  }
+  if (ev.type == 'touchend') {
+    var _touch = ev.changedTouches[0];
+    x = _touch.clientX;
+    y = _touch.clientY;
   }
   var canvasPos = {
     x: x - rect.left,
