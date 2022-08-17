@@ -9,8 +9,8 @@ var config = {
   canvasWidth: 1000,
   canvasHeight: 800,
 
-  viewWidth: 66,
-  viewHeight: 72,
+  viewWidth: 25,
+  viewHeight: 50,
   useFullScreen: true,
   cellWidth: 20,
   cellHeight: 16,
@@ -481,7 +481,7 @@ var spriteRenderFn = function spriteRenderFn(ctx, game, ant) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":38,"../selectors/sprites":48,"../utils/vectors":101,"./makeEntity":11}],3:[function(require,module,exports){
+},{"../render/renderAgent":38,"../selectors/sprites":48,"../utils/vectors":100,"./makeEntity":11}],3:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -689,7 +689,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":38,"../utils/vectors":101,"./makeEntity.js":11}],6:[function(require,module,exports){
+},{"../render/renderAgent":38,"../utils/vectors":100,"./makeEntity.js":11}],6:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -765,7 +765,7 @@ var render = function render(ctx, game, bullet) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":48,"../simulation/actionQueue":50,"../utils/vectors":101,"./makeEntity":11}],7:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":48,"../simulation/actionQueue":50,"../utils/vectors":100,"./makeEntity":11}],7:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -934,7 +934,7 @@ var config = {
   width: 2,
   height: 2,
   maxThetaSpeed: 0.05,
-  cost: 100,
+  // cost: 100,
   isExplosionImmune: true
 };
 
@@ -985,7 +985,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":38,"../utils/vectors":101,"./makeEntity.js":11}],11:[function(require,module,exports){
+},{"../render/renderAgent":38,"../utils/vectors":100,"./makeEntity.js":11}],11:[function(require,module,exports){
 'use strict';
 
 var makeEntity = function makeEntity(type, position, width, height) {
@@ -1102,7 +1102,7 @@ var render = function render(ctx, game, missile) {
 };
 
 module.exports = { config: config, make: make, render: render };
-},{"../config":1,"../selectors/sprites":48,"../simulation/actionQueue":50,"../utils/vectors":101,"./makeEntity":11}],13:[function(require,module,exports){
+},{"../config":1,"../selectors/sprites":48,"../simulation/actionQueue":50,"../utils/vectors":100,"./makeEntity":11}],13:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1117,8 +1117,8 @@ var _require3 = require('../render/renderAgent'),
     renderAgent = _require3.renderAgent;
 
 var config = {
-  maxHP: 10, // hack to prevent circular reference with render Agent
-  hp: 10,
+  maxHP: 20, // hack to prevent circular reference with render Agent
+  hp: 20,
   damage: 1,
   width: 1,
   height: 1,
@@ -1422,9 +1422,9 @@ var config = {
   SHOOT: {
     duration: 4000,
     spriteOrder: [0]
-  },
+  }
 
-  cost: 50
+  // cost: 50,
 
 };
 
@@ -1489,7 +1489,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":38,"../utils/vectors":101,"./makeEntity.js":11}],17:[function(require,module,exports){
+},{"../render/renderAgent":38,"../utils/vectors":100,"./makeEntity.js":11}],17:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -1705,7 +1705,7 @@ var render = function render(ctx, game, turret) {
 module.exports = {
   make: make, render: render, config: config
 };
-},{"../render/renderAgent":38,"../selectors/sprites":48,"../utils/vectors":101,"./makeEntity.js":11}],20:[function(require,module,exports){
+},{"../render/renderAgent":38,"../selectors/sprites":48,"../utils/vectors":100,"./makeEntity.js":11}],20:[function(require,module,exports){
 'use strict';
 
 var _require = require('redux'),
@@ -1734,7 +1734,7 @@ function renderUI(store) {
     modal: state.modal
   }), document.getElementById('container'));
 }
-},{"./reducers/rootReducer":35,"./ui/Main.react":84,"react":139,"react-dom":136,"redux":140}],21:[function(require,module,exports){
+},{"./reducers/rootReducer":35,"./ui/Main.react":83,"react":161,"react-dom":158,"redux":162}],21:[function(require,module,exports){
 // @flow
 
 module.exports = {
@@ -2461,7 +2461,7 @@ function createEntitiesReducer(game, action) {
 }
 
 module.exports = { gameReducer: gameReducer };
-},{"../config":1,"../entities/registry":15,"../render/render":37,"../selectors/pheromones":47,"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/pheromones":55,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],32:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../render/render":37,"../selectors/pheromones":47,"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/pheromones":55,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],32:[function(require,module,exports){
 'use strict';
 
 var hotKeysReducer = function hotKeysReducer(hotKeys, action) {
@@ -3017,7 +3017,7 @@ function upgradeReducer(state, action) {
 }
 
 module.exports = { rootReducer: rootReducer };
-},{"../levels/levels":21,"../simulation/entityOperations":52,"../state/gameState":56,"../state/state":57,"../utils/helpers":98,"./gameReducer":31,"./hotKeysReducer":32,"./modalReducer":33,"./mouseReducer":34,"./tickReducer":36}],36:[function(require,module,exports){
+},{"../levels/levels":21,"../simulation/entityOperations":52,"../state/gameState":56,"../state/state":57,"../utils/helpers":97,"./gameReducer":31,"./hotKeysReducer":32,"./modalReducer":33,"./mouseReducer":34,"./tickReducer":36}],36:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3793,7 +3793,7 @@ var updateTicker = function updateTicker(game) {
 };
 
 module.exports = { tickReducer: tickReducer };
-},{"../config":1,"../entities/registry":15,"../render/render":37,"../selectors/buildings":42,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/pheromones":47,"../selectors/sprites":48,"../simulation/actionOperations":49,"../simulation/actionQueue.js":50,"../simulation/agentOperations":51,"../simulation/entityOperations":52,"../simulation/miscOperations":54,"../simulation/pheromones":55,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/stochastic":100,"../utils/vectors":101}],37:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../render/render":37,"../selectors/buildings":42,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/pheromones":47,"../selectors/sprites":48,"../simulation/actionOperations":49,"../simulation/actionQueue.js":50,"../simulation/agentOperations":51,"../simulation/entityOperations":52,"../simulation/miscOperations":54,"../simulation/pheromones":55,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/stochastic":99,"../utils/vectors":100}],37:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -3872,14 +3872,14 @@ var renderFrame = function renderFrame(game) {
   ctx = canvas.getContext('2d');
   if (!ctx) return;
   ctx.fillStyle = 'black';
-  ctx.fillRect(0, 0, globalConfig.config.canvasWidth, globalConfig.config.canvasHeight);
+  ctx.fillRect(0, 0, window.innerWidth, window.innerHeight);
 
-  var pxWidth = globalConfig.config.canvasWidth / 4;
+  var pxWidth = window.innerWidth / 4;
   var pxHeight = 0.6 * pxWidth;
   if (!game.maxMinimap) {
     var bigDims = {
-      pxWidth: globalConfig.config.canvasWidth,
-      pxHeight: globalConfig.config.canvasHeight,
+      pxWidth: window.innerWidth,
+      pxHeight: window.innerHeight,
       viewWidth: game.viewWidth,
       viewHeight: game.viewHeight,
       viewPos: _extends({}, game.viewPos)
@@ -3897,7 +3897,7 @@ var renderFrame = function renderFrame(game) {
     // HACK: only pxWidth/pxHeight can really actually be set in main view
     renderView(canvas, ctx, game, bigDims);
     ctx.save();
-    ctx.translate(globalConfig.config.canvasWidth - pxWidth - 8, globalConfig.config.canvasHeight - pxHeight - 8);
+    ctx.translate(window.innerWidth - pxWidth - 8, window.innerHeight - pxHeight - 8);
     // renderMinimap(ctx, game, miniDims);
     ctx.restore();
   } else {
@@ -3906,8 +3906,8 @@ var renderFrame = function renderFrame(game) {
       y: game.viewPos.y - game.viewHeight / 2
     };
     var _bigDims = {
-      pxWidth: globalConfig.config.canvasWidth,
-      pxHeight: globalConfig.config.canvasHeight,
+      pxWidth: window.innerWidth,
+      pxHeight: window.innerHeight,
       viewWidth: game.viewWidth * 3,
       viewHeight: game.viewHeight * 3,
       viewPos: {
@@ -3924,7 +3924,7 @@ var renderFrame = function renderFrame(game) {
     };
     // renderMinimap(ctx, game, bigDims);
     ctx.save();
-    ctx.translate(globalConfig.config.canvasWidth - pxWidth - 8, 8);
+    ctx.translate(window.innerWidth - pxWidth - 8, 8);
     ctx.globalAlpha = 0.8;
     // HACK: only pxWidth/pxHeight can really actually be set in main view
     renderView(canvas, ctx, game, _miniDims, true /*isMini*/);
@@ -4427,7 +4427,7 @@ var renderPheromones = function renderPheromones(ctx, game) {
 };
 
 module.exports = { render: render };
-},{"../config":1,"../entities/registry":15,"../selectors/misc":44,"../selectors/mouseInteractionSelectors":45,"../selectors/sprites":48,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101,"./renderMinimap":40}],38:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../selectors/misc":44,"../selectors/mouseInteractionSelectors":45,"../selectors/sprites":48,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100,"./renderMinimap":40}],38:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4472,9 +4472,9 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
   ctx.translate(-width / 2, -height / 2);
 
   // render hp bar
-  // if (Math.ceil(agent.hp) < config[agent.playerID][agent.caste].hp) {
-  //   renderHealthBar(ctx, agent, config[agent.playerID][agent.caste].hp);
-  // }
+  if (Math.ceil(agent.hp) < agent.maxHP) {
+    renderHealthBar(ctx, agent, agent.maxHP);
+  }
 
   ctx.restore();
 
@@ -4519,7 +4519,7 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
 };
 
 module.exports = { renderAgent: renderAgent };
-},{"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101,"./renderHealthBar":39}],39:[function(require,module,exports){
+},{"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100,"./renderHealthBar":39}],39:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -4561,7 +4561,7 @@ var renderHealthBar = function renderHealthBar(ctx, entity, maxHealth) {
 };
 
 module.exports = { renderHealthBar: renderHealthBar };
-},{"../utils/gridHelpers":97,"../utils/vectors":101}],40:[function(require,module,exports){
+},{"../utils/gridHelpers":96,"../utils/vectors":100}],40:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5004,7 +5004,7 @@ var onMinimap = function onMinimap(dims, entity) {
 module.exports = {
   renderMinimap: renderMinimap
 };
-},{"../entities/registry":15,"../selectors/misc":44,"../selectors/sprites":48,"../utils/gridHelpers":97,"../utils/vectors":101,"./renderSegmented":41}],41:[function(require,module,exports){
+},{"../entities/registry":15,"../selectors/misc":44,"../selectors/sprites":48,"../utils/gridHelpers":96,"../utils/vectors":100,"./renderSegmented":41}],41:[function(require,module,exports){
 'use strict';
 
 var _require = require('../selectors/sprites'),
@@ -5152,7 +5152,7 @@ module.exports = {
   renderSegmented: renderSegmented,
   renderWormCanvas: renderWormCanvas
 };
-},{"../selectors/misc":44,"../selectors/sprites":48,"../utils/vectors":101,"./renderHealthBar":39}],42:[function(require,module,exports){
+},{"../selectors/misc":44,"../selectors/sprites":48,"../utils/vectors":100,"./renderHealthBar":39}],42:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5247,7 +5247,7 @@ module.exports = {
   collidesWith: collidesWith,
   collisionsAtSpace: collisionsAtSpace
 };
-},{"../utils/gridHelpers":97}],44:[function(require,module,exports){
+},{"../utils/gridHelpers":96}],44:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -5496,7 +5496,7 @@ module.exports = {
   getControlledEntityInteraction: getControlledEntityInteraction,
   getManningAction: getManningAction
 };
-},{"../selectors/collisions":43,"../selectors/neighbors":46,"../simulation/actionQueue":50,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],45:[function(require,module,exports){
+},{"../selectors/collisions":43,"../selectors/neighbors":46,"../simulation/actionQueue":50,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],45:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -5591,7 +5591,7 @@ module.exports = {
   isNeighboringColonyPher: isNeighboringColonyPher,
   isAboveSomething: isAboveSomething
 };
-},{"../entities/registry":15,"../selectors/buildings":42,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],46:[function(require,module,exports){
+},{"../entities/registry":15,"../selectors/buildings":42,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],46:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -5858,7 +5858,7 @@ module.exports = {
   getFreeNeighborPositions: getFreeNeighborPositions,
   areNeighbors: areNeighbors
 };
-},{"../selectors/collisions":43,"../utils/gridHelpers":97,"../utils/vectors":101}],47:[function(require,module,exports){
+},{"../selectors/collisions":43,"../utils/gridHelpers":96,"../utils/vectors":100}],47:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6053,7 +6053,7 @@ module.exports = {
   getQuantityForStalePos: getQuantityForStalePos,
   isPositionBlockingPheromone: isPositionBlockingPheromone
 };
-},{"../config":1,"../selectors/neighbors":46,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],48:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":46,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],48:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -6568,7 +6568,7 @@ module.exports = {
   getSegmentTail: getSegmentTail,
   getBeetleSprite: getBeetleSprite
 };
-},{"../config":1,"../selectors/misc":44,"../selectors/neighbors":46,"../simulation/actionQueue":50,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],49:[function(require,module,exports){
+},{"../config":1,"../selectors/misc":44,"../selectors/neighbors":46,"../simulation/actionQueue":50,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],49:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -6914,7 +6914,7 @@ var entityUnMan = function entityUnMan(game, entity, mannedEntity) {
 module.exports = {
   entityStartCurrentAction: entityStartCurrentAction
 };
-},{"../entities/registry":15,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/sprites":48,"../simulation/actionQueue":50,"../simulation/agentOperations":51,"../simulation/entityOperations":52,"../simulation/explosiveOperations":53,"../simulation/miscOperations":54,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],50:[function(require,module,exports){
+},{"../entities/registry":15,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/sprites":48,"../simulation/actionQueue":50,"../simulation/agentOperations":51,"../simulation/entityOperations":52,"../simulation/explosiveOperations":53,"../simulation/miscOperations":54,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],50:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7146,7 +7146,7 @@ module.exports = {
   makeAction: makeAction,
   getFrame: getFrame
 };
-},{"../selectors/pheromones":47,"../utils/helpers":98,"../utils/vectors":101}],51:[function(require,module,exports){
+},{"../selectors/pheromones":47,"../utils/helpers":97,"../utils/vectors":100}],51:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -7507,7 +7507,7 @@ module.exports = {
   agentDecideMove: agentDecideMove,
   agentSwitchTask: agentSwitchTask
 };
-},{"../config":1,"../entities/registry":15,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/pheromones":47,"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/pheromones":55,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/stochastic":100,"../utils/vectors":101}],52:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../selectors/collisions":43,"../selectors/misc":44,"../selectors/neighbors":46,"../selectors/pheromones":47,"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/pheromones":55,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/stochastic":99,"../utils/vectors":100}],52:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -8222,7 +8222,7 @@ module.exports = {
   insertEntityInGrid: insertEntityInGrid,
   removeEntityFromGrid: removeEntityFromGrid
 };
-},{"../config":1,"../entities/makeEntity":11,"../entities/registry":15,"../properties/registry":30,"../selectors/neighbors":46,"../selectors/pheromones":47,"../simulation/pheromones":55,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],53:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":11,"../entities/registry":15,"../properties/registry":30,"../selectors/neighbors":46,"../selectors/pheromones":47,"../simulation/pheromones":55,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],53:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8354,7 +8354,7 @@ var triggerExplosion = function triggerExplosion(game, explosive, precompute) {
 module.exports = {
   triggerExplosion: triggerExplosion
 };
-},{"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/miscOperations":54,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],54:[function(require,module,exports){
+},{"../simulation/actionQueue":50,"../simulation/entityOperations":52,"../simulation/miscOperations":54,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],54:[function(require,module,exports){
 'use strict';
 
 var _require = require('../simulation/actionQueue'),
@@ -8741,7 +8741,7 @@ module.exports = {
   refreshPheromones: refreshPheromones,
   getBiggestNeighborVal: getBiggestNeighborVal
 };
-},{"../config":1,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],56:[function(require,module,exports){
+},{"../config":1,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],56:[function(require,module,exports){
 'use strict';
 
 var _require = require('../entities/makeEntity'),
@@ -8946,7 +8946,7 @@ var initBaseState = function initBaseState(gridSize, numPlayers) {
 };
 
 module.exports = { initBaseState: initBaseState, initPlayer: initPlayer };
-},{"../config":1,"../entities/makeEntity":11,"../entities/registry":15,"../properties/registry":30,"../simulation/entityOperations":52,"../utils/gridHelpers":97,"../utils/stochastic":100,"../utils/vectors":101}],57:[function(require,module,exports){
+},{"../config":1,"../entities/makeEntity":11,"../entities/registry":15,"../properties/registry":30,"../simulation/entityOperations":52,"../utils/gridHelpers":96,"../utils/stochastic":99,"../utils/vectors":100}],57:[function(require,module,exports){
 'use strict';
 
 var initState = function initState() {
@@ -9049,7 +9049,7 @@ var handleGameLoss = function handleGameLoss(store, dispatch, state, reason) {
   var body = React.createElement(
     'div',
     null,
-    'Your base was destroyed! You survived ' + game.missilesSurvived + ' missiles'
+    'Your base was destroyed! You survived ' + game.score + ' monsters'
   );
 
   dispatch({ type: 'SET_MODAL',
@@ -9111,7 +9111,7 @@ var handleGameWon = function handleGameWon(store, dispatch, state, reason) {
 };
 
 module.exports = { initGameOverSystem: initGameOverSystem };
-},{"../render/render":37,"../ui/components/Button.react":88,"../ui/components/Divider.react":90,"../ui/components/Modal.react":93,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101,"axios":104,"react":139}],59:[function(require,module,exports){
+},{"../render/render":37,"../ui/components/Button.react":87,"../ui/components/Divider.react":89,"../ui/components/Modal.react":92,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100,"axios":103,"react":161}],59:[function(require,module,exports){
 'use strict';
 
 var initKeyboardControlsSystem = function initKeyboardControlsSystem(store) {
@@ -9277,7 +9277,7 @@ var initMonsterAttackSystem = function initMonsterAttackSystem(store) {
 
     var gameSeconds = game.totalGameTime / 1000;
 
-    var spawnRate = Math.max(5, Math.round(100 - game.score));
+    var spawnRate = Math.max(5, Math.round(150 - game.score));
 
     if (game.time > 0 && game.time % spawnRate == 0) {
       var position = { x: 0, y: 0 };
@@ -9314,7 +9314,7 @@ function doStartWave(dispatch, game, missileFrequency) {
 }
 
 module.exports = { initMonsterAttackSystem: initMonsterAttackSystem };
-},{"../config":1,"../entities/registry":15,"../utils/stochastic":100}],61:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../utils/stochastic":99}],61:[function(require,module,exports){
 'use strict';
 
 var _require = require('../config'),
@@ -9552,7 +9552,7 @@ var getMousePixel = function getMousePixel(ev, canvas) {
 };
 
 module.exports = { initMouseControlsSystem: initMouseControlsSystem };
-},{"../config":1,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],62:[function(require,module,exports){
+},{"../config":1,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],62:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -9645,7 +9645,7 @@ var initPheromoneWorkerSystem = function initPheromoneWorkerSystem(store) {
 };
 
 module.exports = { initPheromoneWorkerSystem: initPheromoneWorkerSystem };
-},{"../entities/registry":15,"../utils/helpers":98,"../utils/vectors":101}],63:[function(require,module,exports){
+},{"../entities/registry":15,"../utils/helpers":97,"../utils/vectors":100}],63:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -9695,7 +9695,7 @@ var initRainSystem = function initRainSystem(store) {
 };
 
 module.exports = { initRainSystem: initRainSystem };
-},{"../config":1,"../simulation/pheromones":55,"../utils/stochastic":100}],64:[function(require,module,exports){
+},{"../config":1,"../simulation/pheromones":55,"../utils/stochastic":99}],64:[function(require,module,exports){
 'use strict';
 
 var _require = require('../config'),
@@ -9771,7 +9771,7 @@ function loadLevel(store, levelName, additionalUpgrades) {
 module.exports = {
   loadLevel: loadLevel
 };
-},{"../levels/levels":21,"../utils/proceduralLevel":99}],66:[function(require,module,exports){
+},{"../levels/levels":21,"../utils/proceduralLevel":98}],66:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/vectors'),
@@ -9883,7 +9883,7 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 };
 
 module.exports = { handleCollect: handleCollect, handlePlace: handlePlace };
-},{"../entities/registry":15,"../selectors/buildings":42,"../selectors/mouseInteractionSelectors":45,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101}],67:[function(require,module,exports){
+},{"../entities/registry":15,"../selectors/buildings":42,"../selectors/mouseInteractionSelectors":45,"../selectors/neighbors":46,"../selectors/pheromones":47,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100}],67:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -9916,146 +9916,7 @@ var BottomBar = function BottomBar(props) {
 };
 
 module.exports = BottomBar;
-},{"./InfoHUD.react":81,"react":139}],68:[function(require,module,exports){
-'use strict';
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var React = require('react');
-
-var _require = require('../config'),
-    config = _require.config;
-
-var useEffect = React.useEffect,
-    useState = React.useState,
-    useMemo = React.useMemo,
-    Component = React.Component;
-
-
-function Canvas(props) {
-  var dispatch = props.dispatch,
-      innerWidth = props.innerWidth,
-      innerHeight = props.innerHeight,
-      isExperimental = props.isExperimental,
-      focusedEntity = props.focusedEntity;
-
-  // calculate max canvas width (allows canvas sizing DOWN)
-
-  var maxHeight = Math.min(2000, innerHeight, innerWidth * 1.33);
-  var maxWidth = maxHeight * 0.75;
-
-  if (config.useFullScreen && !isExperimental) {
-    maxWidth = innerWidth;
-    maxHeight = innerHeight;
-    var sizeMult = 0.9;
-    if (maxWidth < 600 || maxHeight < 800) {
-      sizeMult = 0.75;
-    }
-    if (maxWidth > 1000 || maxHeight > 1000) {
-      sizeMult = 1.25;
-    }
-    if (maxWidth > 1200 || maxHeight > 1200) {
-      sizeMult = 1.3;
-    }
-    useEffect(function () {
-      var viewPos = { x: 0, y: 0 };
-      var viewWidth = maxWidth / (config.cellWidth * sizeMult);
-      var viewHeight = maxHeight / (config.cellHeight * sizeMult);
-      if (focusedEntity != null) {
-        viewPos = {
-          x: focusedEntity.position.x - viewWidth / 2,
-          y: focusedEntity.position.y - viewHeight / 2
-        };
-      }
-      dispatch({ type: 'SET_VIEW_POS',
-        viewPos: viewPos, viewWidth: viewWidth, viewHeight: viewHeight
-      });
-    }, [maxWidth, maxHeight]);
-
-    if (maxWidth != config.canvasWidth) {
-      config.canvasWidth = maxWidth;
-    }
-    if (maxHeight != config.canvasHeight) {
-      config.canvasHeight = maxHeight;
-    }
-  } else if (isExperimental) {
-    // HACK: for when opening up the editor UI in game mode
-    config.canvasWidth = Math.min(config.canvasWidth, 1200);
-  }
-
-  var defaultStyle = {
-    height: '100%',
-    width: '100%',
-    maxWidth: maxWidth,
-    maxHeight: maxHeight,
-    margin: 'auto',
-    position: 'relative'
-  };
-  var experimentalStyle = {
-    height: config.canvasHeight,
-    width: config.canvasWidth,
-    maxWidth: config.canvasWidth,
-    maxHeight: config.canvasHeight,
-    position: 'absolute',
-    top: 0,
-    left: 0
-  };
-
-  return React.createElement(
-    'div',
-    { id: 'canvasWrapper',
-      style: isExperimental ? experimentalStyle : defaultStyle
-    },
-    React.createElement('canvas', {
-      id: 'canvas', style: {
-        backgroundColor: 'white',
-        cursor: 'pointer'
-      },
-      width: config.canvasWidth, height: config.canvasHeight
-    })
-  );
-}
-
-function withPropsChecker(WrappedComponent) {
-  return function (_Component) {
-    _inherits(PropsChecker, _Component);
-
-    function PropsChecker() {
-      _classCallCheck(this, PropsChecker);
-
-      return _possibleConstructorReturn(this, (PropsChecker.__proto__ || Object.getPrototypeOf(PropsChecker)).apply(this, arguments));
-    }
-
-    _createClass(PropsChecker, [{
-      key: 'componentWillReceiveProps',
-      value: function componentWillReceiveProps(nextProps) {
-        var _this2 = this;
-
-        Object.keys(nextProps).filter(function (key) {
-          return nextProps[key] !== _this2.props[key];
-        }).map(function (key) {
-          console.log('changed property:', key, 'from', _this2.props[key], 'to', nextProps[key]);
-        });
-      }
-    }, {
-      key: 'render',
-      value: function render() {
-        return React.createElement(WrappedComponent, this.props);
-      }
-    }]);
-
-    return PropsChecker;
-  }(Component);
-}
-
-module.exports = React.memo(Canvas);
-},{"../config":1,"react":139}],69:[function(require,module,exports){
+},{"./InfoHUD.react":80,"react":161}],68:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10143,7 +10004,7 @@ var AudioWidget = function AudioWidget(props) {
 };
 
 module.exports = AudioWidget;
-},{"./Button.react":70,"react":139}],70:[function(require,module,exports){
+},{"./Button.react":69,"react":161}],69:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10227,7 +10088,7 @@ function Button(props) {
 }
 
 module.exports = Button;
-},{"react":139}],71:[function(require,module,exports){
+},{"react":161}],70:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10267,7 +10128,7 @@ function Checkbox(props) {
 }
 
 module.exports = Checkbox;
-},{"react":139}],72:[function(require,module,exports){
+},{"react":161}],71:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10287,7 +10148,7 @@ function Divider(props) {
 }
 
 module.exports = Divider;
-},{"react":139}],73:[function(require,module,exports){
+},{"react":161}],72:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10328,7 +10189,7 @@ var Dropdown = function Dropdown(props) {
 };
 
 module.exports = Dropdown;
-},{"react":139}],74:[function(require,module,exports){
+},{"react":161}],73:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -10358,7 +10219,7 @@ var InfoCard = function InfoCard(props) {
 };
 
 module.exports = InfoCard;
-},{"react":139}],75:[function(require,module,exports){
+},{"react":161}],74:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10432,7 +10293,7 @@ function Modal(props) {
 }
 
 module.exports = Modal;
-},{"../../utils/helpers":98,"./Button.react":70,"react":139}],76:[function(require,module,exports){
+},{"../../utils/helpers":97,"./Button.react":69,"react":161}],75:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10522,7 +10383,7 @@ var submitValue = function submitValue(onChange, nextVal, onlyInt) {
 };
 
 module.exports = NumberField;
-},{"react":139}],77:[function(require,module,exports){
+},{"react":161}],76:[function(require,module,exports){
 'use strict';
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -10611,7 +10472,7 @@ var RadioPicker = function (_React$Component) {
 }(React.Component);
 
 module.exports = RadioPicker;
-},{"react":139}],78:[function(require,module,exports){
+},{"react":161}],77:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -10682,7 +10543,7 @@ function Slider(props) {
 }
 
 module.exports = Slider;
-},{"./NumberField.react":76,"react":139}],79:[function(require,module,exports){
+},{"./NumberField.react":75,"react":161}],78:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -10861,48 +10722,52 @@ function ExperimentalSidebar(props) {
 }
 
 module.exports = ExperimentalSidebar;
-},{"./Components/Button.react":70,"./Components/Checkbox.react":71,"./Components/Divider.react":72,"./Components/Dropdown.react":73,"./Components/Slider.react":78,"react":139}],80:[function(require,module,exports){
+},{"./Components/Button.react":69,"./Components/Checkbox.react":70,"./Components/Divider.react":71,"./Components/Dropdown.react":72,"./Components/Slider.react":77,"react":161}],79:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
 var React = require('react');
 var Button = require('./Components/Button.react');
-var Canvas = require('./Canvas.react');
+// const Canvas = require('./Canvas.react');
+
+var _require = require('bens_ui_components'),
+    Canvas = _require.Canvas;
+
 var Checkbox = require('./Components/Checkbox.react');
 var RadioPicker = require('./Components/RadioPicker.react');
 var BottomBar = require('./BottomBar.react');
 var TopBar = require('./TopBar.react');
 
-var _require = require('../config'),
-    config = _require.config;
+var _require2 = require('../config'),
+    config = _require2.config;
 
-var _require2 = require('../systems/mouseControlsSystem'),
-    initMouseControlsSystem = _require2.initMouseControlsSystem;
+var _require3 = require('../systems/mouseControlsSystem'),
+    initMouseControlsSystem = _require3.initMouseControlsSystem;
 
-var _require3 = require('../systems/gameOverSystem'),
-    initGameOverSystem = _require3.initGameOverSystem;
+var _require4 = require('../systems/gameOverSystem'),
+    initGameOverSystem = _require4.initGameOverSystem;
 
-var _require4 = require('../systems/spriteSheetSystem'),
-    initSpriteSheetSystem = _require4.initSpriteSheetSystem;
+var _require5 = require('../systems/spriteSheetSystem'),
+    initSpriteSheetSystem = _require5.initSpriteSheetSystem;
 
-var _require5 = require('../systems/rainSystem'),
-    initRainSystem = _require5.initRainSystem;
+var _require6 = require('../systems/rainSystem'),
+    initRainSystem = _require6.initRainSystem;
 
-var _require6 = require('../systems/monsterAttackSystem'),
-    initMonsterAttackSystem = _require6.initMonsterAttackSystem;
+var _require7 = require('../systems/monsterAttackSystem'),
+    initMonsterAttackSystem = _require7.initMonsterAttackSystem;
 
-var _require7 = require('../systems/pheromoneWorkerSystem'),
-    initPheromoneWorkerSystem = _require7.initPheromoneWorkerSystem;
+var _require8 = require('../systems/pheromoneWorkerSystem'),
+    initPheromoneWorkerSystem = _require8.initPheromoneWorkerSystem;
 
-var _require8 = require('../systems/keyboardControlsSystem'),
-    initKeyboardControlsSystem = _require8.initKeyboardControlsSystem;
+var _require9 = require('../systems/keyboardControlsSystem'),
+    initKeyboardControlsSystem = _require9.initKeyboardControlsSystem;
 
 var ExperimentalSidebar = require('./ExperimentalSidebar.react');
 
-var _require9 = require('../thunks/mouseInteractions'),
-    handleCollect = _require9.handleCollect,
-    handlePlace = _require9.handlePlace;
+var _require10 = require('../thunks/mouseInteractions'),
+    handleCollect = _require10.handleCollect,
+    handlePlace = _require10.handlePlace;
 
 var useEffect = React.useEffect,
     useState = React.useState,
@@ -10910,26 +10775,26 @@ var useEffect = React.useEffect,
     Component = React.Component,
     memo = React.memo;
 
-var _require10 = require('../utils/vectors'),
-    add = _require10.add,
-    subtract = _require10.subtract;
+var _require11 = require('../utils/vectors'),
+    add = _require11.add,
+    subtract = _require11.subtract;
 
-var _require11 = require('../utils/gridHelpers'),
-    lookupInGrid = _require11.lookupInGrid;
+var _require12 = require('../utils/gridHelpers'),
+    lookupInGrid = _require12.lookupInGrid;
 
-var _require12 = require('../utils/helpers'),
-    clamp = _require12.clamp,
-    isMobile = _require12.isMobile;
+var _require13 = require('../utils/helpers'),
+    clamp = _require13.clamp,
+    isMobile = _require13.isMobile;
 
-var _require13 = require('../selectors/misc'),
-    getControlledEntityInteraction = _require13.getControlledEntityInteraction,
-    getManningAction = _require13.getManningAction;
+var _require14 = require('../selectors/misc'),
+    getControlledEntityInteraction = _require14.getControlledEntityInteraction,
+    getManningAction = _require14.getManningAction;
 
-var _require14 = require('../simulation/actionQueue'),
-    isActionTypeQueued = _require14.isActionTypeQueued;
+var _require15 = require('../simulation/actionQueue'),
+    isActionTypeQueued = _require15.isActionTypeQueued;
 
-var _require15 = require('../render/render'),
-    render = _require15.render;
+var _require16 = require('../render/render'),
+    render = _require16.render;
 
 function Game(props) {
   var dispatch = props.dispatch,
@@ -11009,62 +10874,22 @@ function Game(props) {
       placeType: game.placeType,
       base: game.entities[game.BASE[0]]
     }),
-    React.createElement(Canvas, {
-      dispatch: dispatch,
-      tickInterval: tickInterval,
-      innerWidth: dims.width,
-      innerHeight: dims.height,
-      isExperimental: state.screen == 'EDITOR',
-      focusedEntity: game.focusedEntity
-    }),
+    React.createElement(Canvas, { useFullScreen: state.screen != 'EDITOR' }),
     React.createElement(Ticker, { ticker: game.ticker }),
     React.createElement(MiniTicker, { miniTicker: game.miniTicker })
   );
 }
 
+// <Canvas
+//   dispatch={dispatch}
+//   tickInterval={tickInterval}
+//   innerWidth={dims.width}
+//   innerHeight={dims.height}
+//   isExperimental={state.screen == 'EDITOR'}
+//   focusedEntity={game.focusedEntity}
+// />
+
 function registerHotkeys(dispatch) {
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyDown',
-    key: 'E',
-    fn: function fn(s) {
-      var game = s.getState().game;
-      var controlledEntity = game.controlledEntity;
-      if (!controlledEntity) return;
-
-      var entityAction = getControlledEntityInteraction(game, controlledEntity);
-      if ((entityAction.type == 'PICKUP' || entityAction.type == 'PUTDOWN') && (isActionTypeQueued(controlledEntity, 'PICKUP') || isActionTypeQueued(controlledEntity, 'PUTDOWN'))) {
-        return;
-      }
-      dispatch({
-        type: 'ENQUEUE_ENTITY_ACTION',
-        entity: controlledEntity,
-        entityAction: entityAction
-      });
-    }
-  });
-
-  // manning:
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyDown',
-    key: 'M',
-    fn: function fn(s) {
-      var game = s.getState().game;
-      var controlledEntity = game.controlledEntity;
-      if (!controlledEntity) return;
-
-      var _getManningAction = getManningAction(game),
-          entity = _getManningAction.entity,
-          entityAction = _getManningAction.entityAction;
-
-      if (entityAction) {
-        dispatch({
-          type: 'ENQUEUE_ENTITY_ACTION',
-          entity: entity,
-          entityAction: entityAction
-        });
-      }
-    }
-  });
 
   dispatch({
     type: 'SET_HOTKEY', press: 'onKeyDown',
@@ -11116,6 +10941,19 @@ function registerHotkeys(dispatch) {
         type: 'SET_VIEW_POS', viewPos: add(game.viewPos, { x: moveAmount, y: 0 })
       });
       render(game);
+    }
+  });
+
+  dispatch({
+    type: 'SET_HOTKEY', press: 'onKeyDown',
+    key: 'space',
+    fn: function fn(s) {
+      var game = s.getState().game;
+      if (game.tickInterval) {
+        s.dispatch({ type: 'STOP_TICK' });
+      } else {
+        s.dispatch({ type: 'START_TICK' });
+      }
     }
   });
 }
@@ -11213,7 +11051,7 @@ function MiniTicker(props) {
 }
 
 module.exports = Game;
-},{"../config":1,"../render/render":37,"../selectors/misc":44,"../simulation/actionQueue":50,"../systems/gameOverSystem":58,"../systems/keyboardControlsSystem":59,"../systems/monsterAttackSystem":60,"../systems/mouseControlsSystem":61,"../systems/pheromoneWorkerSystem":62,"../systems/rainSystem":63,"../systems/spriteSheetSystem":64,"../thunks/mouseInteractions":66,"../utils/gridHelpers":97,"../utils/helpers":98,"../utils/vectors":101,"./BottomBar.react":67,"./Canvas.react":68,"./Components/Button.react":70,"./Components/Checkbox.react":71,"./Components/RadioPicker.react":77,"./ExperimentalSidebar.react":79,"./TopBar.react":86,"react":139}],81:[function(require,module,exports){
+},{"../config":1,"../render/render":37,"../selectors/misc":44,"../simulation/actionQueue":50,"../systems/gameOverSystem":58,"../systems/keyboardControlsSystem":59,"../systems/monsterAttackSystem":60,"../systems/mouseControlsSystem":61,"../systems/pheromoneWorkerSystem":62,"../systems/rainSystem":63,"../systems/spriteSheetSystem":64,"../thunks/mouseInteractions":66,"../utils/gridHelpers":96,"../utils/helpers":97,"../utils/vectors":100,"./BottomBar.react":67,"./Components/Button.react":69,"./Components/Checkbox.react":70,"./Components/RadioPicker.react":76,"./ExperimentalSidebar.react":78,"./TopBar.react":85,"bens_ui_components":147,"react":161}],80:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -11453,7 +11291,7 @@ var EntityInfoCard = function EntityInfoCard(props) {
 };
 
 module.exports = InfoHUD;
-},{"../config":1,"../entities/registry":15,"../selectors/pheromones":47,"../ui/components/InfoCard.react":92,"../utils/gridHelpers":97,"../utils/helpers":98,"react":139}],82:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../selectors/pheromones":47,"../ui/components/InfoCard.react":91,"../utils/gridHelpers":96,"../utils/helpers":97,"react":161}],81:[function(require,module,exports){
 'use strict';
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -12481,7 +12319,7 @@ function createEntityOptions(game, editor, setEditor) {
 }
 
 module.exports = LevelEditor;
-},{"../config":1,"../entities/registry":15,"../render/render":37,"../systems/mouseControlsSystem":61,"../utils/vectors":101,"./components/Button.react":88,"./components/Checkbox.react":89,"./components/Divider.react":90,"./components/Dropdown.react":91,"./components/NumberField.react":94,"./components/Slider.react":96,"react":139}],83:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../render/render":37,"../systems/mouseControlsSystem":61,"../utils/vectors":100,"./components/Button.react":87,"./components/Checkbox.react":88,"./components/Divider.react":89,"./components/Dropdown.react":90,"./components/NumberField.react":93,"./components/Slider.react":95,"react":161}],82:[function(require,module,exports){
 'use strict';
 
 var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
@@ -12518,7 +12356,7 @@ function Lobby(props) {
 
   var state = store.getState();
 
-  var _useState = useState('procedural'),
+  var _useState = useState('sparseWallDefense'),
       _useState2 = _slicedToArray(_useState, 2),
       level = _useState2[0],
       setLevel = _useState2[1];
@@ -12911,7 +12749,7 @@ function playLevel(store, levelName, setLoadingProgress, setIsLoaded) {
 }
 
 module.exports = Lobby;
-},{"../config":1,"../levels/levels":21,"../systems/spriteSheetSystem":64,"../thunks/levelThunks":65,"../ui/components/Modal.react":93,"../ui/components/QuitButton.react":95,"../utils/helpers":98,"./components/AudioWidget.react":87,"./components/Button.react":88,"./components/Checkbox.react":89,"./components/Divider.react":90,"./components/Dropdown.react":91,"axios":104,"react":139}],84:[function(require,module,exports){
+},{"../config":1,"../levels/levels":21,"../systems/spriteSheetSystem":64,"../thunks/levelThunks":65,"../ui/components/Modal.react":92,"../ui/components/QuitButton.react":94,"../utils/helpers":97,"./components/AudioWidget.react":86,"./components/Button.react":87,"./components/Checkbox.react":88,"./components/Divider.react":89,"./components/Dropdown.react":90,"axios":103,"react":161}],83:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -12958,7 +12796,7 @@ function Main(props) {
 }
 
 module.exports = Main;
-},{"./Game.react":80,"./LevelEditor.react":82,"./Lobby.react":83,"react":139}],85:[function(require,module,exports){
+},{"./Game.react":79,"./LevelEditor.react":81,"./Lobby.react":82,"react":161}],84:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -13376,7 +13214,7 @@ function Resource(props) {
 }
 
 module.exports = PlacementPalette;
-},{"../config":1,"../entities/registry":15,"../selectors/buildings":42,"../ui/Components/InfoCard.react":74,"react":139}],86:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../selectors/buildings":42,"../ui/Components/InfoCard.react":73,"react":161}],85:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -13411,7 +13249,7 @@ function TopBar(props) {
 
   if (isExperimental && tickInterval == null) return null;
 
-  var height = 100;
+  var height = 10;
   var topPadding = 8;
   var leftPadding = 4;
 
@@ -13493,23 +13331,23 @@ function TopBar(props) {
 }
 
 module.exports = TopBar;
-},{"../config":1,"../entities/registry":15,"../ui/PlacementPalette.react":85,"../ui/components/InfoCard.react":92,"../ui/components/QuitButton.react":95,"../utils/helpers":98,"./Components/AudioWidget.react":69,"./Components/Button.react":70,"./Components/Divider.react":72,"./Components/Modal.react":75,"react":139}],87:[function(require,module,exports){
+},{"../config":1,"../entities/registry":15,"../ui/PlacementPalette.react":84,"../ui/components/InfoCard.react":91,"../ui/components/QuitButton.react":94,"../utils/helpers":97,"./Components/AudioWidget.react":68,"./Components/Button.react":69,"./Components/Divider.react":71,"./Components/Modal.react":74,"react":161}],86:[function(require,module,exports){
+arguments[4][68][0].apply(exports,arguments)
+},{"./Button.react":87,"dup":68,"react":161}],87:[function(require,module,exports){
 arguments[4][69][0].apply(exports,arguments)
-},{"./Button.react":88,"dup":69,"react":139}],88:[function(require,module,exports){
+},{"dup":69,"react":161}],88:[function(require,module,exports){
 arguments[4][70][0].apply(exports,arguments)
-},{"dup":70,"react":139}],89:[function(require,module,exports){
+},{"dup":70,"react":161}],89:[function(require,module,exports){
 arguments[4][71][0].apply(exports,arguments)
-},{"dup":71,"react":139}],90:[function(require,module,exports){
+},{"dup":71,"react":161}],90:[function(require,module,exports){
 arguments[4][72][0].apply(exports,arguments)
-},{"dup":72,"react":139}],91:[function(require,module,exports){
+},{"dup":72,"react":161}],91:[function(require,module,exports){
 arguments[4][73][0].apply(exports,arguments)
-},{"dup":73,"react":139}],92:[function(require,module,exports){
+},{"dup":73,"react":161}],92:[function(require,module,exports){
 arguments[4][74][0].apply(exports,arguments)
-},{"dup":74,"react":139}],93:[function(require,module,exports){
+},{"../../utils/helpers":97,"./Button.react":87,"dup":74,"react":161}],93:[function(require,module,exports){
 arguments[4][75][0].apply(exports,arguments)
-},{"../../utils/helpers":98,"./Button.react":88,"dup":75,"react":139}],94:[function(require,module,exports){
-arguments[4][76][0].apply(exports,arguments)
-},{"dup":76,"react":139}],95:[function(require,module,exports){
+},{"dup":75,"react":161}],94:[function(require,module,exports){
 'use strict';
 
 var React = require('react');
@@ -13598,9 +13436,9 @@ var quitGameModal = function quitGameModal(dispatch) {
 };
 
 module.exports = QuitButton;
-},{"../../utils/helpers":98,"./Button.react":88,"./Modal.react":93,"react":139}],96:[function(require,module,exports){
-arguments[4][78][0].apply(exports,arguments)
-},{"./NumberField.react":94,"dup":78,"react":139}],97:[function(require,module,exports){
+},{"../../utils/helpers":97,"./Button.react":87,"./Modal.react":92,"react":161}],95:[function(require,module,exports){
+arguments[4][77][0].apply(exports,arguments)
+},{"./NumberField.react":93,"dup":77,"react":161}],96:[function(require,module,exports){
 'use strict';
 
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
@@ -13695,8 +13533,8 @@ var deleteFromCell = function deleteFromCell(grid, position, entityID) {
 var canvasToGrid = function canvasToGrid(game, canvasPos) {
   var config = globalConfig.config;
   var scaleVec = {
-    x: game.viewWidth / config.canvasWidth,
-    y: game.viewHeight / config.canvasHeight
+    x: game.viewWidth / window.innerWidth,
+    y: game.viewHeight / window.innerHeight
   };
 
   var gridCoord = floor(add({ x: game.viewPos.x, y: game.viewPos.y }, multiply(canvasPos, scaleVec)));
@@ -13736,7 +13574,7 @@ module.exports = {
   getEntityPositions: getEntityPositions,
   entityInsideGrid: entityInsideGrid
 };
-},{"../config":1,"../utils/helpers":98,"../utils/vectors":101}],98:[function(require,module,exports){
+},{"../config":1,"../utils/helpers":97,"../utils/vectors":100}],97:[function(require,module,exports){
 'use strict';
 
 var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
@@ -13919,7 +13757,7 @@ module.exports = {
   forEachObj: forEachObj,
   filterObj: filterObj
 };
-},{"./vectors":101}],99:[function(require,module,exports){
+},{"./vectors":100}],98:[function(require,module,exports){
 'use strict';
 
 var _require = require('../utils/stochastic'),
@@ -14044,7 +13882,7 @@ var clearOutPocket = function clearOutPocket(level, rect) {
 };
 
 module.exports = { getProceduralLevel: getProceduralLevel };
-},{"../config":1,"../utils/stochastic":100}],100:[function(require,module,exports){
+},{"../config":1,"../utils/stochastic":99}],99:[function(require,module,exports){
 "use strict";
 
 var floor = Math.floor,
@@ -14099,7 +13937,7 @@ module.exports = {
   oneOf: oneOf,
   weightedOneOf: weightedOneOf
 };
-},{}],101:[function(require,module,exports){
+},{}],100:[function(require,module,exports){
 "use strict";
 
 var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
@@ -14298,7 +14136,7 @@ module.exports = {
   rotate: rotate,
   abs: abs
 };
-},{}],102:[function(require,module,exports){
+},{}],101:[function(require,module,exports){
 function _defineProperty(obj, key, value) {
   if (key in obj) {
     Object.defineProperty(obj, key, {
@@ -14316,7 +14154,7 @@ function _defineProperty(obj, key, value) {
 
 module.exports = _defineProperty;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{}],103:[function(require,module,exports){
+},{}],102:[function(require,module,exports){
 var defineProperty = require("./defineProperty.js");
 
 function ownKeys(object, enumerableOnly) {
@@ -14359,9 +14197,9 @@ function _objectSpread2(target) {
 
 module.exports = _objectSpread2;
 module.exports["default"] = module.exports, module.exports.__esModule = true;
-},{"./defineProperty.js":102}],104:[function(require,module,exports){
+},{"./defineProperty.js":101}],103:[function(require,module,exports){
 module.exports = require('./lib/axios');
-},{"./lib/axios":106}],105:[function(require,module,exports){
+},{"./lib/axios":105}],104:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14575,7 +14413,7 @@ module.exports = function xhrAdapter(config) {
   });
 };
 
-},{"../cancel/Cancel":107,"../core/buildFullPath":112,"../core/createError":113,"../defaults":119,"./../core/settle":117,"./../helpers/buildURL":122,"./../helpers/cookies":124,"./../helpers/isURLSameOrigin":127,"./../helpers/parseHeaders":129,"./../utils":132}],106:[function(require,module,exports){
+},{"../cancel/Cancel":106,"../core/buildFullPath":111,"../core/createError":112,"../defaults":118,"./../core/settle":116,"./../helpers/buildURL":121,"./../helpers/cookies":123,"./../helpers/isURLSameOrigin":126,"./../helpers/parseHeaders":128,"./../utils":131}],105:[function(require,module,exports){
 'use strict';
 
 var utils = require('./utils');
@@ -14634,7 +14472,7 @@ module.exports = axios;
 // Allow use of default import syntax in TypeScript
 module.exports.default = axios;
 
-},{"./cancel/Cancel":107,"./cancel/CancelToken":108,"./cancel/isCancel":109,"./core/Axios":110,"./core/mergeConfig":116,"./defaults":119,"./env/data":120,"./helpers/bind":121,"./helpers/isAxiosError":126,"./helpers/spread":130,"./utils":132}],107:[function(require,module,exports){
+},{"./cancel/Cancel":106,"./cancel/CancelToken":107,"./cancel/isCancel":108,"./core/Axios":109,"./core/mergeConfig":115,"./defaults":118,"./env/data":119,"./helpers/bind":120,"./helpers/isAxiosError":125,"./helpers/spread":129,"./utils":131}],106:[function(require,module,exports){
 'use strict';
 
 /**
@@ -14655,7 +14493,7 @@ Cancel.prototype.__CANCEL__ = true;
 
 module.exports = Cancel;
 
-},{}],108:[function(require,module,exports){
+},{}],107:[function(require,module,exports){
 'use strict';
 
 var Cancel = require('./Cancel');
@@ -14776,14 +14614,14 @@ CancelToken.source = function source() {
 
 module.exports = CancelToken;
 
-},{"./Cancel":107}],109:[function(require,module,exports){
+},{"./Cancel":106}],108:[function(require,module,exports){
 'use strict';
 
 module.exports = function isCancel(value) {
   return !!(value && value.__CANCEL__);
 };
 
-},{}],110:[function(require,module,exports){
+},{}],109:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14933,7 +14771,7 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 
 module.exports = Axios;
 
-},{"../helpers/buildURL":122,"../helpers/validator":131,"./../utils":132,"./InterceptorManager":111,"./dispatchRequest":114,"./mergeConfig":116}],111:[function(require,module,exports){
+},{"../helpers/buildURL":121,"../helpers/validator":130,"./../utils":131,"./InterceptorManager":110,"./dispatchRequest":113,"./mergeConfig":115}],110:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -14989,7 +14827,7 @@ InterceptorManager.prototype.forEach = function forEach(fn) {
 
 module.exports = InterceptorManager;
 
-},{"./../utils":132}],112:[function(require,module,exports){
+},{"./../utils":131}],111:[function(require,module,exports){
 'use strict';
 
 var isAbsoluteURL = require('../helpers/isAbsoluteURL');
@@ -15011,7 +14849,7 @@ module.exports = function buildFullPath(baseURL, requestedURL) {
   return requestedURL;
 };
 
-},{"../helpers/combineURLs":123,"../helpers/isAbsoluteURL":125}],113:[function(require,module,exports){
+},{"../helpers/combineURLs":122,"../helpers/isAbsoluteURL":124}],112:[function(require,module,exports){
 'use strict';
 
 var enhanceError = require('./enhanceError');
@@ -15031,7 +14869,7 @@ module.exports = function createError(message, config, code, request, response) 
   return enhanceError(error, config, code, request, response);
 };
 
-},{"./enhanceError":115}],114:[function(require,module,exports){
+},{"./enhanceError":114}],113:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15120,7 +14958,7 @@ module.exports = function dispatchRequest(config) {
   });
 };
 
-},{"../cancel/Cancel":107,"../cancel/isCancel":109,"../defaults":119,"./../utils":132,"./transformData":118}],115:[function(require,module,exports){
+},{"../cancel/Cancel":106,"../cancel/isCancel":108,"../defaults":118,"./../utils":131,"./transformData":117}],114:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15165,7 +15003,7 @@ module.exports = function enhanceError(error, config, code, request, response) {
   return error;
 };
 
-},{}],116:[function(require,module,exports){
+},{}],115:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -15266,7 +15104,7 @@ module.exports = function mergeConfig(config1, config2) {
   return config;
 };
 
-},{"../utils":132}],117:[function(require,module,exports){
+},{"../utils":131}],116:[function(require,module,exports){
 'use strict';
 
 var createError = require('./createError');
@@ -15293,7 +15131,7 @@ module.exports = function settle(resolve, reject, response) {
   }
 };
 
-},{"./createError":113}],118:[function(require,module,exports){
+},{"./createError":112}],117:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15317,7 +15155,7 @@ module.exports = function transformData(data, headers, fns) {
   return data;
 };
 
-},{"./../defaults":119,"./../utils":132}],119:[function(require,module,exports){
+},{"./../defaults":118,"./../utils":131}],118:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -15455,11 +15293,11 @@ utils.forEach(['post', 'put', 'patch'], function forEachMethodWithData(method) {
 module.exports = defaults;
 
 }).call(this)}).call(this,require('_process'))
-},{"./adapters/http":105,"./adapters/xhr":105,"./core/enhanceError":115,"./helpers/normalizeHeaderName":128,"./utils":132,"_process":147}],120:[function(require,module,exports){
+},{"./adapters/http":104,"./adapters/xhr":104,"./core/enhanceError":114,"./helpers/normalizeHeaderName":127,"./utils":131,"_process":169}],119:[function(require,module,exports){
 module.exports = {
   "version": "0.24.0"
 };
-},{}],121:[function(require,module,exports){
+},{}],120:[function(require,module,exports){
 'use strict';
 
 module.exports = function bind(fn, thisArg) {
@@ -15472,7 +15310,7 @@ module.exports = function bind(fn, thisArg) {
   };
 };
 
-},{}],122:[function(require,module,exports){
+},{}],121:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15544,7 +15382,7 @@ module.exports = function buildURL(url, params, paramsSerializer) {
   return url;
 };
 
-},{"./../utils":132}],123:[function(require,module,exports){
+},{"./../utils":131}],122:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15560,7 +15398,7 @@ module.exports = function combineURLs(baseURL, relativeURL) {
     : baseURL;
 };
 
-},{}],124:[function(require,module,exports){
+},{}],123:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15615,7 +15453,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":132}],125:[function(require,module,exports){
+},{"./../utils":131}],124:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15631,7 +15469,7 @@ module.exports = function isAbsoluteURL(url) {
   return /^([a-z][a-z\d\+\-\.]*:)?\/\//i.test(url);
 };
 
-},{}],126:[function(require,module,exports){
+},{}],125:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15644,7 +15482,7 @@ module.exports = function isAxiosError(payload) {
   return (typeof payload === 'object') && (payload.isAxiosError === true);
 };
 
-},{}],127:[function(require,module,exports){
+},{}],126:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15714,7 +15552,7 @@ module.exports = (
     })()
 );
 
-},{"./../utils":132}],128:[function(require,module,exports){
+},{"./../utils":131}],127:[function(require,module,exports){
 'use strict';
 
 var utils = require('../utils');
@@ -15728,7 +15566,7 @@ module.exports = function normalizeHeaderName(headers, normalizedName) {
   });
 };
 
-},{"../utils":132}],129:[function(require,module,exports){
+},{"../utils":131}],128:[function(require,module,exports){
 'use strict';
 
 var utils = require('./../utils');
@@ -15783,7 +15621,7 @@ module.exports = function parseHeaders(headers) {
   return parsed;
 };
 
-},{"./../utils":132}],130:[function(require,module,exports){
+},{"./../utils":131}],129:[function(require,module,exports){
 'use strict';
 
 /**
@@ -15812,7 +15650,7 @@ module.exports = function spread(callback) {
   };
 };
 
-},{}],131:[function(require,module,exports){
+},{}],130:[function(require,module,exports){
 'use strict';
 
 var VERSION = require('../env/data').version;
@@ -15896,7 +15734,7 @@ module.exports = {
   validators: validators
 };
 
-},{"../env/data":120}],132:[function(require,module,exports){
+},{"../env/data":119}],131:[function(require,module,exports){
 'use strict';
 
 var bind = require('./helpers/bind');
@@ -16247,7 +16085,1691 @@ module.exports = {
   stripBOM: stripBOM
 };
 
-},{"./helpers/bind":121}],133:[function(require,module,exports){
+},{"./helpers/bind":120}],132:[function(require,module,exports){
+'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var React = require('react');
+var Button = require('./Button.react');
+var useState = React.useState,
+    useEffect = React.useEffect,
+    useMemo = React.useMemo;
+
+/**
+ * Props:
+ *
+ * audioFiles, // array of {path, type} pairs
+ * isMuted, // optional boolean for outside control of this widget
+ * setIsMuted, // optional function called when this is toggled
+ * isShuffled, // optional boolean for whether audio should play in random order
+ * style, // optional object of css styles
+ *
+ */
+
+var AudioWidget = function AudioWidget(props) {
+  var _useState = useState(!!props.isMuted),
+      _useState2 = _slicedToArray(_useState, 2),
+      isMuted = _useState2[0],
+      setIsMuted = _useState2[1];
+
+  var _useState3 = useState(0),
+      _useState4 = _slicedToArray(_useState3, 2),
+      playIndex = _useState4[0],
+      setPlayIndex = _useState4[1];
+
+  var playOrder = useMemo(function () {
+    var array = props.audioFiles.map(function (a, i) {
+      return i;
+    });
+    if (props.isShuffled) {
+      for (var i = array.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = array[i];
+        array[i] = array[j];
+        array[j] = temp;
+      }
+      // initialOrder.sort(() => (Math.random() > 0.5) ? 1 : -1)
+    }
+    return array;
+  }, [props.audioFiles]);
+
+  var widgetStyle = {
+    margin: 5,
+    borderRadius: 8,
+    left: 5
+  };
+
+  // player
+  var audioPlayer = useMemo(function () {
+    var a = new Audio(props.audioFiles[playIndex].path);
+    return a;
+  }, [playIndex, isMuted, props.audioFiles]);
+
+  useEffect(function () {
+    if (!isMuted) {
+      audioPlayer.addEventListener('loadeddata', function () {
+        audioPlayer.play();
+        setTimeout(function () {
+          return setPlayIndex((playIndex + 1) % props.audioFiles.length);
+        }, audioPlayer.duration * 1000);
+      });
+    }
+    return function () {
+      audioPlayer.pause();
+    };
+  }, [playIndex, isMuted, props.audioFiles, audioPlayer]);
+
+  return React.createElement(
+    'div',
+    {
+      style: props.style ? props.style : widgetStyle
+    },
+    React.createElement(Button, {
+      label: isMuted ? 'Turn Music ON' : 'Turn Music OFF',
+      onClick: function onClick() {
+        audioPlayer.pause();
+        setIsMuted(!isMuted);
+        if (props.setIsMuted) {
+          props.setIsMuted(!isMuted);
+        }
+      }
+    })
+  );
+};
+
+module.exports = AudioWidget;
+},{"./Button.react":133,"react":161}],133:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var React = require('react');
+var useState = React.useState,
+    useEffect = React.useEffect;
+
+// props:
+// id: ?string
+// label: string
+// onClick: () => void
+// onMouseDown: optional () => void
+// onMouseUp: optional () => void
+// disabled: optional boolean
+// style: optional Object
+
+function Button(props) {
+  var id = props.id || props.label;
+
+  var touchFn = function touchFn() {
+    if (props.onMouseDown != null) {
+      props.onMouseDown();
+    } else {
+      props.onClick();
+    }
+  };
+
+  var _useState = useState(null),
+      _useState2 = _slicedToArray(_useState, 2),
+      intervalID = _useState2[0],
+      setIntervalID = _useState2[1];
+
+  return React.createElement(
+    'button',
+    { type: 'button',
+      style: _extends({
+        touchAction: 'initial',
+        fontSize: '18px'
+      }, props.style),
+      key: id || label,
+      className: props.disabled ? 'buttonDisable' : '',
+      id: id.toUpperCase() + '_button',
+      onClick: props.disabled ? function () {} : props.onClick,
+      onTouchStart: function onTouchStart(ev) {
+        ev.preventDefault();
+        if (props.disabled) {
+          return;
+        }
+        if (intervalID) {
+          console.log("already in interval, clearing");
+          clearInterval(intervalID);
+          setIntervalID(null);
+        }
+        touchFn();
+        // HACK: if you set the right condition, allow repetive presses
+        if (false) {
+          var interval = setInterval(touchFn, 120);
+          setIntervalID(interval);
+        }
+      },
+      onTouchEnd: function onTouchEnd(ev) {
+        ev.preventDefault();
+        clearInterval(intervalID);
+        setIntervalID(null);
+        props.onMouseUp;
+      },
+      onTouchCancel: function onTouchCancel(ev) {
+        clearInterval(intervalID);
+        setIntervalID(null);
+        props.onMouseUp;
+      },
+      onTouchMove: function onTouchMove(ev) {
+        ev.preventDefault();
+      },
+      onMouseDown: props.onMouseDown,
+      onMouseUp: props.onMouseUp,
+      disabled: props.disabled
+    },
+    props.label
+  );
+}
+
+module.exports = Button;
+},{"react":161}],134:[function(require,module,exports){
+'use strict';
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var React = require('react');
+var useEffect = React.useEffect,
+    useState = React.useState,
+    useMemo = React.useMemo,
+    Component = React.Component;
+
+
+function Canvas(props) {
+  var useFullScreen = props.useFullScreen,
+      width = props.width,
+      height = props.height,
+      id = props.id,
+      cellSize = props.cellSize,
+      dispatch = props.dispatch,
+      focus = props.focus;
+
+  var _useState = useState(width ? width : window.innerWidth),
+      _useState2 = _slicedToArray(_useState, 2),
+      windowWidth = _useState2[0],
+      setWindowWidth = _useState2[1];
+
+  var _useState3 = useState(height ? height : window.innerHeight),
+      _useState4 = _slicedToArray(_useState3, 2),
+      windowHeight = _useState4[0],
+      setWindowHeight = _useState4[1];
+
+  useEffect(function () {
+    function handleResize() {
+      if (useFullScreen) {
+        setWindowWidth(window.innerWidth);
+        setWindowHeight(window.innerHeight);
+      }
+    }
+
+    window.addEventListener('resize', handleResize);
+  });
+
+  if (useFullScreen) {
+    var sizeMult = 0.9;
+    if (windowWidth < 600 || windowHeight < 800) {
+      sizeMult = 0.75;
+    }
+    if (windowWidth > 1000 || windowHeight > 1000) {
+      sizeMult = 1.25;
+    }
+    if (windowWidth > 1200 || windowHeight > 1200) {
+      sizeMult = 1.3;
+    }
+    useEffect(function () {
+      if (focus != null) {
+        var viewPos = { x: 0, y: 0 };
+        var viewWidth = windowWidth / (cellSize * sizeMult);
+        var viewHeight = windowHeight / (cellHeight * sizeMult);
+        viewPos = {
+          x: focus.position.x - viewWidth / 2,
+          y: focus.position.y - viewHeight / 2
+        };
+        dispatch({ type: 'SET_VIEW_POS',
+          viewPos: viewPos, viewWidth: viewWidth, viewHeight: viewHeight
+        });
+      }
+    }, [windowWidth, windowHeight]);
+  }
+
+  var fullScreenStyle = {
+    height: '100%',
+    width: '100%',
+    margin: 'auto',
+    position: 'relative'
+  };
+  var nonFullScreenStyle = {
+    height: windowHeight,
+    width: windowWidth
+  };
+
+  return React.createElement(
+    'div',
+    { id: 'canvasWrapper',
+      style: useFullScreen ? fullScreenStyle : nonFullScreenStyle
+    },
+    React.createElement('canvas', {
+      id: id || "canvas", style: {
+        backgroundColor: 'white',
+        cursor: 'pointer'
+      },
+      width: windowWidth, height: windowHeight
+    })
+  );
+}
+
+function withPropsChecker(WrappedComponent) {
+  return function (_Component) {
+    _inherits(PropsChecker, _Component);
+
+    function PropsChecker() {
+      _classCallCheck(this, PropsChecker);
+
+      return _possibleConstructorReturn(this, (PropsChecker.__proto__ || Object.getPrototypeOf(PropsChecker)).apply(this, arguments));
+    }
+
+    _createClass(PropsChecker, [{
+      key: 'componentWillReceiveProps',
+      value: function componentWillReceiveProps(nextProps) {
+        var _this2 = this;
+
+        Object.keys(nextProps).filter(function (key) {
+          return nextProps[key] !== _this2.props[key];
+        }).map(function (key) {
+          console.log('changed property:', key, 'from', _this2.props[key], 'to', nextProps[key]);
+        });
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        return React.createElement(WrappedComponent, this.props);
+      }
+    }]);
+
+    return PropsChecker;
+  }(Component);
+}
+
+module.exports = React.memo(Canvas);
+},{"react":161}],135:[function(require,module,exports){
+arguments[4][70][0].apply(exports,arguments)
+},{"dup":70,"react":161}],136:[function(require,module,exports){
+arguments[4][71][0].apply(exports,arguments)
+},{"dup":71,"react":161}],137:[function(require,module,exports){
+arguments[4][72][0].apply(exports,arguments)
+},{"dup":72,"react":161}],138:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var React = require('react');
+
+var InfoCard = function InfoCard(props) {
+  var overrideStyle = props.style || {};
+  var underrideStyle = props.underrideStyle || {};
+  return React.createElement(
+    'div',
+    {
+      style: _extends({}, underrideStyle, {
+        border: props.border != null ? props.border : '1px solid black',
+        backgroundColor: 'white',
+        opacity: props.opacity != null ? props.opacity : 1,
+        // width: 200,
+        // height: 148,
+        verticalAlign: 'top',
+        marginBottom: 4,
+        marginLeft: 4,
+        display: 'inline-block',
+        padding: 4
+      }, overrideStyle)
+    },
+    props.children
+  );
+};
+
+module.exports = InfoCard;
+},{"react":161}],139:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Button = require('./Button.react');
+
+var isMobile = require('bens_utils').platform.isMobile;
+
+/*
+type Props = {
+  title: ?string,
+  body: ?string,
+  buttons: Array<{
+    label: string,
+    onClick: () => void,
+  }>,
+  height: ?number,
+};
+*/
+
+function Modal(props) {
+  var title = props.title,
+      body = props.body,
+      buttons = props.buttons;
+
+  var height = props.height ? props.height : 450;
+
+  // using 2 rects to properly position width and height
+  var rect = document.getElementById('container').getBoundingClientRect();
+  var canvasRect = null;
+  var canvas = document.getElementById('canvas');
+  if (canvas != null) {
+    canvasRect = canvas.getBoundingClientRect();
+  } else {
+    canvasRect = rect;
+  }
+
+  var buttonHTML = buttons.map(function (b) {
+    return React.createElement(Button, {
+      key: "b_" + b.label,
+      disabled: !!b.disabled,
+      label: b.label, onClick: b.onClick
+    });
+  });
+
+  var width = props.width ? props.width : Math.min(rect.width * 0.8, 350);
+  return React.createElement(
+    'div',
+    {
+      style: {
+        position: 'absolute',
+        backgroundColor: 'whitesmoke',
+        border: '1px solid black',
+        padding: 4,
+        boxShadow: '2px 2px #666666',
+        borderRadius: 3,
+        color: '#46403a',
+        textAlign: 'center',
+        width: width,
+        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
+        left: (rect.width - width) / 2
+      }
+    },
+    React.createElement(
+      'h3',
+      null,
+      React.createElement(
+        'b',
+        null,
+        title
+      )
+    ),
+    body,
+    React.createElement(
+      'div',
+      {
+        style: {}
+      },
+      buttonHTML
+    )
+  );
+}
+
+module.exports = Modal;
+},{"./Button.react":133,"bens_utils":154,"react":161}],140:[function(require,module,exports){
+'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+var React = require('react');
+var useState = React.useState,
+    useMemo = React.useMemo,
+    useEffect = React.useEffect;
+
+/**
+ * props:
+ * value: number
+ * onChange: (number) => void,
+ * onlyInt: boolean, // only allow ints instead of floats
+ * width: number,
+ * submitOnEnter: boolean, // not implemented -- hard to play nice w/other keys
+ * submitOnBlur: boolean,
+ */
+
+var NumberField = function NumberField(props) {
+  var value = props.value,
+      _onChange = props.onChange,
+      onlyInt = props.onlyInt,
+      submitOnEnter = props.submitOnEnter,
+      submitOnBlur = props.submitOnBlur;
+
+  var _useState = useState(value),
+      _useState2 = _slicedToArray(_useState, 2),
+      stateValue = _useState2[0],
+      setValue = _useState2[1];
+
+  useEffect(function () {
+    setValue(value);
+  }, [value]);
+
+  var _useState3 = useState(false),
+      _useState4 = _slicedToArray(_useState3, 2),
+      isFocused = _useState4[0],
+      setFocus = _useState4[1];
+
+  useEffect(function () {
+    // document.onkeydown = (ev) => {
+    //   if (ev.keyCode == 13)  { // Enter
+    //     if (isFocused) {
+    //       submitValue(onChange, stateValue, onlyInt);
+    //     }
+    //   }
+    // };
+  }, [isFocused, stateValue]);
+
+  return React.createElement('input', { type: 'text',
+    style: {
+      width: props.width != null ? props.width : 40
+    },
+    value: stateValue,
+    onFocus: function onFocus() {
+      setFocus(true);
+    },
+    onBlur: function onBlur() {
+      setFocus(false);
+      if (submitOnBlur) {
+        submitValue(_onChange, stateValue, onlyInt);
+      }
+    },
+    onChange: function onChange(ev) {
+      var nextVal = ev.target.value;
+      if (isNaN(Number(nextVal))) return; // don't allow non-numerical input
+      setValue(nextVal);
+      if (!submitOnEnter && !submitOnBlur) {
+        submitValue(_onChange, nextVal, onlyInt);
+      }
+    }
+  });
+};
+
+var submitValue = function submitValue(onChange, nextVal, onlyInt) {
+  if (nextVal === '') {
+    onChange(0);
+  } else if (!onlyInt && nextVal[nextVal.length - 1] === '.') {
+    onChange(parseFloat(nextVal + '0'));
+  } else if (isNaN(Number(nextVal))) {
+    return; // ignore NaNs
+  } else {
+    var num = onlyInt ? parseInt(nextVal) : parseFloat(nextVal);
+    onChange(num);
+  }
+};
+
+module.exports = NumberField;
+},{"react":161}],141:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+/**
+ * See ~/Code/teaching/clusters for an example of how to use the plot
+ * Specifically ui/Main and reducers/plotReducer
+ */
+
+var React = require('react');
+var Button = require('./Button.react');
+var Canvas = require('./Canvas.react');
+var useState = React.useState,
+    useMemo = React.useMemo,
+    useEffect = React.useEffect,
+    useReducer = React.useReducer;
+
+// type Point = {
+//   x: number,
+//   y: number,
+//   color: ?string, // css color
+// };
+//
+// type Axis = {
+//   dimension: 'x' | 'y',
+//   label: string,
+//   min: ?number,
+//   max: ?number,
+//   adaptiveRange: ?boolean, // min/max adapt to the given points
+//   hidden: ?boolean, // don't render the axis
+//   majorTicks: ?number,
+//   minorTicks: ?number,
+// };
+
+/**
+ * NOTE: 0, 0 is the bottom left corner
+ *
+ * props:
+ *   points: Array<Point>,
+ *   xAxis: Axis,
+ *   yAxis: Axis,
+ *   isLinear: boolean,
+ *   watch: ?number, // if provided, will watch for changes in this value
+ *                   // and add a point to the plot whenever it changes
+ *                   // up to a maximum number of points equal to the xAxis size
+ *   changeOnly: ?boolean, // a watch prop, only add a point if watched prop changes
+ *   inline: ?boolean,
+ *
+ * canvas props:
+ *   canvasID: ?string, // for when there's multiple plots
+ *   useFullScreen: boolean,
+ *   width: number,
+ *   height: number,
+ */
+
+var Plot = function Plot(props) {
+
+  // screen resizing
+  var _useState = useState(0),
+      _useState2 = _slicedToArray(_useState, 2),
+      resizeCount = _useState2[0],
+      setResize = _useState2[1];
+
+  useEffect(function () {
+    function handleResize() {
+      setResize(resizeCount + 1);
+    }
+    window.addEventListener('resize', handleResize);
+    return function () {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [resizeCount]);
+
+  // rendering
+  useEffect(function () {
+    var canvas = document.getElementById(props.canvasID || 'canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+
+    var xAxis = props.xAxis,
+        yAxis = props.yAxis,
+        isLinear = props.isLinear;
+
+    var _canvas$getBoundingCl = canvas.getBoundingClientRect(),
+        width = _canvas$getBoundingCl.width,
+        height = _canvas$getBoundingCl.height;
+
+    var xmax = xAxis.max == null ? 10 : xAxis.max;
+    var xmin = xAxis.min == null ? 0 : xAxis.min;
+    var ymax = yAxis.max == null ? 10 : yAxis.max;
+    var ymin = yAxis.min == null ? 0 : yAxis.min;
+
+    // handling adaptive ranges
+    if (xAxis.adaptiveRange) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = allPoints[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var point = _step.value;
+
+          if (point.x < xmin) {
+            xmin = point.x;
+          }
+          if (point.x > xmax) {
+            xmax = point.x;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+    }
+    if (yAxis.adaptiveRange) {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = props.points[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var _point = _step2.value;
+
+          if (_point.y < ymin) {
+            ymin = _point.y;
+          }
+          if (_point.y > ymax) {
+            ymax = _point.y;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+    }
+
+    // scaling props.points to canvas
+    var xTrans = width / (xmax - xmin);
+    var yTrans = height / (ymax - ymin);
+    var transX = function transX(x) {
+      return x * xTrans - xmin * xTrans;
+    };
+    var transY = function transY(y) {
+      return y * yTrans - ymin * yTrans;
+    };
+
+    // clear canvas
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, width, height);
+
+    // drawing axes
+    if (!xAxis.hidden) {
+      ctx.fillStyle = 'black';
+      var xMajor = xAxis.majorTicks || 10;
+      for (var x = xmin; x < xmax; x += xMajor) {
+        drawLine(ctx, { x: transX(x), y: height }, { x: transX(x), y: height - 20 });
+      }
+      var xMinor = xAxis.minorTicks || 2;
+      for (var _x = xmin; _x < xmax; _x += xMinor) {
+        drawLine(ctx, { x: transX(_x), y: height }, { x: transX(_x), y: height - 10 });
+      }
+    }
+    if (!yAxis.hidden) {
+      var yMajor = yAxis.majorTicks || 10;
+      for (var y = ymin; y < ymax; y += yMajor) {
+        drawLine(ctx, { x: 0, y: transY(y) }, { x: 20, y: transY(y) });
+      }
+      var yMinor = yAxis.minorTicks || 2;
+      for (var _y = ymin; _y < ymax; _y += yMinor) {
+        drawLine(ctx, { x: 0, y: transY(_y) }, { x: 10, y: transY(_y) });
+      }
+    }
+
+    // drawing props.points
+    var sortedPoints = [].concat(_toConsumableArray(props.points)).sort(function (a, b) {
+      return a.x - b.x;
+    });
+    var prevPoint = null;
+    var _iteratorNormalCompletion3 = true;
+    var _didIteratorError3 = false;
+    var _iteratorError3 = undefined;
+
+    try {
+      for (var _iterator3 = sortedPoints[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
+        var _point2 = _step3.value;
+
+        ctx.fillStyle = _point2.color ? _point2.color : 'black';
+        var _x2 = transX(_point2.x);
+        var _y2 = ymax * yTrans - ymin * yTrans - _point2.y * yTrans;
+        var size = 2;
+        if (!isLinear) {
+          ctx.fillRect(_x2 - size, _y2 - size, size * 2, size * 2);
+        }
+
+        if (isLinear && prevPoint != null) {
+          ctx.fillStyle = 'black';
+          drawLine(ctx, prevPoint, { x: _x2, y: _y2 });
+        }
+        prevPoint = { x: _x2, y: _y2 };
+      }
+    } catch (err) {
+      _didIteratorError3 = true;
+      _iteratorError3 = err;
+    } finally {
+      try {
+        if (!_iteratorNormalCompletion3 && _iterator3.return) {
+          _iterator3.return();
+        }
+      } finally {
+        if (_didIteratorError3) {
+          throw _iteratorError3;
+        }
+      }
+    }
+  }, [props, resizeCount]);
+
+  // axis labels
+  var xAxisLabel = null;
+  var yAxisLabel = null;
+  if (props.xAxis.label != null) {
+    xAxisLabel = React.createElement(
+      'div',
+      { style: {
+          textAlign: 'center'
+        } },
+      props.xAxis.label
+    );
+  }
+  if (props.yAxis.label != null) {
+    yAxisLabel = React.createElement(
+      'div',
+      { style: {
+          display: 'table-cell',
+          verticalAlign: 'middle'
+        } },
+      props.yAxis.label
+    );
+  }
+
+  return React.createElement(
+    'div',
+    {
+      style: {
+        width: 'fit-content',
+        display: props.inline ? 'inline' : 'table'
+      }
+    },
+    yAxisLabel,
+    React.createElement(
+      'div',
+      { style: { display: 'inline-block' } },
+      React.createElement(Canvas, {
+        id: props.canvasID,
+        useFullScreen: props.useFullScreen,
+        width: props.width,
+        height: props.height
+      })
+    ),
+    xAxisLabel
+  );
+};
+
+var drawLine = function drawLine(ctx, p1, p2) {
+  ctx.beginPath();
+  ctx.moveTo(p1.x, p1.y);
+  ctx.lineTo(p2.x, p2.y);
+  ctx.stroke();
+  ctx.closePath();
+};
+
+var PlotWatcher = function PlotWatcher(props) {
+  // track points with watching
+  var _useReducer = useReducer(function (state, action) {
+    if (action.type == 'SET_ALL') {
+      return { points: [].concat(_toConsumableArray(action.points)) };
+    }
+
+    var value = action.value;
+    // don't add a point if we're changeOnly and value is the same
+
+    var prevVal = state.points.length > 0 ? state.points[state.points.length - 1].y : -1;
+    if (props.changeOnly && value == prevVal) {
+      return state;
+    }
+    var point = { x: state.points.length, y: value };
+    if (point.x < props.xAxis.max) {
+      return _extends({}, state, {
+        points: state.points ? [].concat(_toConsumableArray(state.points), [point]) : points
+      });
+    } else {
+      var _state$points = _toArray(state.points),
+          _ = _state$points[0],
+          next = _state$points.slice(1);
+
+      var _iteratorNormalCompletion4 = true;
+      var _didIteratorError4 = false;
+      var _iteratorError4 = undefined;
+
+      try {
+        for (var _iterator4 = next[Symbol.iterator](), _step4; !(_iteratorNormalCompletion4 = (_step4 = _iterator4.next()).done); _iteratorNormalCompletion4 = true) {
+          var p = _step4.value;
+
+          p.x -= 1;
+        }
+      } catch (err) {
+        _didIteratorError4 = true;
+        _iteratorError4 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion4 && _iterator4.return) {
+            _iterator4.return();
+          }
+        } finally {
+          if (_didIteratorError4) {
+            throw _iteratorError4;
+          }
+        }
+      }
+
+      return _extends({}, state, {
+        points: state.points ? [].concat(_toConsumableArray(next), [point]) : points
+      });
+    }
+  }, { points: [].concat(_toConsumableArray(props.points)) }),
+      _useReducer2 = _slicedToArray(_useReducer, 2),
+      pointState = _useReducer2[0],
+      dispatch = _useReducer2[1];
+
+  useEffect(function () {
+    if (props.watch == null) {
+      dispatch({ type: 'SET_ALL', points: props.points });
+    } else {
+      dispatch({ type: 'SET', value: props.watch });
+    }
+  }, [props.watch, dispatch, props.points]);
+
+  return React.createElement(Plot, _extends({}, props, { points: pointState.points }));
+};
+
+module.exports = PlotWatcher;
+},{"./Button.react":133,"./Canvas.react":134,"react":161}],142:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var Button = require('./Button.react');
+var Modal = require('./Modal.react');
+
+var isElectron = require('bens_utils').platform.isElectron;
+
+var useState = React.useState,
+    useEffect = React.useEffect,
+    useMemo = React.useMemo;
+
+
+var QuitButton = function QuitButton(props) {
+  var isInGame = props.isInGame,
+      dispatch = props.dispatch;
+
+
+  if (!isInGame && !isElectron()) return null;
+
+  var buttonStyle = isInGame ? {} : {
+    margin: 5,
+    borderRadius: 8,
+    left: 5
+  };
+  return React.createElement(
+    'div',
+    {
+      style: buttonStyle
+    },
+    React.createElement(Button, {
+      label: 'Quit',
+      onClick: function onClick() {
+        if (!isInGame) {
+          remote.webFrame.context.close();
+        } else {
+          quitGameModal(dispatch);
+        }
+      }
+    })
+  );
+};
+
+var quitGameModal = function quitGameModal(dispatch) {
+  dispatch({ type: 'STOP_TICK' });
+
+  var returnToMainMenuButton = {
+    label: 'Main Menu',
+    onClick: function onClick() {
+      dispatch({ type: 'DISMISS_MODAL' });
+      dispatch({ type: 'RETURN_TO_LOBBY' });
+    }
+  };
+  var returnToGameButton = {
+    label: 'Return to Game',
+    onClick: function onClick() {
+      dispatch({ type: 'DISMISS_MODAL' });
+      dispatch({ type: 'START_TICK' });
+    }
+  };
+  var quitAppButton = {
+    label: 'Quit Application',
+    onClick: function onClick() {
+      remote.webFrame.context.close();
+    }
+  };
+  var buttons = [returnToGameButton, returnToMainMenuButton];
+  if (isElectron()) {
+    buttons.push(quitAppButton);
+  }
+
+  var body = React.createElement('div', null);
+
+  dispatch({ type: 'SET_MODAL',
+    modal: React.createElement(Modal, {
+      title: 'Quit Game?',
+      body: body,
+      buttons: buttons
+    })
+  });
+};
+
+module.exports = QuitButton;
+},{"./Button.react":133,"./Modal.react":139,"bens_utils":154,"react":161}],143:[function(require,module,exports){
+arguments[4][76][0].apply(exports,arguments)
+},{"dup":76,"react":161}],144:[function(require,module,exports){
+'use strict';
+
+var React = require('react');
+var NumberField = require('./NumberField.react');
+var useState = React.useState,
+    useMemo = React.useMemo,
+    useEffect = React.useEffect;
+
+/**
+ *  props:
+ *  min, max: number,
+ *  value: ?number (min if null),
+ *  onChange: (number) => void,
+ *  step: ?number (1 if null),
+ *  label: ?string,
+ *  isFloat: ?boolean
+ */
+
+function Slider(props) {
+  var isFloat = props.isFloat;
+
+  var label = React.createElement(
+    'div',
+    { style: { display: 'inline-block' } },
+    props.label
+  );
+  var value = props.value != null ? props.value : props.min;
+  value = isFloat ? Math.floor(value * 10) : value;
+  var displayValue = isFloat ? value / 10 : value;
+
+  var min = isFloat ? props.min * 10 : props.min;
+  var max = isFloat ? props.max * 10 : props.max;
+
+  var originalValue = useMemo(function () {
+    return displayValue;
+  }, []);
+  return React.createElement(
+    'div',
+    null,
+    props.label != null ? label : null,
+    React.createElement('input', { type: 'range',
+      id: 'slider_' + label,
+      min: min, max: max,
+      value: value,
+      onChange: function onChange(ev) {
+        var val = ev.target.value;
+        props.onChange(parseFloat(isFloat ? val / 10 : val));
+      },
+      step: props.step != null ? props.step : 1
+    }),
+    React.createElement(
+      'div',
+      { style: { display: 'inline-block' } },
+      React.createElement(NumberField, {
+        value: displayValue,
+        onlyInt: !isFloat,
+        onChange: function onChange(val) {
+          props.onChange(val);
+        },
+        submitOnBlur: false
+      }),
+      '(',
+      originalValue,
+      ')'
+    )
+  );
+}
+
+module.exports = Slider;
+},{"./NumberField.react":140,"react":161}],145:[function(require,module,exports){
+'use strict';
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var React = require('react');
+var Button = require('./Button.react');
+var useEffect = React.useEffect,
+    useMemo = React.useMemo,
+    useState = React.useState;
+
+/**
+type ColumnName = string;
+type Props = {
+  columns: {[name: ColumnName]: {
+    displayName: string,
+    sortFn: ?() => number, // sorts alphanumerically if not provided
+    maxWidth: number, // maximum number of characters allowed
+  }},
+  rows: Array<{[name: ColumnName]: mixed}>,
+  hideColSorts: boolean,
+};
+*/
+
+var tableStyle = {
+  backgroundColor: '#faf8ef',
+  width: '100%',
+  borderRadius: 8
+};
+
+function Table(props) {
+  var columns = props.columns,
+      rows = props.rows,
+      hideColSorts = props.hideColSorts;
+
+  var colNames = Object.keys(columns);
+
+  var _useState = useState({ by: 'ASC', name: null }),
+      _useState2 = _slicedToArray(_useState, 2),
+      sortByColumn = _useState2[0],
+      setSortByColumn = _useState2[1];
+
+  var headers = colNames.map(function (col) {
+    return React.createElement(
+      'th',
+      { key: 'header_' + col },
+      columns[col].displayName,
+      hideColSorts ? null : React.createElement(
+        'div',
+        { style: { fontWeight: 'normal' } },
+        'Sort:',
+        React.createElement(Button, {
+          label: '/\\',
+          fontSize: 12,
+          onClick: function onClick() {
+            setSortByColumn({ by: 'ASC', name: col });
+          }
+        }),
+        React.createElement(Button, {
+          label: '\\/',
+          fontSize: 12,
+          onClick: function onClick() {
+            setSortByColumn({ by: 'DESC', name: col });
+          }
+        })
+      )
+    );
+  });
+
+  var sortedRows = useMemo(function () {
+    if (sortByColumn.name == null) return rows;
+    var sorted = [];
+    if (columns[sortByColumn.name].sortFn != null) {
+      sorted = [].concat(_toConsumableArray(rows)).sort(columns[sortByColumn.name].sortFn);
+    } else {
+      sorted = [].concat(_toConsumableArray(rows)).sort(function (rowA, rowB) {
+        if (rowA[sortByColumn.name] < rowB[sortByColumn.name]) {
+          return -1;
+        }
+        return 1;
+      });
+    }
+    if (sortByColumn.by != 'ASC') {
+      return sorted.reverse();
+    }
+    return sorted;
+  }, [sortByColumn, rows]);
+
+  var rowHTML = sortedRows.map(function (row, i) {
+    var rowData = colNames.map(function (col) {
+      var dataCell = columns[col].maxWidth ? ("" + row[col]).slice(0, columns[col].maxWidth) : row[col];
+      return React.createElement(
+        'td',
+        { key: 'cell_' + col + row[col] },
+        dataCell
+      );
+    });
+    return React.createElement(
+      'tr',
+      { key: 'row_' + i },
+      rowData
+    );
+  });
+
+  return React.createElement(
+    'table',
+    { style: tableStyle },
+    React.createElement(
+      'thead',
+      null,
+      React.createElement(
+        'tr',
+        null,
+        headers
+      )
+    ),
+    React.createElement(
+      'tbody',
+      null,
+      rowHTML
+    )
+  );
+}
+
+module.exports = Table;
+},{"./Button.react":133,"react":161}],146:[function(require,module,exports){
+'use strict';
+
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+
+function _toArray(arr) { return Array.isArray(arr) ? arr : Array.from(arr); }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+var plotReducer = function plotReducer(state, action) {
+  switch (action.type) {
+    case 'SET_AXIS':
+      var axis = action.axis;
+
+      var whichAxis = axis.dimension == 'x' ? 'xAxis' : 'yAxis';
+      return _extends({}, state, _defineProperty({}, whichAxis, _extends({ label: axis.dimension, min: 0, max: 100 }, axis)));
+    case 'SET_POINTS':
+      var points = action.points;
+
+      return _extends({}, state, {
+        points: points
+      });
+    case 'ADD_POINTS':
+      {
+        var _points = action.points;
+
+        return _extends({}, state, {
+          points: state.points ? [].concat(_toConsumableArray(state.points), _toConsumableArray(_points)) : _points
+        });
+      }
+    case 'ADD_POINT_CIRCULAR':
+      {
+        var point = action.point;
+
+        if (point.x < state.xAxis.max) {
+          return _extends({}, state, {
+            points: state.points ? [].concat(_toConsumableArray(state.points), [point]) : points
+          });
+        } else {
+          var _state$points = _toArray(state.points),
+              _ = _state$points[0],
+              next = _state$points.slice(1);
+
+          return _extends({}, state, {
+            points: state.points ? [].concat(_toConsumableArray(next), [point]) : points
+          });
+        }
+      }
+    case 'CLEAR_POINTS':
+      {
+        return _extends({}, state, {
+          points: []
+        });
+      }
+    case 'PRINT_POINTS':
+      {
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = state.points[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var _point = _step.value;
+
+            console.log(_point.x + "," + _point.y);
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+
+        return state;
+      }
+  }
+};
+
+module.exports = { plotReducer: plotReducer };
+},{}],147:[function(require,module,exports){
+
+module.exports = {
+  AudioWidget: require('./bin/AudioWidget.react.js'),
+  Button: require('./bin/Button.react.js'),
+  Canvas: require('./bin/Canvas.react.js'),
+  Checkbox: require('./bin/Checkbox.react.js'),
+  Divider: require('./bin/Divider.react.js'),
+  Dropdown: require('./bin/Dropdown.react.js'),
+  InfoCard: require('./bin/InfoCard.react.js'),
+  Modal: require('./bin/Modal.react.js'),
+  NumberField: require('./bin/NumberField.react.js'),
+  Plot: require('./bin/Plot.react.js'),
+  plotReducer: require('./bin/plotReducer.js').plotReducer,
+  QuitButton: require('./bin/QuitButton.react.js'),
+  RadioPicker: require('./bin/RadioPicker.react.js'),
+  Slider: require('./bin/Slider.react.js'),
+  Table: require('./bin/Table.react.js'),
+};
+
+},{"./bin/AudioWidget.react.js":132,"./bin/Button.react.js":133,"./bin/Canvas.react.js":134,"./bin/Checkbox.react.js":135,"./bin/Divider.react.js":136,"./bin/Dropdown.react.js":137,"./bin/InfoCard.react.js":138,"./bin/Modal.react.js":139,"./bin/NumberField.react.js":140,"./bin/Plot.react.js":141,"./bin/QuitButton.react.js":142,"./bin/RadioPicker.react.js":143,"./bin/Slider.react.js":144,"./bin/Table.react.js":145,"./bin/plotReducer.js":146}],148:[function(require,module,exports){
+'use strict';
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var _require = require('./helpers'),
+    thetaToDir = _require.thetaToDir;
+
+var _require2 = require('./math'),
+    clamp = _require2.clamp;
+
+var _require3 = require('./vectors'),
+    add = _require3.add,
+    multiply = _require3.multiply,
+    subtract = _require3.subtract,
+    equals = _require3.equals,
+    floor = _require3.floor,
+    containsVector = _require3.containsVector;
+
+var initGrid = function initGrid(gridWidth, gridHeight, numPlayers) {
+  var grid = [];
+  for (var x = 0; x < gridWidth; x++) {
+    var col = [];
+    for (var y = 0; y < gridHeight; y++) {
+      var cell = {
+        entities: []
+      };
+      for (var i = 0; i < numPlayers; i++) {
+        cell[i + 1] = {};
+        // pheromones:
+        // for (const pheromoneType of config.pheromoneTypes) {
+        //   cell[i+1][pheromoneType] = 0;
+        // }
+      }
+      col.push(cell);
+    }
+    grid.push(col);
+  }
+  return grid;
+};
+
+var insideGrid = function insideGrid(grid, position) {
+  if (position == null) return false;
+  var x = position.x,
+      y = position.y;
+
+  return grid[x] != null && x >= 0 && y >= 0 && x < grid.length && y < grid[x].length;
+};
+var entityInsideGrid = function entityInsideGrid(game, entity) {
+  var gridWidth = game.gridWidth,
+      gridHeight = game.gridHeight;
+  var position = entity.position,
+      width = entity.width,
+      height = entity.height;
+
+  if (position == null) return false;
+  var x = position.x,
+      y = position.y;
+
+
+  return x >= 0 && y >= 0 && x + width <= gridWidth && y + height <= gridHeight;
+};
+
+var lookupInGrid = function lookupInGrid(grid, position) {
+  if (!insideGrid(grid, position)) return [];
+  return grid[position.x][position.y].entities;
+};
+
+var getPheromonesInCell = function getPheromonesInCell(grid, position, playerID) {
+  if (!insideGrid(grid, position)) return [];
+  return grid[position.x][position.y][playerID];
+};
+
+var insertInCell = function insertInCell(grid, position, entityID) {
+  if (!insideGrid(grid, position)) return false;
+
+  grid[position.x][position.y].entities.push(entityID);
+  return true;
+};
+
+var deleteFromCell = function deleteFromCell(grid, position, entityID) {
+  if (!insideGrid(grid, position)) return true;
+
+  var x = position.x,
+      y = position.y;
+
+  var oldLength = grid[x][y].entities.length;
+  grid[x][y].entities = grid[x][y].entities.filter(function (id) {
+    return id != entityID;
+  });
+
+  return oldLength != grid[x][y].entities.length;
+};
+
+var canvasToGrid = function canvasToGrid(game, canvasPos, canvasSize) {
+  var canvasWidth = canvasSize.width,
+      canvasHeight = canvasSize.height;
+  var viewPos = game.viewPos,
+      viewWidth = game.viewWidth,
+      viewHeight = game.viewHeight;
+
+  // HACK: this is copypasta from the render/render.js function for maxMinimap
+
+  if (game.maxMinimap) {
+    var nextViewPos = {
+      x: game.viewPos.x - game.viewWidth * 3 / 2,
+      y: game.viewPos.y - game.viewHeight * 3 / 2
+    };
+    viewWidth *= 3;
+    viewHeight *= 3;
+    viewPos = {
+      x: clamp(nextViewPos.x, 0, game.gridWidth - game.viewWidth * 3),
+      y: clamp(nextViewPos.y, 0, game.gridHeight - game.viewHeight * 3)
+    };
+    if (viewWidth > game.gridWidth) {
+      viewPos.x = game.gridWidth / 2 - viewWidth / 2;
+    }
+    if (viewHeight > game.gridHeight) {
+      viewPos.y = game.gridHeight / 2 - viewHeight / 2;
+    }
+  }
+
+  var scaleVec = {
+    x: viewWidth / canvasWidth,
+    y: viewHeight / canvasHeight
+  };
+
+  var gridCoord = floor(add({ x: viewPos.x, y: viewPos.y }, multiply(canvasPos, scaleVec)));
+  return floor(gridCoord);
+};
+
+var getEntityPositions = function getEntityPositions(game, entity) {
+  if (entity.segmented) {
+    return [entity.position].concat(_toConsumableArray(entity.segments.map(function (s) {
+      return s.position;
+    })));
+  }
+  var width = entity.width != null ? entity.width : 1;
+  var height = entity.height != null ? entity.height : 1;
+  var dir = thetaToDir(entity.theta);
+  var positions = [];
+  for (var x = 0; x < entity.width; x++) {
+    for (var y = 0; y < entity.height; y++) {
+      var pos = { x: x, y: y };
+      if (dir == 'left' || dir == 'right') {
+        pos = { x: y, y: x };
+      }
+      positions.push(add(entity.position, pos));
+    }
+  }
+  return positions;
+};
+
+module.exports = {
+  initGrid: initGrid, // TODO: move gridHelpers out of utils/
+  insideGrid: insideGrid,
+  lookupInGrid: lookupInGrid,
+  insertInCell: insertInCell,
+  deleteFromCell: deleteFromCell,
+  getPheromonesInCell: getPheromonesInCell,
+  canvasToGrid: canvasToGrid,
+  getEntityPositions: getEntityPositions,
+  entityInsideGrid: entityInsideGrid
+};
+},{"./helpers":149,"./math":150,"./vectors":153}],149:[function(require,module,exports){
+'use strict';
+
+var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function (obj) { return typeof obj; } : function (obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; };
+
+var _slicedToArray = function () { function sliceIterator(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"]) _i["return"](); } finally { if (_d) throw _e; } } return _arr; } return function (arr, i) { if (Array.isArray(arr)) { return arr; } else if (Symbol.iterator in Object(arr)) { return sliceIterator(arr, i); } else { throw new TypeError("Invalid attempt to destructure non-iterable instance"); } }; }();
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var _require = require('./vectors'),
+    subtract = _require.subtract,
+    vectorTheta = _require.vectorTheta;
+
+// NOTE: for angles in radians being close to each other!
+var closeTo = function closeTo(a, b) {
+  var normalizedA = a % (2 * Math.PI);
+  var epsilon = 0.00001;
+  return Math.abs(normalizedA - b) < epsilon;
+};
+
+var sameArray = function sameArray(arrayA, arrayB) {
+  if (arrayA.length != arrayB.length) return false;
+  for (var i = 0; i < arrayA.length; i++) {
+    if (arrayA[i] != arrayB[i]) {
+      return false;
+    }
+  }
+  return true;
+};
+
+var thetaToDir = function thetaToDir(theta, noDiagonal) {
+  // 90 degree only:
+  if (noDiagonal) {
+    var _directions = ['left', 'down', 'right', 'up'];
+    var _deg = Math.round(theta * 180 / Math.PI);
+    if (Math.round(_deg / 45) % 2 != 0) return null;
+    return _directions[Math.round(_deg / 90) % 4];
+  }
+
+  // including 45 degree:
+  var directions = ['left', 'leftup', 'up', 'rightup', 'right', 'rightdown', 'down', 'leftdown'];
+  var deg = Math.round(theta * 180 / Math.PI);
+  if (Math.round(deg / 45) != deg / 45) return null;
+  return directions[Math.round(deg / 45) % 8];
+};
+
+var isDiagonalTheta = function isDiagonalTheta(theta) {
+  var dir = thetaToDir(theta);
+  return dir == 'leftdown' || dir == 'rightdown' || dir == 'rightup' || dir == 'leftup';
+};
+
+var isDiagonalMove = function isDiagonalMove(vecA, vecB) {
+  if (vecA == null || vecB == null) return false;
+  return isDiagonalTheta(vectorTheta(subtract(vecA, vecB)));
+};
+
+var encodePosition = function encodePosition(pos) {
+  return "" + pos.x + "," + pos.y;
+};
+
+var decodePosition = function decodePosition(pos) {
+  var _pos$split = pos.split(','),
+      _pos$split2 = _slicedToArray(_pos$split, 2),
+      x = _pos$split2[0],
+      y = _pos$split2[1];
+
+  return { x: x, y: y };
+};
+
+var getDisplayTime = function getDisplayTime(millis) {
+  var seconds = Math.floor(millis / 1000);
+  var minutes = Math.floor(seconds / 60);
+  var leftOverSeconds = seconds - minutes * 60;
+  var leftOverSecondsStr = leftOverSeconds == 0 ? '00' : '' + leftOverSeconds;
+  if (leftOverSeconds < 10 && leftOverSeconds != 0) {
+    leftOverSecondsStr = '0' + leftOverSecondsStr;
+  }
+
+  return minutes + ':' + leftOverSecondsStr;
+};
+
+var throttle = function throttle(func, args, wait) {
+  var inThrottle = false;
+  return function (ev) {
+    if (inThrottle) {
+      return;
+    }
+    func.apply(undefined, _toConsumableArray(args).concat([ev]));
+    inThrottle = true;
+    setTimeout(function () {
+      inThrottle = false;
+    }, wait);
+  };
+};
+
+function deepCopy(obj) {
+  if ((typeof obj === 'undefined' ? 'undefined' : _typeof(obj)) !== 'object' || obj == null) {
+    return obj;
+  }
+
+  var copy = {};
+  for (var key in obj) {
+    if (_typeof(obj[key]) === 'object' && obj[key] != null) {
+      if (Array.isArray(obj[key])) {
+        copy[key] = [];
+        var _iteratorNormalCompletion = true;
+        var _didIteratorError = false;
+        var _iteratorError = undefined;
+
+        try {
+          for (var _iterator = obj[key][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+            var elem = _step.value;
+
+            copy[key].push(deepCopy(elem));
+          }
+        } catch (err) {
+          _didIteratorError = true;
+          _iteratorError = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion && _iterator.return) {
+              _iterator.return();
+            }
+          } finally {
+            if (_didIteratorError) {
+              throw _iteratorError;
+            }
+          }
+        }
+      } else {
+        copy[key] = deepCopy(obj[key]);
+      }
+    } else {
+      copy[key] = obj[key];
+    }
+  }
+  return copy;
+}
+
+module.exports = {
+  closeTo: closeTo, sameArray: sameArray, thetaToDir: thetaToDir,
+  isDiagonalTheta: isDiagonalTheta, isDiagonalMove: isDiagonalMove,
+  encodePosition: encodePosition, decodePosition: decodePosition,
+  getDisplayTime: getDisplayTime,
+  deepCopy: deepCopy,
+  throttle: throttle
+};
+},{"./vectors":153}],150:[function(require,module,exports){
+"use strict";
+
+var clamp = function clamp(val, min, max) {
+  return Math.min(Math.max(val, min), max);
+};
+
+/**
+ * when you want to do A - B, but A must always be >= 0, and you need
+ * to do something different if B > A, then use this function.
+ * Returns a {result, deficit, amount} tuple where
+ * - result is the new value of A after the subtraction, but always >= 0
+ * - deficit is the leftover value if B > A
+ * - amount is how much of operandB successfully subtracted
+ *    (will either equal operandB if deficit = 0 or operandA otherwise,
+ *    unless a step parameter is provided)
+ *
+ * Use the optional step parameter to ensure a minimum leftover
+ * amount that won't be subtracted if B > A. (ie if A is $27 and
+ * B is 3 * $10 of items, then step would be 10 and so
+ * {result: 7, deficit: 3, amount: 20} instead of
+ * {result: 0, deficit: 3, amount: 27})
+ **/
+var subtractWithDeficit = function subtractWithDeficit(operandA, operandB, step) {
+  step = step != null ? step : 1;
+  var result = operandA - operandB;
+  var amount = operandB;
+  var deficit = 0;
+  if (result < 0) {
+    // for reference, results without step:
+    // deficit = -1 * result;
+    // amount = operandA;
+    // result = 0;
+
+    deficit = -1 * result;
+    amount = Math.floor(operandA / step) * step;
+    result = operandA % step;
+  }
+  return { result: result, deficit: deficit, amount: amount };
+};
+
+module.exports = {
+  clamp: clamp,
+  subtractWithDeficit: subtractWithDeficit
+};
+},{}],151:[function(require,module,exports){
+'use strict';
+
+function isIpad() {
+  return navigator.platform == 'MacIntel' && navigator.maxTouchPoints > 0 && !navigator.userAgent.match(/iPhone/i);
+}
+
+function isMobile() {
+  var toMatch = [/Android/i, /webOS/i, /iPhone/i, /iPad/i, /iPod/i, /BlackBerry/i, /Windows Phone/i];
+
+  return toMatch.some(function (toMatchItem) {
+    return navigator.userAgent.match(toMatchItem);
+  }) || isIpad();
+}
+
+// HACK: when we're in electron window.require is a function
+function isElectron() {
+  // return true;
+  return window.require != null;
+}
+
+module.exports = {
+  isElectron: isElectron,
+  isIpad: isIpad,
+  isMobile: isMobile
+};
+},{}],152:[function(require,module,exports){
+arguments[4][99][0].apply(exports,arguments)
+},{"dup":99}],153:[function(require,module,exports){
+arguments[4][100][0].apply(exports,arguments)
+},{"dup":100}],154:[function(require,module,exports){
+
+module.exports = {
+  vectors: require('./bin/vectors'),
+  helpers: require('./bin/helpers'),
+  stochastic: require('./bin/stochastic'),
+  grid: require('./bin/gridHelpers'),
+  platform: require('./bin/platform'),
+  math: require('./bin/math'),
+}
+
+},{"./bin/gridHelpers":148,"./bin/helpers":149,"./bin/math":150,"./bin/platform":151,"./bin/stochastic":152,"./bin/vectors":153}],155:[function(require,module,exports){
 /*
 object-assign
 (c) Sindre Sorhus
@@ -16339,7 +17861,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],134:[function(require,module,exports){
+},{}],156:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react-dom.development.js
@@ -42605,7 +44127,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":147,"object-assign":133,"react":139,"scheduler":145,"scheduler/tracing":146}],135:[function(require,module,exports){
+},{"_process":169,"object-assign":155,"react":161,"scheduler":167,"scheduler/tracing":168}],157:[function(require,module,exports){
 /** @license React v17.0.2
  * react-dom.production.min.js
  *
@@ -42904,7 +44426,7 @@ exports.findDOMNode=function(a){if(null==a)return null;if(1===a.nodeType)return 
 exports.render=function(a,b,c){if(!rk(b))throw Error(y(200));return tk(null,a,b,!1,c)};exports.unmountComponentAtNode=function(a){if(!rk(a))throw Error(y(40));return a._reactRootContainer?(Xj(function(){tk(null,null,a,!1,function(){a._reactRootContainer=null;a[ff]=null})}),!0):!1};exports.unstable_batchedUpdates=Wj;exports.unstable_createPortal=function(a,b){return uk(a,b,2<arguments.length&&void 0!==arguments[2]?arguments[2]:null)};
 exports.unstable_renderSubtreeIntoContainer=function(a,b,c,d){if(!rk(c))throw Error(y(200));if(null==a||void 0===a._reactInternals)throw Error(y(38));return tk(a,b,c,!1,d)};exports.version="17.0.2";
 
-},{"object-assign":133,"react":139,"scheduler":145}],136:[function(require,module,exports){
+},{"object-assign":155,"react":161,"scheduler":167}],158:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -42946,7 +44468,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react-dom.development.js":134,"./cjs/react-dom.production.min.js":135,"_process":147}],137:[function(require,module,exports){
+},{"./cjs/react-dom.development.js":156,"./cjs/react-dom.production.min.js":157,"_process":169}],159:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v17.0.2
  * react.development.js
@@ -45283,7 +46805,7 @@ exports.version = ReactVersion;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":147,"object-assign":133}],138:[function(require,module,exports){
+},{"_process":169,"object-assign":155}],160:[function(require,module,exports){
 /** @license React v17.0.2
  * react.production.min.js
  *
@@ -45308,7 +46830,7 @@ key:d,ref:k,props:e,_owner:h}};exports.createContext=function(a,b){void 0===b&&(
 exports.lazy=function(a){return{$$typeof:v,_payload:{_status:-1,_result:a},_init:Q}};exports.memo=function(a,b){return{$$typeof:u,type:a,compare:void 0===b?null:b}};exports.useCallback=function(a,b){return S().useCallback(a,b)};exports.useContext=function(a,b){return S().useContext(a,b)};exports.useDebugValue=function(){};exports.useEffect=function(a,b){return S().useEffect(a,b)};exports.useImperativeHandle=function(a,b,c){return S().useImperativeHandle(a,b,c)};
 exports.useLayoutEffect=function(a,b){return S().useLayoutEffect(a,b)};exports.useMemo=function(a,b){return S().useMemo(a,b)};exports.useReducer=function(a,b,c){return S().useReducer(a,b,c)};exports.useRef=function(a){return S().useRef(a)};exports.useState=function(a){return S().useState(a)};exports.version="17.0.2";
 
-},{"object-assign":133}],139:[function(require,module,exports){
+},{"object-assign":155}],161:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -45319,7 +46841,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/react.development.js":137,"./cjs/react.production.min.js":138,"_process":147}],140:[function(require,module,exports){
+},{"./cjs/react.development.js":159,"./cjs/react.production.min.js":160,"_process":169}],162:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -46020,7 +47542,7 @@ exports.compose = compose;
 exports.createStore = createStore;
 
 }).call(this)}).call(this,require('_process'))
-},{"@babel/runtime/helpers/objectSpread2":103,"_process":147}],141:[function(require,module,exports){
+},{"@babel/runtime/helpers/objectSpread2":102,"_process":169}],163:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler-tracing.development.js
@@ -46371,7 +47893,7 @@ exports.unstable_wrap = unstable_wrap;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":147}],142:[function(require,module,exports){
+},{"_process":169}],164:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler-tracing.production.min.js
  *
@@ -46382,7 +47904,7 @@ exports.unstable_wrap = unstable_wrap;
  */
 'use strict';var b=0;exports.__interactionsRef=null;exports.__subscriberRef=null;exports.unstable_clear=function(a){return a()};exports.unstable_getCurrent=function(){return null};exports.unstable_getThreadID=function(){return++b};exports.unstable_subscribe=function(){};exports.unstable_trace=function(a,d,c){return c()};exports.unstable_unsubscribe=function(){};exports.unstable_wrap=function(a){return a};
 
-},{}],143:[function(require,module,exports){
+},{}],165:[function(require,module,exports){
 (function (process){(function (){
 /** @license React v0.20.2
  * scheduler.development.js
@@ -47032,7 +48554,7 @@ exports.unstable_wrapCallback = unstable_wrapCallback;
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"_process":147}],144:[function(require,module,exports){
+},{"_process":169}],166:[function(require,module,exports){
 /** @license React v0.20.2
  * scheduler.production.min.js
  *
@@ -47054,7 +48576,7 @@ exports.unstable_next=function(a){switch(P){case 1:case 2:case 3:var b=3;break;d
 exports.unstable_scheduleCallback=function(a,b,c){var d=exports.unstable_now();"object"===typeof c&&null!==c?(c=c.delay,c="number"===typeof c&&0<c?d+c:d):c=d;switch(a){case 1:var e=-1;break;case 2:e=250;break;case 5:e=1073741823;break;case 4:e=1E4;break;default:e=5E3}e=c+e;a={id:N++,callback:b,priorityLevel:a,startTime:c,expirationTime:e,sortIndex:-1};c>d?(a.sortIndex=c,H(M,a),null===J(L)&&a===J(M)&&(S?h():S=!0,g(U,c-d))):(a.sortIndex=e,H(L,a),R||Q||(R=!0,f(V)));return a};
 exports.unstable_wrapCallback=function(a){var b=P;return function(){var c=P;P=b;try{return a.apply(this,arguments)}finally{P=c}}};
 
-},{}],145:[function(require,module,exports){
+},{}],167:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -47065,7 +48587,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler.development.js":143,"./cjs/scheduler.production.min.js":144,"_process":147}],146:[function(require,module,exports){
+},{"./cjs/scheduler.development.js":165,"./cjs/scheduler.production.min.js":166,"_process":169}],168:[function(require,module,exports){
 (function (process){(function (){
 'use strict';
 
@@ -47076,7 +48598,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 }).call(this)}).call(this,require('_process'))
-},{"./cjs/scheduler-tracing.development.js":141,"./cjs/scheduler-tracing.production.min.js":142,"_process":147}],147:[function(require,module,exports){
+},{"./cjs/scheduler-tracing.development.js":163,"./cjs/scheduler-tracing.production.min.js":164,"_process":169}],169:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 

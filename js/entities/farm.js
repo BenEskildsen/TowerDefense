@@ -9,7 +9,7 @@ const config = {
   width: 2,
   height: 2,
   maxThetaSpeed: 0.05,
-  cost: 100,
+  // cost: 100,
   isExplosionImmune: true,
 };
 

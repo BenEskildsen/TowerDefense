@@ -9,8 +9,8 @@ var config = {
   canvasWidth: 1000,
   canvasHeight: 800,
 
-  viewWidth: 66,
-  viewHeight: 72,
+  viewWidth: 25,
+  viewHeight: 50,
   useFullScreen: true,
   cellWidth: 20,
   cellHeight: 16,
@@ -934,7 +934,7 @@ var config = {
   width: 2,
   height: 2,
   maxThetaSpeed: 0.05,
-  cost: 100,
+  // cost: 100,
   isExplosionImmune: true
 };
 
@@ -1117,8 +1117,8 @@ var _require3 = require('../render/renderAgent'),
     renderAgent = _require3.renderAgent;
 
 var config = {
-  maxHP: 10, // hack to prevent circular reference with render Agent
-  hp: 10,
+  maxHP: 20, // hack to prevent circular reference with render Agent
+  hp: 20,
   damage: 1,
   width: 1,
   height: 1,
@@ -1422,9 +1422,9 @@ var config = {
   SHOOT: {
     duration: 4000,
     spriteOrder: [0]
-  },
+  }
 
-  cost: 50
+  // cost: 50,
 
 };
 
@@ -2695,9 +2695,9 @@ var renderAgent = function renderAgent(ctx, game, agent, spriteRenderFn) {
   ctx.translate(-width / 2, -height / 2);
 
   // render hp bar
-  // if (Math.ceil(agent.hp) < config[agent.playerID][agent.caste].hp) {
-  //   renderHealthBar(ctx, agent, config[agent.playerID][agent.caste].hp);
-  // }
+  if (Math.ceil(agent.hp) < agent.maxHP) {
+    renderHealthBar(ctx, agent, agent.maxHP);
+  }
 
   ctx.restore();
 
@@ -5476,8 +5476,8 @@ var deleteFromCell = function deleteFromCell(grid, position, entityID) {
 var canvasToGrid = function canvasToGrid(game, canvasPos) {
   var config = globalConfig.config;
   var scaleVec = {
-    x: game.viewWidth / config.canvasWidth,
-    y: game.viewHeight / config.canvasHeight
+    x: game.viewWidth / window.innerWidth,
+    y: game.viewHeight / window.innerHeight
   };
 
   var gridCoord = floor(add({ x: game.viewPos.x, y: game.viewPos.y }, multiply(canvasPos, scaleVec)));

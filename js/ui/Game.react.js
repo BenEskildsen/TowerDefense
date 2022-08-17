@@ -2,7 +2,8 @@
 
 const React = require('react');
 const Button = require('./Components/Button.react');
-const Canvas = require('./Canvas.react');
+// const Canvas = require('./Canvas.react');
+const {Canvas} = require('bens_ui_components');
 const Checkbox = require('./Components/Checkbox.react');
 const RadioPicker = require('./Components/RadioPicker.react');
 const BottomBar = require('./BottomBar.react');
@@ -116,64 +117,23 @@ function Game(props: Props): React.Node {
         placeType={game.placeType}
         base={game.entities[game.BASE[0]]}
       />
-      <Canvas
-        dispatch={dispatch}
-        tickInterval={tickInterval}
-        innerWidth={dims.width}
-        innerHeight={dims.height}
-        isExperimental={state.screen == 'EDITOR'}
-        focusedEntity={game.focusedEntity}
-      />
+      <Canvas useFullScreen={state.screen != 'EDITOR'} />
       <Ticker ticker={game.ticker} />
       <MiniTicker miniTicker={game.miniTicker} />
     </div>
   );
 }
 
+      // <Canvas
+      //   dispatch={dispatch}
+      //   tickInterval={tickInterval}
+      //   innerWidth={dims.width}
+      //   innerHeight={dims.height}
+      //   isExperimental={state.screen == 'EDITOR'}
+      //   focusedEntity={game.focusedEntity}
+      // />
+
 function registerHotkeys(dispatch) {
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyDown',
-    key: 'E',
-    fn: (s) => {
-      const game = s.getState().game;
-      const controlledEntity = game.controlledEntity;
-      if (!controlledEntity) return;
-
-      const entityAction = getControlledEntityInteraction(game, controlledEntity);
-      if (
-        (entityAction.type == 'PICKUP' || entityAction.type == 'PUTDOWN') &&
-        (
-          isActionTypeQueued(controlledEntity, 'PICKUP') ||
-          isActionTypeQueued(controlledEntity, 'PUTDOWN'))
-      ) {
-        return;
-      }
-      dispatch({
-        type: 'ENQUEUE_ENTITY_ACTION',
-        entity: controlledEntity,
-        entityAction,
-      });
-    }
-  });
-
-  // manning:
-  dispatch({
-    type: 'SET_HOTKEY', press: 'onKeyDown',
-    key: 'M',
-    fn: (s) => {
-      const game = s.getState().game;
-      const controlledEntity = game.controlledEntity;
-      if (!controlledEntity) return;
-      const {entity, entityAction} = getManningAction(game);
-      if (entityAction) {
-        dispatch({
-          type: 'ENQUEUE_ENTITY_ACTION',
-          entity,
-          entityAction,
-        });
-      }
-    }
-  });
 
   dispatch({
     type: 'SET_HOTKEY', press: 'onKeyDown',
@@ -225,6 +185,19 @@ function registerHotkeys(dispatch) {
         type: 'SET_VIEW_POS', viewPos: add(game.viewPos, {x: moveAmount, y: 0}),
       });
       render(game);
+    }
+  });
+
+  dispatch({
+    type: 'SET_HOTKEY', press: 'onKeyDown',
+    key: 'space',
+    fn: (s) => {
+      const game = s.getState().game;
+      if (game.tickInterval) {
+        s.dispatch({type: 'STOP_TICK'});
+      } else {
+        s.dispatch({type: 'START_TICK'});
+      }
     }
   });
 }

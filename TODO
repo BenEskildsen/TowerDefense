@@ -18,8 +18,10 @@
     cheaper dirt?
   - can get a critical mass of turrets at around 4 farms that kills everything
   - maze is too strong relative to pathing
+    - enemies ramp up more slowly, but always attack so they don't go through maze?
   - stronger enemies?
   - ramps up to screen filled with monsters by about 350 kills
+  - maybe have enemies kill themselves against base so you don't get overwhelmed
 
 
 - - - - - - REFACTOR - - - - - - - -
@@ -36,6 +38,7 @@
 - - - - - - POLISH - - - - - -
   - UI
     - nicer cards for buildings
+  - remove express and postgres dependencies
   - Remove WASD and scroll (add hotkeys for pause, etc)
   - Remove main menu
   - Reset should pass through lobby again

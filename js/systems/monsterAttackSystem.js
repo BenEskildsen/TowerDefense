@@ -20,7 +20,7 @@ const initMonsterAttackSystem = (store) => {
 
     const gameSeconds = game.totalGameTime / 1000;
 
-    let spawnRate = Math.max(5, Math.round(100 - game.score));
+    let spawnRate = Math.max(5, Math.round(150 - game.score));
 
     if (game.time > 0 && game.time % spawnRate == 0) {
       let position = {x: 0, y: 0};

@@ -26,7 +26,7 @@ function TopBar(props) {
 
   if (isExperimental && tickInterval == null) return null;
 
-  const height = 100;
+  const height = 10;
   const topPadding = 8;
   const leftPadding = 4;
 

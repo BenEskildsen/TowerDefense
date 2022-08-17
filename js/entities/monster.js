@@ -5,8 +5,8 @@ const {getBeetleSprite} = require('../selectors/sprites');
 const {renderAgent} = require('../render/renderAgent');
 
 const config = {
-  maxHP: 10, // hack to prevent circular reference with render Agent
-  hp: 10,
+  maxHP: 20, // hack to prevent circular reference with render Agent
+  hp: 20,
   damage: 1,
   width: 1,
   height: 1,
