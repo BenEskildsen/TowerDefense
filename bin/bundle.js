@@ -3464,17 +3464,21 @@ var updateTowers = function updateTowers(game) {
       }
     }
 
-    if (closeTo(tower.theta, targetTheta)) {
+    var shouldShoot = false;
+    if (Math.abs(tower.theta - targetTheta) <= tower.maxThetaSpeed) {
       tower.theta = targetTheta;
-    } else if (tower.theta < targetTheta) {
+      shouldShoot = true;
+    } else if (tower.theta < targetTheta && targetTheta - tower.theta < Math.PI || tower.theta > targetTheta && tower.theta - targetTheta > Math.PI) {
       tower.thetaSpeed = config.maxThetaSpeed;
-    } else if (tower.theta > targetTheta) {
+      tower.theta += tower.thetaSpeed;
+    } else if (tower.theta < targetTheta && targetTheta - tower.theta > Math.PI || tower.theta > targetTheta && tower.theta - targetTheta < Math.PI) {
       tower.thetaSpeed = -1 * config.maxThetaSpeed;
+      tower.theta += tower.thetaSpeed;
     }
-    tower.theta += tower.thetaSpeed;
+    tower.theta = (2 * Math.PI + tower.theta) % (2 * Math.PI);
 
     // shoot at target
-    if (tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT')) {
+    if (tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT') && shouldShoot) {
       if (tower.needsCooldown) {
         tower.shotsSinceCooldown += 1;
         if (tower.shotsSinceCooldown > tower.shotsTillCooldown) {
@@ -10269,7 +10273,7 @@ function Modal(props) {
         color: '#46403a',
         textAlign: 'center',
         width: width,
-        top: isMobile() ? 0 : (canvasRect.height - height) / 2,
+        top: (canvasRect.height - height) / 2,
         left: (rect.width - width) / 2
       }
     },
@@ -12424,12 +12428,8 @@ function Lobby(props) {
       if (_state.game != null) {
         progress = _state.game.loadingProgress;
       }
-      var title = 'perimeter';
-      var body = 'Keep your underground base alive as long as you can while missiles ' + 'rain down from the sky! Combine the resources around you in novel ways to create ' + 'the alloys used to build anti-missile turrets and generate the electricity to ' + ' power them. Can you create an impenetrable perimeter?';
-      if (isMobile()) {
-        title = '~~Experimental~~ Mobile Mode';
-        body = 'Sorry, the game is not yet ready to play on mobile devices :( ' + 'try going to this link on a computer instead';
-      }
+      var title = 'Monster Defense';
+      var body = "";
       dispatch({ type: 'SET_MODAL', modal: React.createElement(Modal, {
           title: title,
           body: body,

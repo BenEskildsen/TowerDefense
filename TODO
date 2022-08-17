@@ -8,12 +8,13 @@
       - maxHP
       - render healthbars for non-agents
       - render location
-  - turrets
-    - only shoot when aimed at target
-    - make the smaller turn towards target
 
 
 - - - - - - - PLAYTESTING - - - - - - - -
+  - need to prevent accidental drag when you're not touching the screen
+  - dynamite needs to be placeable on monsters
+  - don't drag with turrets, etc (only dirt)
+
   - pacing kinda weird: what to do while waiting for kills?
     cheaper dirt?
   - can get a critical mass of turrets at around 4 farms that kills everything

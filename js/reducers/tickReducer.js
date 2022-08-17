@@ -341,18 +341,28 @@ const updateTowers = (game): void => {
       }
     }
 
-    if (closeTo(tower.theta, targetTheta)) {
+    let shouldShoot = false;
+    if (Math.abs(tower.theta - targetTheta) <= tower.maxThetaSpeed) {
       tower.theta = targetTheta;
-    } else if (tower.theta < targetTheta) {
+      shouldShoot = true;
+    } else if (
+      (tower.theta < targetTheta && targetTheta - tower.theta < Math.PI) ||
+      (tower.theta > targetTheta && tower.theta - targetTheta > Math.PI)
+    ) {
       tower.thetaSpeed = config.maxThetaSpeed;
-    } else if (tower.theta > targetTheta) {
-      tower.thetaSpeed= -1 * config.maxThetaSpeed;
+      tower.theta += tower.thetaSpeed;
+    } else if (
+      (tower.theta < targetTheta && targetTheta - tower.theta > Math.PI) ||
+      (tower.theta > targetTheta && tower.theta - targetTheta < Math.PI)
+    ) {
+      tower.thetaSpeed = -1 * config.maxThetaSpeed;
+      tower.theta += tower.thetaSpeed;
     }
-    tower.theta += tower.thetaSpeed;
+    tower.theta = (2 * Math.PI + tower.theta) % (2 * Math.PI);
 
     // shoot at target
     if (
-      tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT')
+      tower.targetID != null && !isActionTypeQueued(tower, 'SHOOT') && shouldShoot
     ) {
       if (tower.needsCooldown) {
         tower.shotsSinceCooldown += 1;
