@@ -16,16 +16,18 @@ const config = {
   hp: 10,
   width: 1,
   height: 1,
-  explosionRadius: 6,
+  explosionRadius: 5,
   damage: 40,
   timer: 1,
   age: 0,
+  name: 'Bomb',
 
   DIE: {
     duration: 300,
     effectIndex: 250,
     spriteOrder: [0],
   },
+  cost: 25,
 };
 
 const make = (

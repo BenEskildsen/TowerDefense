@@ -598,7 +598,8 @@ var config = {
     spriteOrder: [0]
   },
 
-  cost: 50
+  cost: 50,
+  name: 'Turret'
 
 };
 
@@ -782,6 +783,7 @@ var config = {
   COLLECTABLE: true,
   cost: 1,
   hp: 10,
+  name: 'dirt',
 
   isExplosionImmune: true
 };
@@ -866,16 +868,18 @@ var config = {
   hp: 10,
   width: 1,
   height: 1,
-  explosionRadius: 6,
+  explosionRadius: 5,
   damage: 40,
   timer: 1,
   age: 0,
+  name: 'Bomb',
 
   DIE: {
     duration: 300,
     effectIndex: 250,
     spriteOrder: [0]
-  }
+  },
+  cost: 25
 };
 
 var make = function make(game, position, playerID, explosionRadiusType) {
@@ -934,8 +938,9 @@ var config = {
   width: 2,
   height: 2,
   maxThetaSpeed: 0.05,
-  // cost: 100,
-  isExplosionImmune: true
+  cost: 100,
+  isExplosionImmune: true,
+  name: 'Farm'
 };
 
 var make = function make(game, position, playerID) {
@@ -1545,7 +1550,7 @@ var config = {
   NOT_ANIMATED: true,
   COLLECTABLE: true,
   hp: 50,
-  cost: 10,
+  // cost: 10,
 
   isExplosionImmune: true
 };

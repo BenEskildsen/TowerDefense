@@ -25,6 +25,7 @@ const config = {
   },
 
   cost: 50,
+  name: 'Turret',
 
 };
 

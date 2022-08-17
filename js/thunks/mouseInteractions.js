@@ -71,7 +71,8 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
 
 
   // can't place buildings you can't afford
-  if (config.cost && !canAffordBuilding(game, config.cost)) {
+  const cost = getModifiedCost(game, entityType);
+  if (config.cost && !canAffordBuilding(game, cost)) {
     return;
   }
 
@@ -84,10 +85,10 @@ const handlePlace = (state, dispatch, gridPos, ignorePrevPos) => {
 
   // make the entity and update base resources for its cost
   let entity = null;
-  if (config.cost) {
+  if (cost) {
     dispatch({
       type: 'SUBTRACT_BASE_RESOURCES',
-      cost: config.cost,
+      cost,
     });
     entity = Entities[entityType].make(game, gridPos, game.playerID);
   }

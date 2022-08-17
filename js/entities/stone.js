@@ -10,7 +10,7 @@ const config = {
   NOT_ANIMATED: true,
   COLLECTABLE: true,
   hp: 50,
-  cost: 10,
+  // cost: 10,
 
   isExplosionImmune: true,
 };

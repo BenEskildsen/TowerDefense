@@ -598,7 +598,8 @@ var config = {
     spriteOrder: [0]
   },
 
-  cost: 50
+  cost: 50,
+  name: 'Turret'
 
 };
 
@@ -782,6 +783,7 @@ var config = {
   COLLECTABLE: true,
   cost: 1,
   hp: 10,
+  name: 'dirt',
 
   isExplosionImmune: true
 };
@@ -866,16 +868,18 @@ var config = {
   hp: 10,
   width: 1,
   height: 1,
-  explosionRadius: 6,
+  explosionRadius: 5,
   damage: 40,
   timer: 1,
   age: 0,
+  name: 'Bomb',
 
   DIE: {
     duration: 300,
     effectIndex: 250,
     spriteOrder: [0]
-  }
+  },
+  cost: 25
 };
 
 var make = function make(game, position, playerID, explosionRadiusType) {
@@ -934,8 +938,9 @@ var config = {
   width: 2,
   height: 2,
   maxThetaSpeed: 0.05,
-  // cost: 100,
-  isExplosionImmune: true
+  cost: 100,
+  isExplosionImmune: true,
+  name: 'Farm'
 };
 
 var make = function make(game, position, playerID) {
@@ -1545,7 +1550,7 @@ var config = {
   NOT_ANIMATED: true,
   COLLECTABLE: true,
   hp: 50,
-  cost: 10,
+  // cost: 10,
 
   isExplosionImmune: true
 };
@@ -5153,26 +5158,21 @@ module.exports = {
   renderWormCanvas: renderWormCanvas
 };
 },{"../selectors/misc":44,"../selectors/sprites":48,"../utils/vectors":100,"./renderHealthBar":39}],42:[function(require,module,exports){
-'use strict';
-
-var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
+"use strict";
 
 var _require = require('../entities/registry'),
     Entities = _require.Entities;
 
 var getModifiedCost = function getModifiedCost(game, entityType) {
-  var cost = _extends({}, Entities[entityType].config.cost);
+  var cost = Entities[entityType].config.cost;
+  if (entityType != "FARM") return cost;
+
   var numBuilding = game[entityType].map(function (id) {
     return game.entities[id];
   }).filter(function (e) {
     return e.playerID == game.playerID;
   }).length;
-  for (var resource in cost) {
-    for (var i = 0; i < numBuilding; i++) {
-      cost[resource] *= 2;
-    }
-  }
-  return cost;
+  return cost * numBuilding + cost;
 };
 
 var canAffordBuilding = function canAffordBuilding(game, cost) {
@@ -9852,7 +9852,8 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
   var base = game.bases[game.playerID];
 
   // can't place buildings you can't afford
-  if (config.cost && !canAffordBuilding(game, config.cost)) {
+  var cost = getModifiedCost(game, entityType);
+  if (config.cost && !canAffordBuilding(game, cost)) {
     return;
   }
 
@@ -9866,10 +9867,10 @@ var handlePlace = function handlePlace(state, dispatch, gridPos, ignorePrevPos) 
 
   // make the entity and update base resources for its cost
   var entity = null;
-  if (config.cost) {
+  if (cost) {
     dispatch({
       type: 'SUBTRACT_BASE_RESOURCES',
-      cost: config.cost
+      cost: cost
     });
     entity = Entities[entityType].make(game, gridPos, game.playerID);
   }
@@ -12828,7 +12829,7 @@ function PlacementPalette(props) {
       dispatch: dispatch,
       game: game,
       entityType: entityType,
-      cost: config.cost,
+      cost: getModifiedCost(game, entityType),
       isSelected: entityType == placeType
     }));
   }

@@ -21,7 +21,7 @@ function PlacementPalette(props): React.Node {
         dispatch={dispatch}
         game={game}
         entityType={entityType}
-        cost={config.cost}
+        cost={getModifiedCost(game, entityType)}
         isSelected={entityType == placeType}
       />
     );

@@ -11,6 +11,7 @@ const config = {
   COLLECTABLE: true,
   cost: 1,
   hp: 10,
+  name: 'dirt',
 
   isExplosionImmune: true,
 };
